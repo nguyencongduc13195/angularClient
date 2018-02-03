@@ -1,0 +1,40 @@
+<div class="menu">
+	<div class="cate">Danh mục
+		<i class="fa" 
+			[ngClass]="{'fa-caret-down':isShowCate, 'fa-caret-up':!isShowCate}" 
+			style="float: right;" 
+			(click)="onToggle('cate')">
+		</i>
+	</div>
+	<div class="nav nav-pills nav-stacked" *ngIf="isShowCate">
+		<li *ngFor="let item of categories; let i = index">
+			<a [routerLink]="['/danh-muc',item?.slug]">{{item?.name}} - ({{idCategories[i]}})</a>
+		</li>
+	</div> 
+	<br>
+	<div class="cate">Nhà xuất bản
+		<i class="fa" 
+			style="float: right;" 
+			[ngClass]="{'fa-caret-down':isShowBrand, 'fa-caret-up':!isShowBrand}" 
+			(click)="onToggle('brand')">
+		</i>
+	</div>
+	<div class="nav nav-pills nav-stacked" *ngIf="isShowBrand">
+		<li *ngFor="let item of brands; let i = index">
+			<a [routerLink]="['/nhan-hang',item?.slug]">{{item?.name}} - ({{idBrands[i]}})</a>
+		</li>
+	</div> 
+	<br>
+	<!-- <div class="cate">Tác giả nổi bật
+		<i class="fa" 
+			style="float: right;" 
+			[ngClass]="{'fa-caret-down':isShowAuthor, 'fa-caret-up':!isShowAuthor}" 
+			(click)="onToggle('author')">
+		</i>
+	</div>
+	<div class="nav nav-pills nav-stacked" *ngIf="isShowAuthor">
+		<li *ngFor="let item of authors; let i = index">
+			<a [routerLink]="['/tac-gia',item?.slug]">{{item?.name}} ({{idAuthors[i]}})</a>
+		</li>
+	</div>  -->
+</div>

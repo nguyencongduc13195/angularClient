@@ -1,0 +1,48 @@
+<div class="alert alert-success" *ngIf="updateSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<form [formGroup]="formEditBrand" (ngSubmit)="onSubmit(formEditBrand.value)" *ngIf="loadSuccess; else loadError">
+	<legend>Cập nhật nhà xuất bản</legend>
+	<div class="form-group">
+		<label>Tên nhà xuất bản</label>
+		<input type="text" class="form-control" [(ngModel)]="editBrand.name" formControlName="txtName" placeholder="Vui lòng nhập tên nhà xuất bản.">
+		<span class="label label-danger"
+			*ngIf="formEditBrand.controls.txtName.touched && formEditBrand.controls.txtName?.errors?.required"
+		>Vui lòng nhập tên nhà xuất bản</span>
+	</div>
+	<div class="form-group">
+		<label>Mô tả</label>
+		<textarea class="form-control" [(ngModel)]="editBrand.description" rows="5" formControlName="txtDescription" placeholder="Vui lòng nhập mô tả."></textarea>
+		<span class="label label-danger"
+			*ngIf="formEditBrand.controls.txtDescription.touched && formEditBrand.controls.txtDescription?.errors?.required"
+		>Vui lòng nhập mô tả</span>
+	</div>
+	<div class="form-group">
+		<label>Hình ảnh hiện tại</label>
+		<!-- <img *ngIf="editBrand.image; else none" 
+			src="https://apimean.herokuapp.com/api/brand/img/{{editBrand?.image}}" 
+			class="edit img-responsive"> -->
+		<img *ngIf="editBrand.image; else none" 
+			src="http://localhost:3000/api/brand/img/{{editBrand?.image}}" 
+			class="edit img-responsive">
+		<ng-template #none>
+			<img src="http://localhost:3000/api/brand/img/no-image.jpg" class="img-responsive">
+			<!-- <img src="https://apimean.herokuapp.com/api/brand/img/no-image.jpg" class="img-responsive" alt=""> -->
+		</ng-template>
+	</div>
+	<div class="form-group">
+		<label>Hình ảnh mới</label>
+		<input type="file">
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-lg btn-primary" [disabled]="formEditBrand.invalid">Cập nhật</button>
+	</div>
+</form>
+
+<ng-template #loadError>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>{{msg}}</strong>
+	</div>
+</ng-template>

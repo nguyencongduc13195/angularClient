@@ -1,0 +1,141 @@
+<div class="container">
+	<div class="panel panel-info" *ngIf="loaded; else loading">
+	<div class="panel-heading">Sản phẩm</div>
+	<br>
+	<div class="row" *ngIf="loadAll">
+		<div class="col-sm-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-2">
+			<select #value class="form-control" (change)="selectSort(value.value)">
+				<option>Chọn sắp xếp</option>
+				<option value="1">Tên A-Z</option>
+				<option value="2">Tên Z-A</option>
+				<option value="3">Giá thấp-cao</option>
+				<option value="4">Giá cao-thấp</option>
+			</select>
+		</div>
+		<div class="col-sm-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-2">
+			<select #e class="form-control" (change)="selectElement(e.value)">
+				<option value="default">Chọn hiển thị</option>
+				<option value="1">3 Sản phẩm</option>
+				<option value="2">5 Sản phẩm</option>
+				<option value="3">7 Sản phẩm</option>
+			</select>
+		</div>
+		<div class="col-sm-offset-1 col-xs-4 col-sm-3 col-md-3 col-lg-3">
+			<input type="text" [(ngModel)]="filterName" (keyup)="onFilter()" placeholder="Lọc sản phẩm" class="form-control">
+		</div>
+	</div>
+	<div class="panel-body">
+		<div class="row" *ngIf="isSearch">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+				<button (click)="onLoadProducts()" type="button" class="btn btn-success">Tải lại sản phẩm</button>
+			</div>
+		</div>
+		<br>
+		<div class="row" *ngIf="!isFilter">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" *ngFor="let item of products" style="height: auto">
+				<div class="panel panel-info">
+					<span class="sale" *ngIf="item?.promotion_price !== item?.price">Sale</span>
+					<div class="panel-heading">{{item?.name | summary:30}}</div>
+					<div class="panel-body">
+						<img *ngIf="item?.image; else none" [routerLink]="['/san-pham',item?.slug]" 
+						class="img-responsive img-product" 
+						src="http://apimean.herokuapp.com/api/product/img/{{item?.image}}"
+						/>
+						<ng-template #none>
+							<img class="img-responsive img-product" [routerLink]="['/san-pham',item?.slug]" 
+							src="http://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
+						</ng-template>
+					</div>
+					<div class="panel-heading">
+						<span *ngIf="item?.promotion_price !== item?.price; else nosale">
+							<del>
+								{{item?.price| currency:'VND':'symbol':'1.0-3'}}
+							</del>&nbsp;
+							<strong>{{item?.promotion_price| currency:'VND':'symbol':'1.0-3'}}</strong>
+						</span>
+						<ng-template #nosale>
+							<strong>{{item?.price | currency:'VND':'symbol':'1.0-3' }}</strong>
+						</ng-template>
+						<button *ngIf="item?.stockitems" class="pull-right btn btn-danger btn-xs" (click)="addToCart(item)">Đặt hàng</button>
+					</div>
+					<div class="panel-footer text-center" *ngIf="!item?.stockitems; else instock">
+						<span class="label label-danger">Hết hàng</span>
+					</div>
+					<ng-template #instock>
+						<div class="panel-footer text-center">
+							<span class="label label-success">Còn hàng</span>
+						</div>
+					</ng-template>
+					<div class="panel-heading react">
+						<span>{{item?.likes}}&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i></span>
+						<span>{{item?.dislikes}}&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i></span>
+						<span>{{item?.view_count}}&nbsp;<i class="glyphicon glyphicon-eye-open"></i></span>
+						<span class="pull-right">{{ item?.reviews.length }}&nbsp;<i class="glyphicon glyphicon-comment"></i></span>
+					</div>
+				</div>
+			</div> 
+		</div>
+		<div class="row" *ngIf="!isFilter">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="loadAll">
+				<ul class="pagination pull-right">
+					<li [class.hidden]="pageIndex == 1" (click)="setPage(1)"><a>Đầu</a></li>
+					<li [class.hidden]="pageIndex == 1" (click)="setPage(pageIndex-1)"><a>&laquo;</a></li>
+					<li 
+					*ngFor="let item of totalPage"
+					[class.active]="pageIndex == item"
+					(click)="setPage(item)"
+					><a>{{item}}</a></li>
+					<li [class.hidden]="pageIndex == allPage" (click)="setPage(pageIndex+1)"><a>&raquo;</a></li>
+					<li [class.hidden]="pageIndex == allPage" (click)="setPage(allPage)"><a>Cuối</a></li>
+				</ul>
+			</div>
+		</div>
+		<!-- filter -->
+		<div class="row" *ngIf="isFilter">
+			<div class="col-xs-12 col-sm-6 col-md-6 col-lg-4" *ngFor="let item of productFilter" style="height: auto">
+				<div class="panel panel-info">
+					<span class="sale" *ngIf="item?.promotion_price !== item?.price">Sale</span>
+					<div class="panel-heading">{{item?.name | summary:30}}</div>
+					<div class="panel-body">
+						<img *ngIf="item?.image !=''; else none" [routerLink]="['/san-pham',item?.slug]" class="img-responsive img-product" src="http://apimean.herokuapp.com/api/product/img/{{item?.image}}"/>
+						<ng-template #none>
+							<img 
+								class="img-responsive img-product" 
+								[routerLink]="['/san-pham',item?.slug]" 
+								src="http://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
+						</ng-template>
+					</div>
+					<div class="panel-heading">
+						<span *ngIf="item?.promotion_price !== item?.price; else nosale">
+							<del>
+								{{item?.price| currency:'VND':'symbol':'1.0-3'}}
+							</del>&nbsp;
+							<strong>{{item?.promotion_price| currency:'VND':'symbol':'1.0-3'}}</strong>
+						</span>
+						<ng-template #nosale>
+							<strong>{{item?.price | currency:'VND':'symbol':'1.0-3' }}</strong>
+						</ng-template>
+						<button *ngIf="item?.stockitems" class="pull-right btn btn-danger btn-xs" (click)="addToCart(item)">Đặt hàng</button>
+					</div>
+					<div class="panel-footer text-center" *ngIf="!item?.stockitems; else instock">
+						<span class="label label-danger">Hết hàng</span>
+					</div>
+					<ng-template #instock>
+						<div class="panel-footer text-center">
+							<span class="label label-success">Còn hàng</span>
+						</div>
+					</ng-template>
+					<div class="panel-heading text-center" *ngIf="item?.reviews">
+						{{ item?.reviews.length }} Nhận xét
+					</div>
+				</div>
+			</div> 
+		</div>
+	</div>
+</div>
+<ng-template #loading>
+	<div class="text-center">
+		<img src="assets/img/icon/loading.gif" alt="">
+	</div>
+</ng-template>
+</div>

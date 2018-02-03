@@ -1,0 +1,66 @@
+<div class="container">
+	<div class="information" *ngIf="loadedBrand">
+		<div class="main">
+			<div class="main-title">
+				<span>Thông tin nhà xuất bản {{brand?.name}}</span>
+			</div>
+			<div class="main-body">
+				<div class="main-img">
+					<img src="http://localhost:3000/api/brand/img/{{brand?.image}}" alt="">
+				</div>
+				<div class="main-description">
+					<p class="desc">{{brand?.description}}</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Sách</h3>
+		</div>
+		<div class="panel-body" *ngIf="loaded; else none">
+			<div class="row">
+				<div class="col-xs-12 col-sm-6 col-md-3 top_brand_left" *ngFor="let product of products">
+					<div class="hover14 column">
+						<div class="agile_top_brand_left_grid">
+							<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+								<img src="./assets/img/icon/offer.png" class="img-responsive">
+							</div>
+							<div class="hot" *ngIf="product?.hot_flag">
+								Hot
+							</div>
+							<div class="agile_top_brand_left_grid1">
+								<figure>
+									<div class="snipcart-item block">
+										<div class="snipcart-thumb">
+											<a [routerLink]="['/san-pham', product?.slug]">
+												<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+											</a>		
+											<p class="text-center">{{product?.name}}</p>
+											<h4 class="text-center" 
+											*ngIf="product?.price !== product?.promotion_price; else nosale">
+												{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+												<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+											</h4>
+											<ng-template #nosale>
+												<h4 class="text-center">
+													{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+												</h4>
+											</ng-template>
+										</div>
+									</div>
+									<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
+								</figure>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<ng-template #none>
+			<div class="text-center">
+				<img src="assets/img/icon/loading.gif" alt="">
+			</div>
+		</ng-template>
+	</div>
+</div>

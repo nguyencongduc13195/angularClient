@@ -1,0 +1,44 @@
+<div class="alert alert-success" *ngIf="updateSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<form [formGroup]="formEditCate" (ngSubmit)="onSubmit(formEditCate.value)" *ngIf="loadSuccess; else loadError">
+	<legend>Thêm danh mục</legend>
+	<div class="form-group">
+		<label>Tên danh mục</label>
+		<input type="text" class="form-control" [(ngModel)]="editCate.name" formControlName="txtName" placeholder="Vui lòng nhập tên danh mục.">
+		<span class="label label-danger"
+			*ngIf="formEditCate.controls.txtName.touched && formEditCate.controls.txtName?.errors?.required"
+		>Vui lòng nhập tên danh mục</span>
+	</div>
+	<div class="form-group">
+		<label>Mô tả</label>
+		<textarea class="form-control" [(ngModel)]="editCate.description" rows="5" formControlName="txtDescription" placeholder="Vui lòng nhập mô tả."></textarea>
+		<span class="label label-danger"
+			*ngIf="formEditCate.controls.txtDescription.touched && formEditCate.controls.txtDescription?.errors?.required"
+		>Vui lòng nhập mô tả</span>
+	</div>
+	<div class="form-group">
+		<label>Hình ảnh hiện tại</label>
+		<img *ngIf="editCate.image; else none" 
+			src="https://apimean.herokuapp.com/api/category/img/{{editCate?.image}}" 
+			class="edit img-responsive">
+		<ng-template #none>
+			<img src="https://apimean.herokuapp.com/api/category/img/no-image.jpg" class="img-responsive" alt="">
+		</ng-template>
+	</div>
+	<div class="form-group">
+		<label>Hình ảnh mới</label>
+		<input type="file">
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-lg btn-primary" [disabled]="formEditCate.invalid">Thêm</button>
+	</div>
+</form>
+
+<ng-template #loadError>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>{{msg}}</strong>
+	</div>
+</ng-template>

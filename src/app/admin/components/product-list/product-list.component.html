@@ -1,0 +1,116 @@
+<div class="alert alert-success" *ngIf="deleteSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<div *ngIf="loaded; else none">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th width="5%">STT</th>
+				<th width="20%">Tên sản phẩm</th>
+				<th width="15%">Tên danh mục</th>
+				<th width="15%">NXB</th>
+				<th width="10%">Trạng thái</th>
+				<th width="20%">Ảnh</th>
+				<th width="15%">Hành động</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let product of products; let i = index">
+				<td>{{i+1}}</td>
+				<td>{{product?.name}}</td>
+				<!-- <td>{{product?.body}}</td> -->
+				<td>
+					<select class="form-control" 
+						(change)="onChangeCate(product?._id)" 
+						[(ngModel)]="product.category._id"
+					>
+						<option value="{{item?._id}}" *ngFor="let item of categories">{{ item?.name }}</option>
+					</select>
+					<br/>
+					<div class="text-center" *ngIf="changeCateArray.indexOf(product?._id)>-1">
+						<button 
+							type="button" 
+							class="btn btn-success"
+							(click)="updateCate(product?._id, product?.category?._id)" 
+						>
+							Lưu
+						</button>
+						<button type="button" class="btn btn-danger" 
+							(click)="changeCateArray=[]">
+							Hủy
+						</button>
+						<br/>
+						<span class="label label-success" *ngIf="updateCateSuccess">
+							Thành công
+						</span>
+					</div>
+				</td>
+				<td>
+					<select class="form-control" 
+						(change)="onChangeBrand(product?._id)" 
+						[(ngModel)]="product.brand._id"
+					>
+						<option value="{{item?._id}}" *ngFor="let item of brands">{{ item?.name }}</option>
+					</select>
+					<br/>
+					<div class="text-center" *ngIf="changeBrandArray.indexOf(product?._id)>-1">
+						<button type="button" class="btn btn-success" 
+							(click)="updateBrand(product?._id, product?.brand?._id)"
+						>
+							Lưu
+						</button>
+						<button type="button" class="btn btn-danger" (click)="changeBrandArray=[]"
+						>
+							Hủy
+						</button>
+						<br/>
+						<span class="label label-success" *ngIf="updateBrandSuccess">
+							Thành công
+						</span>
+					</div>
+				</td>
+				<td class=" text-center">
+					<span class="label label-success">
+						{{product?.hot_flag ? 'Hot' : 'Bình thường'}}
+					</span>
+				</td>
+				<td *ngIf="product?.image; else none">
+					<img src="http://localhost:3000/api/product/img/{{product?.image}}" class="img-responsive" style="height: 150px">
+					<!-- <img src="http://apimean.herokuapp.com/api/product/img/{{product?.image}}" class="img-responsive" style="height: 150px"> -->
+				</td>
+				<ng-template #none> 
+					<td>
+						<!-- <img src="https://apimean.herokuapp.com/api/product/img/no-image.jpg" class="img-responsive"> -->
+						<img src="http://localhost:3000/api/product/img/no-image.jpg" class="img-responsive">
+					</td>
+				</ng-template>
+				<td>
+					<button type="button" class="btn btn-success" (click)="navigateToEdit(product?._id)">Sửa</button>
+					<button type="button" class="btn btn-danger" (click)="deleteProduct(product?._id)">Xóa</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<div class="row">
+		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+			<ul class="pagination pull-right">
+				<li [class.hidden]="pageIndex == 1" (click)="setPage(1)"><a>Đầu</a></li>
+				<li [class.hidden]="pageIndex == 1" (click)="setPage(pageIndex-1)"><a>&laquo;</a></li>
+				<li 
+				*ngFor="let item of totalPage"
+				[class.active]="pageIndex == item"
+				(click)="setPage(item)"
+				><a>{{item}}</a></li>
+				<li [class.hidden]="pageIndex == allPage" (click)="setPage(pageIndex+1)"><a>&raquo;</a></li>
+				<li [class.hidden]="pageIndex == allPage" (click)="setPage(allPage)"><a>Cuối</a></li>
+			</ul>
+		</div>
+	</div>
+</div>
+<ng-template #none>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Đang tải...</strong>
+	</div>
+</ng-template>

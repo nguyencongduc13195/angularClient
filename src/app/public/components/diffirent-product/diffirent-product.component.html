@@ -1,0 +1,55 @@
+<div class="title_product col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<span class="diffirent_product">Sản phẩm khác</span>
+</div>
+<br>
+<ng-container *ngIf="diffirentProducts?.length > 0;else none">
+	<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of diffirentProducts">
+		<div class="hover14 column">
+			<div class="agile_top_brand_left_grid">
+				<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+					<img src="./assets/img/icon/offer.png" class="img-responsive">
+				</div>
+				<div class="hot" *ngIf="product?.hot_flag">
+					Hot
+				</div>
+				<div class="agile_top_brand_left_grid1">
+					<figure>
+						<div class="snipcart-item block">
+							<div class="snipcart-thumb">
+								<a [routerLink]="['/san-pham', product?.slug]">
+									<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+								</a>		
+								<p class="text-center">{{product?.name}}</p>
+								<h4 class="text-center" *ngIf="product?.price !== product?.promotion_price; else nosale">
+									{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+									<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+								</h4>
+								<ng-template #nosale>
+									<h4 class="text-center">
+										{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+									</h4>
+								</ng-template>
+							</div>
+						</div>
+						<div class="reaction">
+							<span>{{product?.likes}}&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i></span>
+							<span>{{product?.dislikes}}&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i></span>
+							<span>{{product?.view_count}}&nbsp;<i class="glyphicon glyphicon-eye-open"></i></span>
+							<span class="pull-right">{{ product?.reviews.length }}&nbsp;<i class="glyphicon glyphicon-comment"></i></span>
+						</div>
+						<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
+						
+					</figure>
+				</div>
+			</div>
+		</div>
+	</div>
+</ng-container>
+<ng-template #none>
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+		<div class="alert alert-danger">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>Thông báo!</strong> Sản phẩm đang được cập nhật.
+		</div>
+	</div>
+</ng-template>

@@ -1,0 +1,9 @@
+<i 
+	class="glyphicon"
+	*ngFor="let star of stars"
+	(mouseenter)="setRate(star)" 
+	(mouseleave)="clearRate()"
+	(click)="onRate(star)"
+	[class.glyphicon-star]="star <= rate"
+	[class.glyphicon-star-empty]="star > rate"
+></i>

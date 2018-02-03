@@ -1,0 +1,155 @@
+<app-function 
+	(sort)="getSort($event)" 
+	(element)="getElement($event)"
+	(filter)="getFilter($event)"
+></app-function>
+<br>
+<div class="container">
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">{{categoryname}}:&nbsp;{{totalItems}}&nbsp;sản phẩm</h3>
+		</div>
+		<div class="panel-body" *ngIf="loaded; else none">
+			<div class="row">
+				<div class="col-xs-offset-9 col-md-3 col-sm-6">
+                    <div class="tab-dec">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" [class.active]="viewType=='list'">
+                                <a href="#home" aria-controls="home" (click)="viewType='list'" role="tab" data-toggle="tab">
+                                    <i class="fa fa-th-large"></i>
+                                </a>
+                            </li>
+                            <li role="presentation" [class.active]="viewType=='grid'">
+                                <a href="#profile" aria-controls="profile" (click)="viewType='grid'" role="tab" data-toggle="tab" >
+                                    <i class="fa fa-th-list"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+			</div>
+			<br>
+			<div class="row">
+				<ng-container *ngIf="!isFilter; else noFilter">
+					<ng-container *ngIf="viewType === 'list'; else grid">
+						<div class="col-xs-12 col-sm-6 col-md-3 top_brand_left" *ngFor="let product of products">
+							<div class="hover14 column">
+								<div class="agile_top_brand_left_grid">
+									<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+										<img src="./assets/img/icon/offer.png" class="img-responsive">
+									</div>
+									<div class="hot" *ngIf="product?.hot_flag">
+										Hot
+									</div>
+									<div class="agile_top_brand_left_grid1">
+										<figure>
+											<div class="snipcart-item block">
+												<div class="snipcart-thumb">
+													<a [routerLink]="['/san-pham', product?.slug]">
+														<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+													</a>		
+													<p class="text-center">{{product?.name}}</p>
+													<h4 class="text-center" 
+													*ngIf="product?.price !== product?.promotion_price; else nosale">
+														{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+														<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+													</h4>
+													<ng-template #nosale>
+														<h4 class="text-center">
+															{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+														</h4>
+													</ng-template>
+												</div>
+											</div>
+											<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
+										</figure>
+									</div>
+								</div>
+							</div>
+						</div>
+					</ng-container>
+					<ng-template #grid>
+						<div class="col-xs-12 product-grid" *ngFor="let product of products">
+							<div class="row">
+								<div class="col-xs-3 image-grid">
+									<img src="http://localhost:3000/api/product/img/{{product?.image}}" 
+									class="img-responsive img-grid">
+									<div class="tag-grid" *ngIf="product?.price !== product?.promotion_price">
+										<img src="./assets/img/icon/offer.png" class="img-responsive">
+									</div>
+									<div class="sale1" *ngIf="product?.price !== product?.promotion_price">
+										<span>-{{100-(100*product?.promotion_price)/product?.price | number:'1.0-0'}}%</span>
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<h4 class="nameproduct pull-left">{{product?.name}}</h4>
+									<button type="button" class="add-cart pull-right" (click)="addToCart(product)">
+										<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;
+										Mua hàng
+									</button>
+									<div class="clearfix"></div>
+									<span class="nameauthor">{{product?.writer_name}}</span>
+									<ng-container *ngIf="product?.price!==product?.promotion_price; else noSale">
+										<span class="price">{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}}</span>
+										<del>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</del>
+									</ng-container>
+									<ng-template #noSale>
+										<span class="price">{{product?.price| currency:'VND':'symbol':'1.0-3'}}</span>
+									</ng-template>
+									<span class="desc" [innerHTML]="product?.body | summary:400"></span>
+									<a>Xem thêm...</a>
+								</div>
+							</div>
+						</div>
+					</ng-template>
+				</ng-container>
+				<ng-template #noFilter>
+					<div class="col-xs-12 col-sm-6 col-md-3 top_brand_left" *ngFor="let product of productFilter">
+						<div class="hover14 column">
+							<div class="agile_top_brand_left_grid">
+								<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+									<img src="./assets/img/icon/offer.png" class="img-responsive">
+								</div>
+								<div class="hot" *ngIf="product?.hot_flag">
+									Hot
+								</div>
+								<div class="agile_top_brand_left_grid1">
+									<figure>
+										<div class="snipcart-item block">
+											<div class="snipcart-thumb">
+												<a [routerLink]="['/san-pham', product?.slug]">
+													<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+												</a>		
+												<p class="text-center">{{product?.name}}</p>
+												<h4 class="text-center" 
+												*ngIf="product?.price !== product?.promotion_price; else nosale">
+													{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+													<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+												</h4>
+												<ng-template #nosale>
+													<h4 class="text-center">
+														{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+													</h4>
+												</ng-template>
+											</div>
+										</div>
+										<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
+									</figure>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ng-template>
+			</div>
+		</div>
+		<div class="alert alert-danger" *ngIf="noItems">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<strong>{{msg}}</strong>
+		</div>
+		<ng-template #none>
+			<div class="text-center">
+				<img src="assets/img/icon/loading.gif" alt="">
+			</div>
+		</ng-template>
+	</div>
+</div>

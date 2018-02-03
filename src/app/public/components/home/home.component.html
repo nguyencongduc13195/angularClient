@@ -1,0 +1,102 @@
+<!-- <app-slider (search)="getData($event)"></app-slider>
+<app-products [search]="products"></app-products>
+ -->
+<app-slider></app-slider>
+<div class="all">
+	<div class="container">
+		<div class="row" style="margin-bottom: 20px">
+			<ul class="select">
+				<li [class.active]="active===1" (click)="getProduct(1)">Mới nhất</li>
+				<li [class.active]="active===2" (click)="getProduct(2)">Xem nhiều</li>
+				<li [class.active]="active===3" (click)="getProduct(3)">Yêu thích</li>
+			</ul>
+		</div>
+		<div class="row" *ngIf="!isFilter">
+			<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of products">
+				<div class="hover14 column">
+					<div class="agile_top_brand_left_grid">
+						<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+							<img src="./assets/img/icon/offer.png" class="img-responsive">
+						</div>
+						<div class="hot" *ngIf="product?.hot_flag">
+							Hot
+						</div>
+						<div class="agile_top_brand_left_grid1">
+							<figure>
+								<div class="snipcart-item block">
+									<div class="snipcart-thumb">
+										<a [routerLink]="['/san-pham', product?.slug]">
+											<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+										</a>		
+										<p class="text-center">{{product?.name}}</p>
+										<h4 class="text-center" *ngIf="product?.price !== product?.promotion_price; else nosale">
+											{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+											<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+										</h4>
+										<ng-template #nosale>
+											<h4 class="text-center">
+												{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+											</h4>
+										</ng-template>
+									</div>
+								</div>
+								<div class="reaction">
+									<span>{{product?.likes}}&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i></span>
+									<span>{{product?.dislikes}}&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i></span>
+									<span class="pull-right">{{ product?.reviews.length }}&nbsp;<i class="glyphicon glyphicon-comment"></i></span>
+									<br>
+									<span>{{product?.view_count}}&nbsp;Lượt xem</span>
+								</div>
+								<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row" *ngIf="isFilter">
+			<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of productsFilter">
+				<div class="hover14 column">
+					<div class="agile_top_brand_left_grid">
+						<div class="tag" *ngIf="product?.price !== product?.promotion_price">
+							<img src="./assets/img/icon/offer.png" class="img-responsive">
+						</div>
+						<div class="hot" *ngIf="product?.hot_flag">
+							Hot
+						</div>
+						<div class="agile_top_brand_left_grid1">
+							<figure>
+								<div class="snipcart-item block">
+									<div class="snipcart-thumb">
+										<a [routerLink]="['/san-pham', product?.slug]">
+											<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+										</a>		
+										<p class="text-center">{{product?.name}}</p>
+										<h4 class="text-center" 
+										*ngIf="product?.price !== product?.promotion_price; else nosale">
+											{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
+											<span>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</span>
+										</h4>
+										<ng-template #nosale>
+											<h4 class="text-center">
+												{{product?.price | currency:'VND':'symbol':'1.0-3'}} 
+											</h4>
+										</ng-template>
+									</div>
+								</div>
+								<div class="reaction">
+									<span>{{product?.likes}}&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i></span>
+									<span>{{product?.dislikes}}&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i></span>
+									<span class="pull-right">{{ product?.reviews.length }}&nbsp;<i class="glyphicon glyphicon-comment"></i></span>
+									<br>
+									<span>{{product?.view_count}}&nbsp;Lượt xem</span>
+								</div>
+								<button class="addCart">Thêm giỏ hàng</button>
+							</figure>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

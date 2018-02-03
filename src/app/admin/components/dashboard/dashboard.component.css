@@ -1,0 +1,36 @@
+.dashboard{
+	width: 50%; float: left;
+}
+
+.dashboard h3, .dashboard h4{
+	margin-left: 5px;
+}
+
+.block{
+	height: 100px;
+	text-align: center;
+	font-size: 40px;
+	line-height: 100px;
+}
+.block a{
+	text-decoration: none;
+	color: #fff;
+}
+.block a:hover{
+	cursor: pointer;
+}
+.order{
+	background-color: #34acff;
+}
+.user{
+	background-color: #fab63d;
+}
+.products{
+	background-color: #39c0af;
+}
+.cates{
+	background-color: #f52640;
+}
+.number {
+	background-color: #fff;
+}

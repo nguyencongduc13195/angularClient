@@ -1,0 +1,123 @@
+<div class="navbar navbar-inverse">
+	<div class="container-fluid">	
+		<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#collapse" aria-expanded="false">
+				<span class="sr-only">navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" [routerLink]="['/']">Trang chủ</a>
+		</div>
+	<div class="collapse navbar-collapse" id="collapse">
+		<ul class="nav navbar-nav navbar-right">
+			<li><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart">
+				</span>Giỏ hàng&nbsp;<span class="badge">{{totalQty}} </span></a>
+				<div class="dropdown-menu" style="width:400px">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<div class="row">
+								<div class="col-md-1">#</div>
+								<div class="col-md-2">Ảnh</div>
+								<div class="col-md-3">Tên SP</div>
+								<div class="col-md-3">Giá</div>
+								<div class="col-md-3">Số lượng</div>
+							</div>
+						</div>
+						<div class="panel-body">
+							<div id="cart_product">
+							<div class="row" *ngFor="let item of cartItems; let i = index">
+								<div class="col-md-1">{{i+1}}</div>
+								<div class="col-md-2">
+									<img class="img-responsive" style="height: 30px" 
+									src="http://apimean.herokuapp.com/api/product/img/{{item?.product?.image}}" alt="">
+								</div>
+								<div class="col-md-3">{{item?.product?.name}}</div>
+								<div class="col-md-3" *ngIf="item?.product?.price !== item?.product?.promotion_price">
+									{{item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3' }}
+								</div>
+								<div class="col-md-3" *ngIf="item?.product?.price === item?.product?.promotion_price">
+									{{item?.product?.price |currency:'VND':'symbol':'1.0-3' }}
+								</div>
+								<div class="col-md-3">{{item?.quantity }}</div>
+							</div>
+							</div>
+						</div>
+						<div class="panel-footer pull-right">
+							<button type="button" class="btn btn-success" (click)="getToOrder()">Thanh toán</button>
+						</div>
+					</div>
+				</div>
+			</li>
+			<li *ngIf="!isLogging">
+				<a (click)="showModal()" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-user"></span>&nbsp;Đăng nhập
+				</a>
+			</li>
+			<li *ngIf="!isLogging">
+				<a [routerLink]="['/register']" class="dropdown-toggle" data-toggle="dropdown">
+					<span class="glyphicon glyphicon-user"></span>&nbsp;Đăng ký
+				</a>
+			</li>
+			<li *ngIf="isLogging">
+				<a class="dropdown-toggle" data-toggle="dropdown">
+				<span class="glyphicon glyphicon-user"></span>&nbsp;Thông tin</a>
+				<ul class="dropdown-menu">
+					<li class="list-group-item" [routerLink]="['/thong-tin']">Thông tin cá nhân</li>
+					<li class="list-group-item" *ngIf="isAdmin === '1301'" [routerLink]="['/admin']">Trang Quản Trị</li>
+					<li class="list-group-item" [routerLink]="['/myorder']">Đơn hàng của tôi</li>
+					<li class="list-group-item" (click)="_userService.logout()">Đăng xuất</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>
+
+<div *ngIf="isModalShown" [config]="{ show: true }" (onHidden)="onHidden()" bsModal #autoShownModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+			<div class="modal-body">
+				<div class="{{ msgClass }}" *ngIf="isLogin">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+					<strong>{{ msg }}</strong>
+				</div>
+				<form [formGroup]="formLogin" (ngSubmit)="onLogin(formLogin.value)">
+					<div class="form-group"
+						[ngClass]="{
+							'has-error': formLogin.controls.txtEmail?.errors && formLogin.controls.txtEmail.touched,
+							'has-success': !formLogin.controls.txtEmail?.errors
+						}"
+					>
+						<label>Email</label>
+						<input type="text" class="form-control" name="txtEmail" formControlName="txtEmail" placeholder="Vui lòng nhập Email">
+						<span class="label label-danger" *ngIf="formLogin.controls.txtEmail?.errors?.required && formLogin.controls.txtEmail.touched">Vui lòng nhập Email.</span>
+						<span class="label label-danger" *ngIf="!formLogin.controls.txtEmail?.errors?.required && formLogin.controls.txtEmail?.errors?.email && formLogin.controls.txtEmail.touched">Vui lòng nhập Email đúng định đạng.</span>
+					</div>
+					<div class="form-group"
+						[ngClass]="{
+							'has-error': formLogin.controls.txtPassword?.errors && formLogin.controls.txtPassword.touched,
+							'has-success': !formLogin.controls.txtPassword?.errors
+						}"
+					>
+						<label>Mật khẩu</label>
+						<input type="{{ showhidePassword ? 'password' : 'text' }}" class="form-control" name="txtPassword" formControlName="txtPassword" placeholder="Vui lòng nhập mật khẩu">
+						<span class="label label-danger" *ngIf="formLogin.controls.txtPassword?.errors?.required && formLogin.controls.txtPassword.touched">Vui lòng nhập mật khẩu.</span>
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" (click)="togglePassword()">
+								Ẩn/ Hiện mật khẩu
+							</label>
+						</div>
+					</div>
+					<button type="submit" class="btn btn-info" 
+					[disabled]="formLogin.invalid"
+					[class.hidden]="success_login"
+					>Đồng ý</button>
+					<button type="button" class="btn btn-success" (click)="isModalShown=false"
+					[routerLink]="['/quen-mat-khau']"
+					>Quên mật khẩu</button>
+				</form>
+			</div>
+		</div>
+  	</div>
+</div>

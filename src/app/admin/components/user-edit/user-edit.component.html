@@ -1,0 +1,64 @@
+<div class="alert alert-success" *ngIf="updateSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<form [formGroup]="formEditUser" (ngSubmit)="onSubmit(formEditUser.value)">
+	<legend>Cập nhật người dùng</legend>
+	<div class="form-group">
+		<label>Họ và tên</label>
+		<input type="text" [(ngModel)]="editUser.full_name" class="form-control" formControlName="txtFullName" placeholder="Vui lòng nhập tên.">
+		<span class="label label-danger"
+			*ngIf="formEditUser.controls.txtFullName.touched && formEditUser.controls.txtFullName?.errors?.required"
+		>Vui lòng nhập họ tên.</span>
+	</div>
+	<div class="form-group">
+		<label>Email</label>
+		<input [(ngModel)]="editUser.email" type="text" class="form-control" formControlName="txtEmail" placeholder="Vui lòng nhập email.">
+		<span class="label label-danger"
+			*ngIf="formEditUser.controls.txtEmail.touched && formEditUser.controls.txtEmail?.errors?.required"
+		>Vui lòng nhập email.</span>
+	</div>
+	<div class="form-group">
+		<label>Địa chỉ</label>
+		<input [(ngModel)]="editUser.address" type="text" class="form-control" formControlName="txtAddress" placeholder="Vui lòng nhập địa chỉ.">
+	</div>
+	<div class="form-group">
+		<label>Địa chỉ</label>
+		<input [(ngModel)]="editUser.phone" type="text" class="form-control" formControlName="txtPhone" placeholder="Vui lòng nhập số điện thoại.">
+		<span class="label label-danger"
+			*ngIf="formEditUser.controls.txtPhone.touched && formEditUser.controls.txtPhone?.errors?.required"
+		>Vui lòng nhập địa chỉ.</span>
+	</div>
+	<div class="form-group">
+		<label>Ngày sinh</label>
+		<!-- <input [(ngModel)]="editUser.birthday | date:'yyyy-MM-dd'" type="date" class="form-control" formControlName="txtBirthday" placeholder="Vui lòng nhập ngày sinh."> -->
+		<input [ngModel]="editUser.birthday | date:'yyyy-MM-dd'"  class="form-control" type="date" formControlName="txtBirthday"/>
+		<span class="label label-danger"
+			*ngIf="formEditUser.controls.txtBirthday.touched && formEditUser.controls.txtBirthday?.errors?.required"
+		>Vui lòng nhập email.</span>
+	</div>
+	<div class="form-group">
+		<label>Quyền</label>
+		<select class="form-control" formControlName="txtLevel" name="txtLevel" [(ngModel)]="editUser.level">
+			<option value="Admin">Admin</option>
+			<option value="User">User</option>
+		</select>
+	</div>
+	<div class="form-group">
+		<label>Giới tính</label>
+		<select class="form-control" formControlName="txtGender" name="txtGender" [(ngModel)]="editUser.gender">
+			<option value="Male">Nam</option>
+			<option value="Fermale">Nữ</option>
+		</select>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-primary btn-lg" [disabled]="formEditUser.invalid">Cập nhật</button>
+	</div>
+</form>
+
+<ng-template #loadError>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>{{msg}}</strong>
+	</div>
+</ng-template>

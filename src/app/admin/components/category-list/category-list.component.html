@@ -1,0 +1,42 @@
+<div class="alert alert-success" *ngIf="deleteSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<table class="table table-bordered table-hover" *ngIf="loaded; else noCate">
+	<thead>
+		<tr>
+			<th width="5%">STT</th>
+			<th width="10%">Tên danh mục</th>
+			<th width="50%">Mô tả</th>
+			<th width="20%">Ảnh</th>
+			<th width="15%">Hành động</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let cate of categories; let i = index">
+			<td>{{i+1}}</td>
+			<td>{{cate?.name}}</td>
+			<td>{{cate?.description}}</td>
+			<td *ngIf="cate?.image; else none">
+				<img src="http://localhost:3000/api/category/img/{{cate?.image}}" class="img-responsive">
+				<!-- <img src="http://apimean.herokuapp.com/api/category/img/{{cate?.image}}" class="img-responsive"> -->
+			</td>
+			<ng-template #none> 
+				<td>
+					<img src="http://localhost:3000/api/category/img/no-image.jpg" class="img-responsive">
+					<!-- <img src="https://apimean.herokuapp.com/api/category/img/no-image.jpg" class="img-responsive"> -->
+				</td>
+			</ng-template>
+			<td>
+				<button type="button" class="btn btn-success" (click)="navigateToEdit(cate?._id)">Sửa</button>
+				<button type="button" class="btn btn-danger" (click)="deleteCate(cate?._id)">Xóa</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<ng-template #noCate>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Đang tải...</strong>
+	</div>
+</ng-template>

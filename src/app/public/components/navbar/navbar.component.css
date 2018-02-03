@@ -1,0 +1,38 @@
+.block{
+	display: block;
+}
+.navbar.navbar-inverse{
+	padding: 10px;
+	margin-bottom: 0px;
+	background-color: #eee
+}
+span.active{
+	font-weight: bold;
+	font-size: 16px;
+}
+li:hover a{
+	cursor: pointer;
+	color: #000;
+}
+li.list-group-item:hover{
+	background-color: #eee;
+}
+.panel {
+    margin-bottom: 0px; 
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 0;
+    box-shadow: 0 1px 1px rgba(0,0,0,.05);
+}
+
+.dropdown-menu.block{
+	padding: 0;
+}
+a.navbar-brand{
+	padding: 15px;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+	background-color: #eee;
+	color:#000;
+}

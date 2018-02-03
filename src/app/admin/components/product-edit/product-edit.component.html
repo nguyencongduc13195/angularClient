@@ -1,0 +1,125 @@
+<div class="alert alert-success" *ngIf="updateSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<ng-container *ngIf="loadSuccess">
+	<form [formGroup]="formEditProduct" (ngSubmit)="onSubmit(formEditProduct.value)">
+		<legend>Thêm sản phẩm</legend>
+		<div class="form-group">
+			<label>Danh mục</label>
+			<select class="form-control" formControlName="sltCategory" [(ngModel)]="editProduct.category">
+				<option value="{{item?._id}}" *ngFor="let item of categories">{{item?.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Nhà xuất bản</label>
+			<select class="form-control" formControlName="sltBrand" [(ngModel)]="editProduct.brand">
+				<option value="{{item?._id}}" *ngFor="let item of brands">{{item?.name}}</option>
+			</select>
+		</div>
+		<div class="form-group">
+			<label>Tên sản phẩm</label>
+			<input type="text" [(ngModel)]="editProduct.name" class="form-control" formControlName="txtName" placeholder="Vui lòng nhập tên sản phẩm.">
+			<span class="label label-danger" *ngIf="formEditProduct.controls.txtName.touched && formEditProduct.controls.txtName?.errors?.required"
+			>Vui lòng nhập tên sản phẩm.</span>
+		</div>
+		<div class="form-group">
+			<label>Tên tác giả</label>
+			<input type="text" [(ngModel)]="editProduct.writer_name" class="form-control" formControlName="txtFullName" placeholder="Vui lòng nhập tên tác giả.">
+			<span class="label label-danger"
+				*ngIf="formEditProduct.controls.txtFullName.touched && formEditProduct.controls.txtFullName?.errors?.required"
+			>Vui lòng nhập tên tác giả.</span>
+		</div>
+		<div class="form-group">
+			<label>Mô tả</label>
+	  		<ckeditor 
+	  			formControlName="txtBody" 
+	  			[(ngModel)]="editProduct.body"
+	  			[config]="{extraPlugins: 'divarea'}"
+	  		>
+				<ckbutton 
+					[name]="'saveButton'"
+					[command]="'saveCmd'"
+					[label]="'Save Document'"
+					[toolbar]="'clipboard,1'"
+				></ckbutton>
+			</ckeditor>
+			<span class="label label-danger"
+				*ngIf="formEditProduct.controls.txtBody.touched && formEditProduct.controls.txtBody?.errors?.required"
+			>Vui lòng nhập mô tả.</span>
+		</div>
+		<div class="form-group">
+			<label>Mô tả</label>
+	  		<ckeditor 
+	  			formControlName="txtDescription" 
+	  			[(ngModel)]="editProduct.description"
+	  			[config]="{extraPlugins: 'divarea'}"
+	  		>
+				<ckbutton 
+					[name]="'saveButton'"
+					[command]="'saveCmd'"
+					[label]="'Save Document'"
+					[toolbar]="'clipboard,1'"
+				></ckbutton>
+			</ckeditor>
+			<span class="label label-danger"
+				*ngIf="formEditProduct.controls.txtDescription.touched && formEditProduct.controls.txtDescription?.errors?.required"
+			>Vui lòng nhập chi tiết.</span>
+		</div>
+		<div class="form-group">
+			<label>Giá</label>
+			<input [(ngModel)]="editProduct.price" type="number" class="form-control" formControlName="txtPrice" placeholder="Vui lòng nhập giá.">
+			<span class="label label-danger"
+				*ngIf="formEditProduct.controls.txtPrice.touched && formEditProduct.controls.txtPrice?.errors?.required"
+			>Vui lòng nhập giá.</span>
+		</div>
+		<div class="form-group">
+			<label>Giá khuyến mãi</label>
+			<input [(ngModel)]="editProduct.promotion_price" type="number" class="form-control" formControlName="txtPromotionPrice" placeholder="Vui lòng nhập giá khuyến mãi (nếu có).">
+		</div>
+		<div class="form-group">
+			<label>Số sản phẩm</label>
+			<input [(ngModel)]="editProduct.stockitems" type="number" class="form-control" formControlName="txtStockItems" placeholder="Vui lòng nhập số sản phẩm.">
+			<span class="label label-danger"
+				*ngIf="formEditProduct.controls.txtStockItems.touched && formEditProduct.controls.txtStockItems?.errors?.required"
+			>Vui lòng nhập số lượng sản phẩm.</span>
+		</div>
+		<div class="form-group" *ngIf="!uploadNewImg">
+			<label>Hình ảnh hiện tại</label>
+			<!-- <img class="img-responsive edit" src="https://apimean.herokuapp.com/api/product/img/{{editProduct?.image}}"> -->
+			<img *ngIf="editProduct?.image" class="img-responsive edit" 
+				src="http://localhost:3000/api/product/img/{{editProduct?.image}}">
+			<img *ngIf="!editProduct?.image" class="img-responsive edit" 
+				src="http://localhost:3000/api/product/img/no-image.jpg">
+		</div>
+		<div class="form-group">
+			<label>Hình ảnh mới</label>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<input #myImage type="file" class="form-control">
+					<span class="label label-danger"
+						*ngIf="notUpload"
+					>Vui lòng chọn ảnh.</span>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<button type="button" class="btn btn-success"
+						*ngIf="!uploadNewImg" (click)="onUploadNewImage()"
+					>
+						Tải ảnh
+					</button>
+				</div>
+			</div>
+			<img class="img-responsive edit" src="{{urlImg}}" *ngIf="uploadNewImg">
+		</div>
+		<div class="text-center">
+			<button type="submit" class="btn btn-primary btn-lg" [disabled]="formEditProduct.invalid">Cập nhật</button>
+		</div>
+	</form>
+</ng-container >
+
+<ng-template #loadError>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>{{msg}}</strong>
+	</div>
+</ng-template>

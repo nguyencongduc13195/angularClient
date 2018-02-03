@@ -1,0 +1,286 @@
+ You can add global styles to this file, and also import other style files */
+
+.img-product:hover{
+	cursor: pointer;
+}
+.img-product-order{
+	height: 100px;
+}
+
+.panel-body{
+	position: relative;
+}
+.sale {
+	position: absolute;
+	right: 0;
+	display: block;
+	background-color: #d9534f;
+	padding: 15px;
+	color: #fff;
+	transform: rotate(30deg);
+	border-radius: 10px;
+}
+
+img.edit{
+	height: 150px;
+}
+
+.nav>li>a:focus, .nav>li>a:hover {
+    text-decoration: none;
+    background-color: #859276;
+    color: #fff;
+    font-weight: bold;
+}
+
+.nav-pills>li>a{
+	color: #5f5252;
+	font-size: 15px;
+	background-color: #f5f5f5
+}
+
+.react span{
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.cate{
+	padding: 10px 20px;
+    background-color: #43a243;
+    color: #f1f1f1;
+    font-size: 16px;
+    font-weight: bold;
+    width: 90%;
+    margin: 0 5% 0 5%;
+}
+.nav-stacked>li, .nav-stacked>li+li{
+    margin: 0 5% 0 5%;
+}
+ul{
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+@media only screen and (min-width: 960px) {
+    /*.menu{
+		position: fixed;
+		width: 200px
+	}*/
+}
+
+@media only screen and (max-width: 960px){
+	.slider{
+    	display: none;
+    }
+    .title {
+    	clear: both;
+	    width: 80% !important;
+	}
+    .menu{
+        margin-bottom: 20px;
+    }
+	.top_brand_left:nth-child(1n){
+	    margin-bottom: 20px;
+	}
+    ul.select{
+        width: 100% !important;
+        float: left;
+        margin: 0 auto !important;
+    }
+    ul.select li {
+        font-size: 10px !important;
+        width: 20%;
+        margin-right: 0
+    }
+    .title_product{
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 1180px) and (max-width: 1500px) {
+	.panel-heading{
+		height: 45px;
+		overflow: hidden;
+	}
+	del{
+		display: none;
+	}
+}
+@media only screen and (min-width: 960px)  and (max-width: 1279px){
+    .img-product{
+    	display: block;
+    	margin: auto;
+    }
+}
+/*product*/
+.all{
+	background-color: #f5f5f5;
+}
+ul.select{
+    list-style: none;
+    margin: 0 auto 20px auto;
+    padding: 0;
+    width: 50%;
+}
+ul.select li {
+    margin-right: 30px;
+    padding: 20px 40px;
+    font-weight: bold;
+    float: left;
+    font-size: 20px;
+}
+ul.select li:hover{
+    cursor: pointer;
+}
+ul.select li.active{
+    border-bottom: 5px solid #ea7b7b
+}
+.top_brand_left:nth-child(4n){
+    margin-bottom: 20px;
+}
+.column div.agile_top_brand_left_grid {
+    position: relative;
+    margin: 0;
+}
+.agile_top_brand_left_grid {
+    background: #FFFFFF;
+    padding: .5em;
+    border: 1px solid #BEBEBE;
+    position: relative;
+}
+.agile_top_brand_left_grid1 {
+    padding: 1em;
+    border: 1px solid #D7D7D7;
+}
+.hover14 figure {
+    position: relative;
+}
+.agile_top_brand_left_grid figure {
+    margin: 0;
+    padding: 0;
+    background: transparent;
+    overflow: hidden;
+    z-index: 0;
+}
+.hover14 figure::before {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: -webkit-linear-gradient(left, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.3) 100%);
+    -webkit-transform: skewX(-25deg);
+    transform: skewX(-25deg);
+}
+.hover14 figure:hover::before,.top_brand_left:hover .hover14 figure::before{
+	animation: shine .75s;
+}
+@keyframes shine {
+	100% {
+		left: 125%;
+	}
+}
+.hover14:hover button{
+	background-color: #84C639;
+}
+.tag>img.img-responsive {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+}
+.hot{
+    position: absolute;
+    right: 5%;
+    width: 40px;
+    line-height: 40px;
+    text-align: center;
+    height: 40px;
+    border-radius: 50%;
+    background-color: red;
+    color: #fff;
+    font-weight: bold;
+}
+.img-product{
+    width: 140px;
+    height: 200px;
+}
+.snipcart-thumb a {
+    display: block;
+    text-align: center;
+}
+.agile_top_brand_left_grid1 p {
+    color: #212121;
+    margin: 1.5em 0 1em;
+    line-height: 1.5em;
+    text-transform: capitalize;
+    font-size: 14px;
+    height: 40px;
+}
+.agile_top_brand_left_grid1 h4, .agileinfo_single_right_snipcart h4 {
+    font-weight: 600;
+    font-size: 1em;
+    color: #212121;
+}
+.agile_top_brand_left_grid1 h4 span, .agileinfo_single_right_snipcart h4 span {
+    font-weight: 300;
+    text-decoration: line-through;
+    padding-left: 1em;
+}
+.agile_top_brand_left_grid1 h4, .agileinfo_single_right_snipcart h4 {
+    font-weight: 600;
+    font-size: 1em;
+    color: #212121;
+}
+
+button.addCart {
+    background-color: #FA1818; 
+    display: block;
+    border: none;
+    margin: 0px auto;
+    color: #fff;
+    width: 100%;
+    padding: 10px 15px;
+    margin-top: 20px;
+}
+
+.title_product {
+  margin: 20px 0px;
+}
+span.related_product{
+    background-color: #de5050;
+}
+span.diffirent_product{
+    background-color: #43a243;
+}
+span.related_product, span.diffirent_product {
+  font-size: 16px;
+  color: #fff;
+  display: inline-block;
+  text-transform: uppercase;
+  margin: 0;
+  padding: 10px 15px;
+  position: relative;
+}
+
+span.related_product:before, span.diffirent_product:before {
+  content: "";
+  position: absolute;
+  right: -20px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+}
+span.related_product:before{
+    border-left: 20px solid #de5050;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}
+span.diffirent_product:before{
+    border-left: 20px solid #43a243;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+}

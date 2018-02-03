@@ -1,0 +1,24 @@
+<div class="alert alert-success" *ngIf="addSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<form [formGroup]="formAddAuthor" (ngSubmit)="onSubmit(formAddAuthor.value)">
+	<legend>Thêm tác giả</legend>
+	<div class="form-group">
+		<label>Tên tác giả</label>
+		<input type="text" class="form-control" formControlName="txtName" placeholder="Vui lòng nhập tên tác giả.">
+		<span class="label label-danger"
+			*ngIf="formAddAuthor.controls.txtName.touched && formAddAuthor.controls.txtName?.errors?.required"
+		>Vui lòng nhập tên nhà xuất bản.</span>
+	</div>
+	<div class="form-group">
+		<label>Mô tả</label>
+		<textarea class="form-control" rows="5" formControlName="txtDescription" placeholder="Vui lòng nhập mô tả."></textarea>
+		<span class="label label-danger"
+			*ngIf="formAddAuthor.controls.txtDescription.touched && formAddAuthor.controls.txtDescription?.errors?.required"
+		>Vui lòng nhập mô tả</span>
+	</div>
+	<div class="text-center">
+		<button type="submit" class="btn btn-lg btn-primary" [disabled]="formAddAuthor.invalid">Thêm</button>
+	</div>
+</form>

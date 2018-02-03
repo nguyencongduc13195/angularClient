@@ -1,0 +1,102 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+		<h3 class="panel-title">Thông tin khách hàng</h3>
+	</div>
+	<div class="panel-body">
+		<form [formGroup]="formOrder" (ngSubmit)="onSubmit(formOrder.value)">
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label>Họ tên (*)</label>
+						<div class="input-group has-feedback" 
+							[class.has-error]='formOrder.controls.txtName?.errors &&  formOrder.controls.txtName.touched'
+							[class.has-success]='!formOrder.controls.txtName?.errors'
+							>
+						    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						    <input autocomplete="off" type="text" formControlName="txtName" class="form-control" name="txtName" placeholder="Vui lòng nhập họ tên."
+							[(ngModel)]="user.full_name"
+						    >
+						    <span
+						    *ngIf="formOrder.controls.txtName?.errors &&  formOrder.controls.txtName.touched"
+						    class="glyphicon glyphicon-remove form-control-feedback"></span>
+						    <span
+						    *ngIf="!formOrder.controls.txtName?.errors"
+						    class="glyphicon glyphicon-ok form-control-feedback"></span>
+						    <span class="label label-danger" 
+						    *ngIf="formOrder.controls.txtName?.errors?.required && formOrder.controls.txtName.touched">
+							Vui lòng nhập tên món ăn.</span>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label>Địa chỉ (*)</label>
+						<div class="input-group has-feedback" 
+							[class.has-error]='formOrder.controls.txtAddress?.errors &&  formOrder.controls.txtAddress.touched'
+							[class.has-success]='!formOrder.controls.txtAddress?.errors'
+							>
+						    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						    <input autocomplete="off" type="text" formControlName="txtAddress" class="form-control" name="txtAddress" placeholder="Vui lòng nhập địa chỉ."
+							[(ngModel)]="user.address"
+						    >
+						    <span
+						    *ngIf="formOrder.controls.txtAddress?.errors &&  formOrder.controls.txtAddress.touched"
+						    class="glyphicon glyphicon-remove form-control-feedback"></span>
+						    <span
+						    *ngIf="!formOrder.controls.txtAddress?.errors"
+						    class="glyphicon glyphicon-ok form-control-feedback"></span>
+						    <span class="label label-danger" 
+						    *ngIf="formOrder.controls.txtAddress?.errors?.required && formOrder.controls.txtAddress.touched">
+							Vui lòng nhập địa chỉ nhận hàng.</span>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label>Số điện thoại (*)</label>
+						<div class="input-group has-feedback" 
+							[class.has-error]='formOrder.controls.txtPhone?.errors &&  formOrder.controls.txtPhone.touched'
+							[class.has-success]='!formOrder.controls.txtPhone?.errors'
+							>
+						    <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						    <input autocomplete="off" type="text" formControlName="txtPhone" class="form-control" name="txtPhone" placeholder="Vui lòng nhập số điện thoại."
+							[(ngModel)]="user.phone"
+						    >
+						    <span
+						    *ngIf="formOrder.controls.txtPhone?.errors &&  formOrder.controls.txtPhone.touched"
+						    class="glyphicon glyphicon-remove form-control-feedback"></span>
+						    <span
+						    *ngIf="!formOrder.controls.txtPhone?.errors"
+						    class="glyphicon glyphicon-ok form-control-feedback"></span>
+						    <span class="label label-danger" 
+						    *ngIf="formOrder.controls.txtPhone?.errors?.required && formOrder.controls.txtPhone.touched">
+							Vui lòng nhập số điện thoại nhận hàng.</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label>Phương thức thanh toán</label>
+						<div class="radio">
+							<label>
+								<input (click)="selectPayment(1)" type="radio" name="rdoPayment" value="1" checked="checked">
+								Chuyển khoản
+							</label>
+							<label>
+								<input (click)="selectPayment(0)" type="radio" name="rdoPayment" value="0">
+								COD
+							</label>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+					<div class="form-group">
+						<label>Ghi chú</label>
+						<textarea placeholder="Vui lòng nhập ghi chú (nếu có)." formControlName="txtNote" class="form-control" rows="5"></textarea>
+					</div>
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Đồng ý</button>
+		</form>
+	</div>
+</div>

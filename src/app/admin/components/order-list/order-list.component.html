@@ -1,0 +1,77 @@
+<div class="alert alert-success" *ngIf="deleteSuccess">
+	<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+	<strong>{{msg}}</strong>
+</div>
+<table class="table table-bordered table-hover" *ngIf="!watchDetail">
+	<thead>
+		<tr>
+			<th width="5%">STT</th>
+			<th width="20%">Họ tên</th>
+			<th width="20%">Địa chỉ giao hàng</th>
+			<th width="10%">Số điện thoại</th>
+			<th width="10%">Thanh toán</th>
+			<th width="10%">Trạng thái</th>
+			<th width="15%">Hành động</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let order of orders; let i = index">
+			<td>{{i+1}}</td>
+			<td>{{order?.name}}</td>
+			<td>{{order?.address}}</td>
+			<td>{{order?.phone}}</td>
+			<td>{{order?.paymentOption === 0 ? 'COD' : 'ATM'}}</td>
+			<td>
+				<span class="label label-success" *ngIf="order?.confirm" (click)="updateConfirm(order?._id)">Xác nhận</span>
+				<span class="label label-danger" *ngIf="!order?.confirm" (click)="updateConfirm(order?._id)">Chưa xác nhận</span>
+			</td>
+			<td>
+				<button type="button" class="btn btn-success" (click)="goToDetailOrder(order?._id)">Xem chi tiết</button>
+				<button type="button" class="btn btn-danger" (click)="deleteOrder(order?._id)">Xóa</button>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<table class="table table-bordered table-hover" *ngIf="watchDetail">
+	<thead>
+		<tr>
+			<th width="15%">Họ tên</th>
+			<th width="20%">Địa chỉ giao hàng</th>
+			<th width="10%">Số điện thoại</th>
+			<th width="10%">Ngày đặt</th>
+			<th width="20%">Ghi chú</th>
+			<th width="25%">Sản phẩm</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{order?.name}}</td>
+			<td>{{order?.address}}</td>
+			<td>{{order?.phone}}</td>
+			<td>{{ order?.created_at | date:'dd/MM/yyyy' }}</td>
+			<td>{{order?.note ? order?.note : 'Không có'}}</td>
+			<td>
+				<table class="table table-bordered table-hover">
+					<tbody>
+						<tr>
+							<td width="33%" *ngFor="let item of order['orderItem'][0]['slug']">
+								{{item}}<br/>
+							</td>
+						</tr>
+						<tr>
+							<td *ngFor="let item of order['orderItem'][0]['quantity']">Số lượng: {{item}}</td>
+						</tr>
+						<tr>
+							<td>Tổng tiền: {{order?.total | currency:'VND':'symbol':'1.0-3'}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="5">
+				<button type="button" class="btn btn-danger" (click)="watchDetail = false">Quay về</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

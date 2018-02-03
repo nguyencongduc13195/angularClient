@@ -1,0 +1,190 @@
+<div class="container">
+	<div class="row">
+		<div class="col-md-offset-3 col-xs-6 col-sm-6 col-md-6 col-lg-6">
+			<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" *ngIf="success_register">
+				<div class="{{msgClass}}">
+					{{msg}}
+				</div>
+			</div>
+			<div class="wrapper">
+				<h2 class="pull-left">Đăng ký</h2>
+				<div class="clearfix"></div>
+				<form [formGroup]="formRegister" (ngSubmit)="onRegister(formRegister.value)">
+					<div class="input-group has-feedback"
+						[ngClass]="{
+						'has-error': formRegister.controls.txtFullName?.errors &&  formRegister.controls.txtFullName.touched,
+						 'has-success' : !formRegister.controls.txtFullName?.errors
+						}"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+					    <input autocomplete="off" type="text" formControlName="txtFullName" class="form-control" name="txtFullName" placeholder="Vui lòng nhập họ tên.">
+					    <span
+					    *ngIf="formRegister.controls.txtFullName?.errors &&  formRegister.controls.txtFullName.touched"
+					    class="glyphicon glyphicon-remove form-control-feedback"></span>
+					    <span
+					    *ngIf="!formRegister.controls.txtFullName?.errors"
+					    class="glyphicon glyphicon-ok form-control-feedback"></span>
+					    <span class="label label-danger" 
+					    *ngIf="formRegister.controls.txtFullName?.errors?.required && formRegister.controls.txtFullName.touched">
+						Vui lòng nhập họ tên.</span>
+						<span class="label label-danger" 
+					    *ngIf="(formRegister.controls.txtFullName?.errors?.minlength || formRegister.controls.txtFullName?.errors?.maxlength)  && formRegister.controls.txtFullName.touched">
+						Vui lòng nhập họ tên dài từ 10 đến 30 ký tự.</span>
+					</div>
+					<br>
+					<div class="input-group has-feedback"
+						[ngClass]="{
+						'has-error': (formRegister.controls.txtEmail?.errors &&  formRegister.controls.txtEmail.touched) || !existingEmail,
+						'has-success' : !formRegister.controls.txtEmail?.errors
+						}"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+					    <input (change)="onCheckEmail()" autocomplete="off" type="email" formControlName="txtEmail" class="form-control" name="txtEmail" placeholder="Vui lòng nhập địa chỉ email.">
+					    <span
+					    *ngIf="!formRegister.controls.txtEmail?.errors && existingEmail" 
+					    class="glyphicon glyphicon-ok form-control-feedback"></span>
+					    <span
+					    *ngIf="(formRegister.controls.txtEmail?.errors || !existingEmail) && formRegister.controls.txtEmail.touched" 
+					    class="glyphicon glyphicon-remove form-control-feedback"></span>
+					    <span class="label label-danger" 
+					    *ngIf="formRegister.controls.txtEmail?.errors?.required && formRegister.controls.txtEmail.touched">
+						Vui lòng nhập địa chỉ Email.</span>
+					    <span class="label label-danger"
+					    *ngIf="!formRegister.controls.txtEmail?.errors?.required && formRegister.controls.txtEmail?.errors?.email && formRegister.controls.txtEmail.touched">
+						Vui lòng nhập đúng định dạng Email.</span>
+						<span 
+						class="label"
+						[ngClass]="{'label-danger': !existingEmail, 'label-success': existingEmail }"
+						*ngIf="!formRegister.controls.txtEmail?.errors && formRegister.controls.txtEmail.dirty" 
+					    >
+						{{ existingEmail ? 'Email có thể sử dụng.' : 'Email đã được người khác đăng ký' }}</span>
+					</div>
+					<br>
+					<div class="input-group has-feedback"
+						[ngClass]="{
+						'has-error': formRegister.controls.txtPassword?.errors &&  formRegister.controls.txtPassword.touched,
+						'has-success' : !formRegister.controls.txtPassword?.errors
+						}"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+					    <input (blur)="checkPassword()" autocomplete="off" type="password" formControlName="txtPassword" class="form-control" name="txtPassword" placeholder="Vui lòng nhập mật khẩu.">
+					    <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="formRegister.controls.txtPassword?.errors && formRegister.controls.txtPassword.touched"></span>
+					    <span class="label label-danger" 
+					    *ngIf="formRegister.controls.txtPassword?.errors?.required && formRegister.controls.txtPassword.touched"
+					    >
+						Vui lòng nhập mật khẩu.</span>
+						<span class="label label-danger" 
+					    *ngIf="(formRegister.controls.txtPassword?.errors?.minlength || formRegister.controls.txtPassword?.errors?.maxlength) && formRegister.controls.txtPassword.touched"
+					    >
+						Vui lòng nhập độ dài mật khẩu từ 6 đến 20 ký tự.</span>
+						<span
+					    *ngIf="!formRegister.controls.txtPassword?.errors"
+					    class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+					<br>
+					<div class="input-group has-feedback"
+						[ngClass]="{
+						'has-error': (formRegister.controls.txtRePassword?.errors || !matchPassword) && formRegister.controls.txtRePassword.touched,
+						'has-success': !formRegister.controls.txtRePassword?.errors
+						}"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+					    <input (blur)="checkPassword()" autocomplete="off" type="password" formControlName="txtRePassword" class="form-control" name="txtRePassword" placeholder="Vui lòng nhập xác nhận mật khẩu.">
+					    <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="formRegister.controls.txtRePassword?.errors && formRegister.controls.txtRePassword.touched"></span>
+					    <span class="label label-danger" 
+					    *ngIf="formRegister.controls.txtRePassword?.errors?.required && formRegister.controls.txtRePassword.touched"
+					    >
+						Vui lòng nhập xác nhận mật khẩu.</span>
+						<span class="label label-danger" 
+					    *ngIf="!matchPassword && formRegister.controls.txtRePassword.touched && !formRegister.controls.txtRePassword?.errors?.required"
+					    >
+						Mật khẩu xác nhận không đúng.</span>
+						<span
+					    *ngIf="!formRegister.controls.txtRePassword?.errors"
+					    class="glyphicon glyphicon-ok form-control-feedback"></span>
+					</div>
+					<br>
+					<div class="input-group has-feedback"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-map-marker"></i></span>
+					    <input autocomplete="off" type="text" formControlName="txtAddress" class="form-control" name="txtAddress" placeholder="Vui lòng nhập địa chỉ (nếu có).">
+					</div>
+					<br>
+					<div class="input-group has-feedback"
+						[ngClass]="{
+						'has-error': formRegister.controls.txtPhone?.errors && formRegister.controls.txtPhone.touched,
+						'has-success': !formRegister.controls.txtPhone?.errors
+						}"
+					>
+					    <span class="input-group-addon"><i class="glyphicon glyphicon-earphone"></i></span>
+					    <input autocomplete="off" type="text" formControlName="txtPhone" class="form-control" name="txtPhone" placeholder="Vui lòng nhập số điện thoại.">
+					    <span class="label label-danger" *ngIf="formRegister.controls.txtPhone?.errors?.require">Vui lòng nhập xác nhận mật khẩu.</span>
+					    <span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="formRegister.controls.txtPhone?.errors && formRegister.controls.txtPhone.touched"></span>
+					    <span class="label label-danger" 
+					    *ngIf="formRegister.controls.txtPhone?.errors?.required && formRegister.controls.txtPhone.touched"
+					    >
+						Vui lòng nhập số điện thoại.</span>
+						<span class="label label-danger" 
+					    *ngIf="(formRegister.controls.txtPhone?.errors?.minlength || formRegister.controls.txtPhone?.errors?.maxlength) && formRegister.controls.txtPhone.touched"
+					    >
+						Vui lòng nhập số điện thoại từ 8 -> 11 ký tự.</span>
+					</div>
+					<br>
+					<div class="row">
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+							<label for="">Ngày sinh</label>
+							<div class="input-group has-feedback"
+								[ngClass]="{
+								'has-error': formRegister.controls.txtBirthday?.errors && formRegister.controls.txtBirthday.touched,
+								'has-success': !formRegister.controls.txtBirthday?.errors
+								}"
+							>
+								<span class="input-group-addon"><i class="glyphicon glyphicon-gift"></i></span>
+								<input type="date" name="txtBirthday" formControlName="txtBirthday" class="form-control">
+								<span class="glyphicon glyphicon-remove form-control-feedback" *ngIf="formRegister.controls.txtBirthday?.errors && formRegister.controls.txtBirthday.touched"></span>
+								<span class="glyphicon glyphicon-ok form-control-feedback" *ngIf="!formRegister.controls.txtBirthday?.errors"></span>
+							    <br>
+							    <span class="label label-danger" 
+							    *ngIf="formRegister.controls.txtBirthday?.errors?.required && formRegister.controls.txtBirthday.touched"
+							    >
+								Vui lòng nhập ngày sinh.</span>
+							</div>
+						</div>
+						<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" [class.hidden]="success_register">
+							<label>Giới tính</label>
+							<div class="radio">
+								<label>
+									<input 
+										type="radio" 
+										name="rdoGender" 
+										value="Male" 
+										formControlName="rdoGender"
+										[checked]="rdoGender === 'Male'"
+									/>
+									Nam
+								</label>
+								<label>
+									<input 
+										type="radio" 
+										name="rdoGender" 
+										value="Fermale" 
+										formControlName="rdoGender"
+										[checked]="rdoGender === 'Fermale'"
+									/>
+									Nữ
+								</label>
+							</div>
+						</div>
+					</div>
+					<br>
+					<!-- <button 
+					[hidden]="success_register" type="submit" 
+					[disabled]="formRegister.invalid || !matchPassword || !validEmail" class="center-block btn-submit">Đồng ý</button> -->
+					
+					<button type="submit" class="center-block btn btn-info" [hidden]="success_register" type="submit" 
+					[disabled]="formRegister.invalid || !matchPassword || !existingEmail">Đăng ký</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

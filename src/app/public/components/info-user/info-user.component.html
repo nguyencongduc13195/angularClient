@@ -1,0 +1,33 @@
+<div class="row">
+	<div class="col-md-offset-3 col-md-6">
+		<h3 class="page-header">Thông tin cá nhân  <a (click)="isEditting = !isEditting">{{ isEditting ? '(Hủy)' : '(Cập nhật)' }}</a></h3>
+		<ng-container *ngIf="!isEditting;else ok">
+			<ul class="list-group">
+				<li class="list-group-item"><strong>Tên:</strong> <span>{{userEdit?.full_name}}</span></li>
+				<li class="list-group-item"><strong>Email:</strong> <span>{{userEdit?.email}}</span></li>
+				<li class="list-group-item"><strong>SĐT:</strong> <span>0{{userEdit?.phone}}</span></li>
+			</ul>
+		</ng-container>
+		<ng-template #ok>
+			<form [formGroup]="formEdit" (ngSubmit)="submitEdit(formEdit.value)">
+				<div class="form-group" >
+					<label>Họ tên</label>
+					<input type="text" class="form-control" formControlName="txtFullName" name="txtFullName" placeholder="Vui lòng nhập họ tên." [(ngModel)]="userEdit.full_name">
+				</div>
+				<div class="form-group">
+					<label>Số điện thoại</label>
+					<input type="number" class="form-control" formControlName="txtPhone" name="txtPhone" placeholder="Vui lòng nhập số điện thoại." [(ngModel)]="userEdit.phone">
+				</div>
+				<div class="form-group">
+					<label>Địa chỉ</label>
+					<input type="text" class="form-control" formControlName="txtAddress" name="txtPhone" placeholder="Vui lòng nhập địa chỉ(nếu có)." [(ngModel)]="userEdit.address">
+				</div>
+				<div class="form-group">
+					<label>Ngày sinh</label>
+					<input [ngModel]="userEdit.birthday | date:'yyyy-MM-dd'"  class="form-control" type="date" name="txtBirthday" formControlName="txtBirthday"/>
+				</div>
+				<button type="submit" class="btn btn-primary" [disabled]="formEdit.invalid || emptyNewPass">Đồng ý</button>
+			</form>
+		</ng-template>
+	</div>
+</div>

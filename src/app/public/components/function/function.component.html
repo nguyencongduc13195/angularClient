@@ -1,0 +1,22 @@
+<div class="row">
+	<div class="col-sm-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-2">
+		<select #value class="form-control" (change)="selectSort(value.value)">
+			<option>Chọn sắp xếp</option>
+			<option value="1">Tên A-Z</option>
+			<option value="2">Tên Z-A</option>
+			<option value="3">Giá thấp-cao</option>
+			<option value="4">Giá cao-thấp</option>
+		</select>
+	</div>
+	<div class="col-sm-offset-1 col-xs-4 col-sm-2 col-md-2 col-lg-2">
+		<select #e class="form-control" (change)="selectElement(e.value)">
+			<option value="default">Chọn hiển thị</option>
+			<option value="1">4 Sản phẩm</option>
+			<option value="2">8 Sản phẩm</option>
+			<option value="3">12 Sản phẩm</option>
+		</select>
+	</div>
+	<div class="col-sm-offset-1 col-xs-4 col-sm-3 col-md-3 col-lg-3">
+		<input type="text" [(ngModel)]="filterName" (keyup)="onFilter()" placeholder="Lọc sản phẩm" class="form-control">
+	</div>
+</div>

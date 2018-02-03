@@ -1,0 +1,43 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">Đơn hàng</div>
+	<div class="panel-body">
+		<table class="table table-hover">
+			<tbody>
+				<tr *ngFor="let item of cartItem; let i=index">
+					<td>
+						<img 
+							class="img-responsive img-product-order" 
+							src="http://apimean.herokuapp.com/api/product/img/{{item?.product?.image}}"
+						/>
+					</td>
+					<td>
+						{{item?.product?.name}}<br>
+						<a (click)="removeItem(item)">Xóa</a>
+					</td>
+					<td class="text-center">
+						<button class="btn" (click)="onDecreased(item)"><i class="glyphicon glyphicon-minus"></i></button>
+						&nbsp;{{ item?.quantity }}
+						<button class="btn" (click)="onIncreased(item)"><i class="glyphicon glyphicon-plus"></i></button>
+					</td>
+					<ng-container *ngIf="item?.product?.promotion_price !== item?.product?.price; else nosale">
+						<td>
+							{{ item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3'}}
+						</td>
+						<td>
+							{{item?.quantity * item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3'}}
+						</td>
+					</ng-container>
+					<ng-template #nosale>
+						<td>
+							{{ item?.product?.price |currency:'VND':'symbol':'1.0-3'}}
+						</td>
+						<td>
+							{{item?.quantity * item?.product?.price |currency:'VND':'symbol':'1.0-3'}}
+						</td>
+					</ng-template>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="panel-footer pull-right"><b>Tổng tiền: {{ totals | currency:'VND':'symbol':'1.0-3'}}</b></div>

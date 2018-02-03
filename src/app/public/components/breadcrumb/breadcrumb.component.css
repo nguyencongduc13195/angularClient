@@ -1,0 +1,20 @@
+.breadcrumbs{
+	background-color: #43a243;
+	border-radius: 0;
+	width: 100%;
+	padding: 20px;
+	margin-bottom: 20px;
+	font-size: 16px;
+}
+span{
+	padding: 0px 15px;
+}
+ul>li{
+	float: left;
+}
+ul>li.active{
+	color: #fff;
+}
+i.fa.fa-home {
+    color: #d01414;
+}
