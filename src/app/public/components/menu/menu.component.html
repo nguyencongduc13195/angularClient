@@ -7,8 +7,11 @@
 		</i>
 	</div>
 	<div class="nav nav-pills nav-stacked" *ngIf="isShowCate">
-		<li *ngFor="let item of categories; let i = index">
+		<!-- <li *ngFor="let item of categories; let i = index">
 			<a [routerLink]="['/danh-muc',item?.slug]">{{item?.name}} - ({{idCategories[i]}})</a>
+		</li> -->
+		<li *ngFor="let item of cateMenu">
+			<a [routerLink]="['/danh-muc',item?.slug]">{{item?.name}} - ({{item?.item}})</a>
 		</li>
 	</div> 
 	<br>
@@ -20,8 +23,11 @@
 		</i>
 	</div>
 	<div class="nav nav-pills nav-stacked" *ngIf="isShowBrand">
-		<li *ngFor="let item of brands; let i = index">
+		<!-- <li *ngFor="let item of brands; let i = index">
 			<a [routerLink]="['/nhan-hang',item?.slug]">{{item?.name}} - ({{idBrands[i]}})</a>
+		</li> -->
+		<li *ngFor="let item of brandMenu">
+			<a [routerLink]="['/nhan-hang',item?.slug]">{{item?.name}} - ({{item?.item}})</a>
 		</li>
 	</div> 
 	<br>

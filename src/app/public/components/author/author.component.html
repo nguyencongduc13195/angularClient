@@ -1,3 +1,49 @@
-<p>
-  author works!
-</p>
+<div class="container">
+	<span class="author">Tác giả: </span><h2 class="name">{{authorName}}</h2>
+	<div class="panel panel-success">
+		<div class="panel-heading">
+			<h3 class="panel-title">Sách</h3>
+		</div>
+		<div class="panel-body" *ngIf="loaded; else none">
+			<div class="row">
+				<div class="col-xs-12 product-grid" *ngFor="let product of products">
+							<div class="row">
+								<div class="col-xs-3 image-grid">
+									<img src="http://localhost:3000/api/product/img/{{product?.image}}" 
+									class="img-responsive img-grid">
+									<div class="tag-grid" *ngIf="product?.price !== product?.promotion_price">
+										<img src="./assets/img/icon/offer.png" class="img-responsive">
+									</div>
+									<div class="sale1" *ngIf="product?.price !== product?.promotion_price">
+										<span>-{{100-(100*product?.promotion_price)/product?.price | number:'1.0-0'}}%</span>
+									</div>
+								</div>
+								<div class="col-xs-9">
+									<h4 class="nameproduct pull-left" [routerLink]="['/san-pham', product?.slug]">{{product?.name}}</h4>
+									<button type="button" class="add-cart pull-right" (click)="addToCart(product)">
+										<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;
+										Mua hàng
+									</button>
+									<div class="clearfix"></div>
+									<span class="nameauthor" [routerLink]="['/tac-gia',product?.slug]">{{product?.writer_name}}</span>
+									<ng-container *ngIf="product?.price!==product?.promotion_price; else noSale">
+										<span class="price">{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}}</span>
+										<del>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</del>
+									</ng-container>
+									<ng-template #noSale>
+										<span class="price">{{product?.price| currency:'VND':'symbol':'1.0-3'}}</span>
+									</ng-template>
+									<span class="desc" [innerHTML]="product?.body | summary:400"></span>
+									<a [routerLink]="['/san-pham', product?.slug]">Xem thêm...</a>
+								</div>
+							</div>
+						</div>
+			</div>
+		</div>
+		<ng-template #none>
+			<div class="text-center">
+				<img src="assets/img/icon/loading.gif" alt="">
+			</div>
+		</ng-template>
+	</div>
+</div>

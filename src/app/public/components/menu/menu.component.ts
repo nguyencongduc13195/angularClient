@@ -30,7 +30,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	public isShowAuthor: boolean = false;
 	// categories
 	public categories: Category[] = [];
-	public idCategories: number[] = [];
+	public cateMenu: any[] = [];
 	loadCategories(){
 		this._sub = this._categoryService.getAllCategories().subscribe((data)=>{ 
 			if(data['success']){
@@ -38,8 +38,10 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.categories.forEach((val)=>{
 					this._categoryService.booksOfCate(val._id).subscribe((data)=>{
 						if(data['success']){
-							this.idCategories.push(data['data'])
-						}
+							// console.log(`${val.name} - ${data['data']}`);
+							let item: {} = {name:val.name,item:data['data'],slug: val.slug}
+							this.cateMenu.push(item);
+						}	
 					})
 				})
 			}
@@ -48,6 +50,7 @@ export class MenuComponent implements OnInit, OnDestroy {
 	// brands
 	public brands: Brand[] = [];
 	public idBrands: number[] = [];
+	public brandMenu: any[] = [];
 	loadBrands(){
 		this._sub = this._brandService.getAll().subscribe((data)=>{ 
 			if(data['success']){
@@ -55,7 +58,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.brands.forEach((val)=>{
 					this._brandService.booksOfBrand(val._id).subscribe((data)=>{
 						if(data['success']){
-							this.idBrands.push(data['data'])
+							let item: {} = {name:val.name,item:data['data'],slug: val.slug}
+							this.brandMenu.push(item)
 						}
 					})
 				})

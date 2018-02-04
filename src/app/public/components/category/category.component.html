@@ -82,13 +82,13 @@
 									</div>
 								</div>
 								<div class="col-xs-9">
-									<h4 class="nameproduct pull-left">{{product?.name}}</h4>
+									<h4 class="nameproduct pull-left" [routerLink]="['/san-pham', product?.slug]">{{product?.name}}</h4>
 									<button type="button" class="add-cart pull-right" (click)="addToCart(product)">
 										<i class="glyphicon glyphicon-shopping-cart"></i>&nbsp;
 										Mua hàng
 									</button>
 									<div class="clearfix"></div>
-									<span class="nameauthor">{{product?.writer_name}}</span>
+									<span class="nameauthor" [routerLink]="['/tac-gia',product?.writer_slug]">{{product?.writer_name}}</span>
 									<ng-container *ngIf="product?.price!==product?.promotion_price; else noSale">
 										<span class="price">{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}}</span>
 										<del>{{product?.price | currency:'VND':'symbol':'1.0-3'}}</del>
@@ -97,7 +97,7 @@
 										<span class="price">{{product?.price| currency:'VND':'symbol':'1.0-3'}}</span>
 									</ng-template>
 									<span class="desc" [innerHTML]="product?.body | summary:400"></span>
-									<a>Xem thêm...</a>
+									<a [routerLink]="['/san-pham', product?.slug]">Xem thêm...</a>
 								</div>
 							</div>
 						</div>
@@ -140,6 +140,21 @@
 						</div>
 					</div>
 				</ng-template>
+			</div>
+			<div class="row" *ngIf="!isFilter">
+				<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+					<ul class="pagination pull-right">
+						<li [class.hidden]="pageIndex == 1" (click)="setPage(1)"><a>Đầu</a></li>
+						<li [class.hidden]="pageIndex == 1" (click)="setPage(pageIndex-1)"><a>&laquo;</a></li>
+						<li 
+						*ngFor="let item of totalPage"
+						[class.active]="pageIndex == item"
+						(click)="setPage(item)"
+						><a>{{item}}</a></li>
+						<li [class.hidden]="pageIndex == allPage" (click)="setPage(pageIndex+1)"><a>&raquo;</a></li>
+						<li [class.hidden]="pageIndex == allPage" (click)="setPage(allPage)"><a>Cuối</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
 		<div class="alert alert-danger" *ngIf="noItems">

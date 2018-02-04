@@ -58,6 +58,7 @@ const publicRoutes: Routes = [
 		{path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},
 		{path: 'thong-tin', component: InfoUserComponent, canActivate:[NotauthGuard]},
 		{path: 'quen-mat-khau', component: ForgotPasswordComponent, canActivate:[AuthGuard]},
+		{path: '**', component: HomeComponent}
 	]},]
 @NgModule({
 	imports: [

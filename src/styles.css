@@ -1,5 +1,7 @@
  You can add global styles to this file, and also import other style files */
-
+a:hover{
+    cursor: pointer;
+}
 .img-product:hover{
 	cursor: pointer;
 }
@@ -94,6 +96,15 @@ ul{
     }
     .title_product{
         display: none;
+    }
+    .service-item{
+        height: 170px;
+    }
+    .service-item:nth-child(2n){
+        margin-bottom: 10px;
+    }
+    .service-item:last-child{
+        border-right: 1px solid #000 !important;
     }
 }
 
@@ -283,4 +294,63 @@ span.diffirent_product:before{
     border-left: 20px solid #43a243;
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
+}
+
+span.price{
+    color: #c12126;
+    font-size: 20px;
+}
+/*product-grid*/
+.img-grid{
+    width: 230px;
+    height: 330px;
+}
+.image-grid{
+    position: relative;
+}
+.product-grid{
+    margin-bottom: 20px;
+}
+
+.nameproduct:hover, .nameauthor:hover{
+    color:#43a243;
+    cursor: pointer;
+}
+.nameauthor{
+    color: #747474;
+    margin-bottom: 5px;
+    display: block;
+}
+.desc{
+    color: black;
+    font-size: 12px;
+}
+
+.sale1{
+    position: absolute;
+    right: 25px;
+    width: 35px;
+    height: 25px;
+    bottom: -10px;
+    background-color: red;
+    color: #fff;
+    font-size: 14px;
+    text-align: center;
+    line-height: 25px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.tag-grid>img.img-responsive {
+    position: absolute;
+    left: 0%;
+    top: 0%;
+    z-index: 1;
+}
+
+button.add-cart{
+    border: none;
+    background-color: #e1af04;
+    text-transform: uppercase;
+    color: #000;
+    padding: 10px 15px;
 }

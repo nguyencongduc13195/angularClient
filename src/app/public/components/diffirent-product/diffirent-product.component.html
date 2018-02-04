@@ -16,7 +16,7 @@
 					<figure>
 						<div class="snipcart-item block">
 							<div class="snipcart-thumb">
-								<a [routerLink]="['/san-pham', product?.slug]">
+								<a (click)="navigateToProduct(product?.slug)">
 									<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
 								</a>		
 								<p class="text-center">{{product?.name}}</p>
@@ -34,11 +34,11 @@
 						<div class="reaction">
 							<span>{{product?.likes}}&nbsp;<i class="glyphicon glyphicon-thumbs-up"></i></span>
 							<span>{{product?.dislikes}}&nbsp;<i class="glyphicon glyphicon-thumbs-down"></i></span>
-							<span>{{product?.view_count}}&nbsp;<i class="glyphicon glyphicon-eye-open"></i></span>
 							<span class="pull-right">{{ product?.reviews.length }}&nbsp;<i class="glyphicon glyphicon-comment"></i></span>
+							<br>
+							<span>{{product?.view_count}}&nbsp;Lượt xem</span>
 						</div>
 						<button class="addCart" (click)="addToCart(product)">Thêm giỏ hàng</button>
-						
 					</figure>
 				</div>
 			</div>

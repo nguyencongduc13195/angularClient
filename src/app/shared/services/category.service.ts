@@ -15,8 +15,8 @@ export class CategoryService {
 	public getCateBySlug(slug) : Observable<Category>{
 		return this._httpClient.get<Category>(`${this.api}/findSlug/${slug}`);
 	}
-	public getProductByCategories(slug: string) : Observable<Product[]>{
-		return this._httpClient.get<Product[]>(`${this.api}/${slug}`);
+	public getProductByCategories(slug: string, pageIndex: number = 1, pageSize: number = 4) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/${slug}?pageIndex=${pageIndex}&pageSize=${pageSize}`);
 	}
 	public uploadImage(event): Observable<any>{
 		let fileList: FileList = event.nativeElement.files;

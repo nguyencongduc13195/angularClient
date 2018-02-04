@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from './../../../shared/services/product.service';
 import { CartService } from './../../../shared/services/cart.service';
@@ -11,8 +11,12 @@ import { Subscription } from 'rxjs/Subscription';
 	styleUrls: ['./diffirent-product.component.css']
 })
 export class DiffirentProductComponent implements OnInit, OnDestroy {
-
-	constructor(private _productService: ProductService, private _activatedRoute: ActivatedRoute) { }
+	@Output('view') connector = new EventEmitter<any>();
+	constructor(
+		private _productService: ProductService, 
+		private _activatedRoute: ActivatedRoute, 
+		private _router: Router
+	) { }
 	public diffirentProducts: Product[] = [];
 	ngOnInit() {
 		this._sub = this._activatedRoute.params.subscribe((params: Params)=>{
@@ -20,11 +24,14 @@ export class DiffirentProductComponent implements OnInit, OnDestroy {
 				this._productService.getDiffirentProduct(product['data']['_id']).subscribe((products: Product[])=>{
 					if(products['success']){
 						this.diffirentProducts = products['data'];
-				console.log(this.diffirentProducts);
 					}
 				})
 			})
 		})
+	}
+	navigateToProduct(slug){
+		this._router.navigate(['san-pham/',slug]);
+		this.connector.emit();
 	}
 	private _sub: Subscription;
 	ngOnDestroy(){

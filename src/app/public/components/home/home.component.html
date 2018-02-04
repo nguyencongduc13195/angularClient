@@ -4,14 +4,14 @@
 <app-slider></app-slider>
 <div class="all">
 	<div class="container">
-		<div class="row" style="margin-bottom: 20px">
+		<div class="row" style="margin-bottom: 20px" *ngIf="!isSearching">
 			<ul class="select">
 				<li [class.active]="active===1" (click)="getProduct(1)">Mới nhất</li>
 				<li [class.active]="active===2" (click)="getProduct(2)">Xem nhiều</li>
 				<li [class.active]="active===3" (click)="getProduct(3)">Yêu thích</li>
 			</ul>
 		</div>
-		<div class="row" *ngIf="!isFilter">
+		<div class="row" *ngIf="!isSearching">
 			<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of products">
 				<div class="hover14 column">
 					<div class="agile_top_brand_left_grid">
@@ -54,8 +54,12 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" *ngIf="isFilter">
-			<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of productsFilter">
+		<div class="row" *ngIf="isSearching">
+			<div class="alert alert-success">
+				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+				<strong>Sản phẩm tìm kiếm !</strong>.
+			</div>
+			<div class="col-sm-6 col-md-3 top_brand_left" *ngFor="let product of productsSearch">
 				<div class="hover14 column">
 					<div class="agile_top_brand_left_grid">
 						<div class="tag" *ngIf="product?.price !== product?.promotion_price">

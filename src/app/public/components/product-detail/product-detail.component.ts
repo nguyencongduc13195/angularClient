@@ -37,7 +37,7 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 	public relatedProduct: Product[] = [];
 	loadDetailProduct(){
 		this._sub = this._activatedRoute.params.subscribe((param: Params)=>{
-			this._productService.getOne(param['slug']).subscribe((product)=>{
+			this._productService.getOne(param['slug']).subscribe((product: Product)=>{
 				if(product['success']){
 					this.loaded = true;
 					this._productService.getRelatedProduct(product['data']['_id']).subscribe((product)=>{

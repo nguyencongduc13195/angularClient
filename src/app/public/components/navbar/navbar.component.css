@@ -1,10 +1,25 @@
 .block{
 	display: block;
 }
+a.navbar-brand.logo{
+	display: inline-block;
+	font-size: 30px;
+	padding-left: 60px;
+}
+span.book{
+    color: #43a243;
+    text-decoration: none;
+    font-weight: bold;
+}
+span.store{
+	text-decoration: none;
+    color: #e24444;
+}
 .navbar.navbar-inverse{
-	padding: 10px;
 	margin-bottom: 0px;
-	background-color: #eee
+	background-color: #eee;
+	border:none;
+	padding: 15px 0px;
 }
 span.active{
 	font-weight: bold;

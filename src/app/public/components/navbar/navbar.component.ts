@@ -54,6 +54,10 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 	togglePassword(){
 		this.showhidePassword = !this.showhidePassword;
 	}
+	onSearch(value){
+		console.log(value);
+		this._router.navigate(['/'],{queryParams: {key: value}});
+	}
 	public isAdmin: string ;
 	loadInformation(){
 		this._sub = this._userService.information().subscribe((data)=>{

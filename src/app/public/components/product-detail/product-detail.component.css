@@ -73,17 +73,69 @@ div.one{
 div.zero{
     width: 3.5%;
 }
-
-h5.name {
-    margin-bottom: 20px;
-    font-size: 25px;
-    text-align: center;
-    text-transform: uppercase;
-    color: #212121;
-    font-weight: 600;
+.glyphicon-star{
+    color: #fcd800;
+    font-size: 16px;
 }
 .img-responsive{
     margin:auto ;
     width: 300px;
-    height: 300px;
+    height: 400px;
+}
+.info span{
+    display: block;
+}
+
+.info span>a{
+    color: #087b39
+}
+
+.infoprice{
+    position: relative;
+    margin-bottom: 20px
+}
+label{
+    font-size: 15px;
+}
+span.priceDetail{
+    position: absolute;
+    right: 0;
+}
+
+div.button button{
+    display: block;
+    margin: 0 auto
+}
+
+.content{
+    font-size: 16px;
+    margin: 10px 0 10px;
+}
+div.description{
+    font-size: 16px;
+}
+.comment{
+    font-size: 16px;
+}
+.name, h4{
+    color:#43a243;
+}
+.rating{
+    margin-bottom: 5px;
+}
+::ng-deep .description ul { 
+    float: left;
+    width: 100%;
+    list-style: square;
+    margin:0;
+    padding: 0;
+    list-style-position: inside;
+}
+::ng-deep .description ul li{
+    float: left;
+    width: 50%;
+}
+::ng-deep .description ul li strong{
+    width: 150px;
+    display: inline-block;
 }

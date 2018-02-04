@@ -1,7 +1,7 @@
-<div class="container" *ngIf="loaded" #scroll>
+<div class="container-fluid" *ngIf="loaded" #scroll>
 	<div class="row">
-		<h5 class="name">{{productDetail?.name}}</h5>
-		<div class="col-xs-offset-1 col-xs-4">
+		
+		<div class="col-xs-4">
 			<!-- <img *ngIf="productDetail?.image !==''; else none" 
 				src="https://apimean.herokuapp.com/api/product/img/{{productDetail?.image}}" class="img-responsive"> -->
 			<img *ngIf="productDetail?.image !==''; else none" 
@@ -39,32 +39,76 @@
 				</button>
 			</div>
 		</div>
-		<div class="col-xs-7">
-			<div *ngIf="productDetail?.promotion_price !== productDetail?.price; else nosale">
-				<h4>
-					<del>
-						{{productDetail?.price| currency:'VND':'symbol':'1.0-3'}}
-					</del>
-				</h4>
-				<h4><strong>{{productDetail?.promotion_price| currency:'VND':'symbol':'1.0-3'}}</strong></h4>
+		<div class="col-xs-8">
+			<div class="row">
+				<div class="col-md-7 col-xs-12">
+					<div class="info">
+						<h5 class="name">{{productDetail?.name}}</h5>
+						<span>Tác giả: <a [routerLink]="['/tac-gia', productDetail?.writer_slug]">{{productDetail?.writer_name}}</a></span>
+						<span>Nhà xuất bản: <a>{{productDetail?.brand?.name}}</a></span>
+						<p class="content" [innerHTML]="productDetail?.body | summary:400"></p>
+					</div>
+				</div>
+				<div class="col-md-5 col-xs-12">
+					<div class="panel panel-success">
+						<div class="panel-heading">
+							<h3 class="panel-title">Thông tin thanh toán</h3>
+						</div>
+						<div class="panel-body">
+							<div class="infoprice" *ngIf="productDetail?.promotion_price !== productDetail?.price; else nosale">
+								<div>
+									<label>Giá khuyến mãi: </label>
+									<span class="price priceDetail">
+										<del>
+											{{productDetail?.price| currency:'VND':'symbol':'1.0-3'}}
+										</del>
+									</span>
+								</div>
+								<br>
+								<div>
+									<label>Giá: </label>
+									<span class="price priceDetail">
+										<strong>
+										{{productDetail?.promotion_price| currency:'VND':'symbol':'1.0-3'}}
+										</strong>
+									</span>
+								</div>
+								<br>
+								<div>
+									<label>Tiết kiệm: </label>
+									<span class="price priceDetail" style="color:#087b39">
+										{{(productDetail?.price - productDetail?.promotion_price) | currency:'VND':'symbol':'1.0-3'}}
+										({{100-(100*productDetail?.promotion_price)/productDetail?.price | number:'1.0-0'}})%
+									</span>
+								</div>
+							</div>
+							<ng-template #nosale>
+								<div class="infoprice">
+									<label>Giá: </label>
+									<span class="price priceDetail">
+									{{productDetail?.price | currency:'VND':'symbol':'1.0-3' }}
+									</span>
+								</div>
+								<br>
+							</ng-template>
+							<div class="button">
+								<strong>Số lượng:</strong> <input type="number" min="1" #quantity value="1" class="text-center">
+							<br><br>
+							<button *ngIf="productDetail?.stockitems" type="button" class="btn btn-success btn-lg" 
+								(click)="addToCart(productDetail, quantity.value)">
+								Thêm vào giỏ hàng</button>
+							<button *ngIf="!productDetail?.stockitems" type="button" class="btn btn-danger btn-lg">
+								Sản phẩm đã hết
+							</button>
+							</div>
+						</div>
+					</div>
+				</div>
 			</div>
-			<ng-template #nosale>
-				<h4><strong>{{productDetail?.price | currency:'VND':'symbol':'1.0-3' }}</strong></h4>
-			</ng-template>
-			<!-- <button class="btn"><i class="glyphicon glyphicon-minus"></i></button> -->
-			<strong>Số lượng:</strong> <input type="number" min="1" #quantity value="1" class="text-center">
-			<!-- <button class="btn"><i class="glyphicon glyphicon-plus"></i></button> -->
-			<br><br>
-			<button *ngIf="productDetail?.stockitems" type="button" class="btn btn-success btn-lg" 
-				(click)="addToCart(productDetail, quantity.value)">
-				Thêm vào giỏ hàng</button>
-			<button *ngIf="!productDetail?.stockitems" type="button" class="btn btn-danger btn-lg">
-				Sản phẩm đã hết
-			</button>
 		</div>
 	</div>
 	<div class="row text-center" style="margin-top: 30px;">
-		<div class="col-md-offset-4 col-xs-6 col-sm-6 col-md-3 choice" 
+		<div class="col-xs-6 col-sm-6 col-md-3 choice" 
 			[class.active]="isChoice===1"
 			(click)="isChoice = 1"
 			>
@@ -79,74 +123,104 @@
 	</div>
 	<hr>
 	<div class="row">
-		<div [innerHTML]="productDetail?.body" 
-			class="col-xs-offset-1 col-xs-10" 
-			*ngIf="isChoice===1">
-		</div>
-		<div class="col-xs-offset-1 col-xs-10" *ngIf="isChoice===2">
-			<div class="row">
-				<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-					<h3>Đóng góp ý kiến</h3>
-					<div class="row">
-						<form [formGroup]="formComment" (ngSubmit)="onPostComment(formComment.value)">
-							<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
-								<div class="row">
-									<div class="col-xs-12">
-										<div class="form-group">
-											<input 
-												[(ngModel)]="txtComment"
-												formControlName="txtComment"
-												name="txtComment"
-												type="text" 
-												class="form-control" 
-												placeholder="Vui lòng nhập ý kiến"
-												autocomplete="off" 
-											>
-										</div>
-									</div>
-									<div class="col-xs-12 rate">
-										<app-rating [rated]="rates" (rating)="getRating($event)"></app-rating>
-									</div>
-									<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-										<button 
-										[disabled]="formComment.invalid"
-										type="submit" 
-										class="btn btn-primary btn-lg">Gửi</button>
+		<ng-container *ngIf="isChoice===1; else comment">
+			<div [innerHTML]="productDetail?.body" 
+				class="content col-md-10 col-xs-12" 
+				>
+			</div>
+			<div [innerHTML]="productDetail?.description" 
+				class="description col-md-10 col-xs-12" 
+				>
+			</div>
+		</ng-container>
+		<ng-template #comment>
+			<h4>Đóng góp ý kiến</h4>
+			<div class="col-xs-12">
+				<div class="row">
+					<form [formGroup]="formComment" (ngSubmit)="onPostComment(formComment.value)">
+						<div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+							<div class="row">
+								<div class="col-xs-12">
+									<div class="form-group">
+										<input 
+											[(ngModel)]="txtComment"
+											formControlName="txtComment"
+											name="txtComment"
+											type="text" 
+											class="form-control" 
+											placeholder="Vui lòng nhập ý kiến"
+											autocomplete="off" 
+										>
 									</div>
 								</div>
+								<div class="col-xs-6 col-md-12 rate">
+									<app-rating [rated]="rates" (rating)="getRating($event)"></app-rating>
+								</div>
+								<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+									<button 
+									[disabled]="formComment.invalid"
+									type="submit" 
+									class="btn btn-primary btn-lg">Gửi</button>
+								</div>
 							</div>
-							<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-								<span>5 sao</span><div class="a five">a</div> {{fiveStar}}<br>
-								<span>4 sao</span><div class="a four">a</div> {{fourStar}}<br>
-								<span>3 sao</span><div class="a three">a</div> {{threeStar}}<br>
-								<span>2 sao</span><div class="a two">a</div> {{twoStar}}<br>
-								<span>1 sao</span><div class="a one">a</div> {{oneStar}}<br>
-								<span>0 sao</span><div class="a zero">a</div> {{zeroStar}}<br>
-							</div>
-						</form>
-					</div>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<span>5 sao</span><div class="a five">a</div> {{fiveStar}}<br>
+							<span>4 sao</span><div class="a four">a</div> {{fourStar}}<br>
+							<span>3 sao</span><div class="a three">a</div> {{threeStar}}<br>
+							<span>2 sao</span><div class="a two">a</div> {{twoStar}}<br>
+							<span>1 sao</span><div class="a one">a</div> {{oneStar}}<br>
+							<span>0 sao</span><div class="a zero">a</div> {{zeroStar}}<br>
+						</div>
+					</form>
 				</div>
-				<hr>
-				<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6" *ngFor="let item of reviews">
-					<div class="thumbnail">
-						<div class="caption">
-							<div class="pull-left">
-								<h3>{{item?.full_name}}</h3>
-								<h4>{{item?.created_at | date:'dd/MM/yyyy'}}</h4>
+				<div class="row">
+					<h4>Nhận xét của khách hàng</h4>
+					<div class="col-xs-12" *ngFor="let item of reviews">
+						<div class="thumbnail">
+							<div class="caption">
+								<div class="rating">
+									<div *ngIf="item?.rating==5">
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+									</div>
+									<div *ngIf="item?.rating==4">
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+									</div>
+									<div *ngIf="item?.rating==3">
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+									</div>
+									<div *ngIf="item?.rating==2">
+										<i class="glyphicon glyphicon-star"></i>
+										<i class="glyphicon glyphicon-star"></i>
+									</div>
+									<div *ngIf="item?.rating==1">
+										<i class="glyphicon glyphicon-star"></i>
+									</div>
+								</div>
+								<div class="comment">
+									Bởi&nbsp;<span class="name">{{item?.full_name}}</span>&nbsp;
+									vào ngày&nbsp;<span>{{item?.created_at | date:'dd/MM/yyyy, HH:mm:ss'}}</span>
+									<p class="content">{{item?.comment}}</p>
+								</div>
 							</div>
-							<h3 class="pull-right">
-								{{item?.rating}}&nbsp;<strong><i class="glyphicon glyphicon-star"></i></strong></h3>
-							<div class="clearfix"></div>
-							<p>{{item?.comment}}</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		</ng-template>
 	</div>
 	<br>
 	<div class="row">
 		<app-related-product (view)="getData($event)"></app-related-product>
-		<app-diffirent-product></app-diffirent-product>
+		<app-diffirent-product (view)="getData($event)"></app-diffirent-product>
 	</div>
 </div>
