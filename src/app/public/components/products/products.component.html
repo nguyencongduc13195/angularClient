@@ -39,11 +39,11 @@
 					<div class="panel-body">
 						<img *ngIf="item?.image; else none" [routerLink]="['/san-pham',item?.slug]" 
 						class="img-responsive img-product" 
-						src="http://apimean.herokuapp.com/api/product/img/{{item?.image}}"
+						src="https://apimean.herokuapp.com/api/product/img/{{item?.image}}"
 						/>
 						<ng-template #none>
 							<img class="img-responsive img-product" [routerLink]="['/san-pham',item?.slug]" 
-							src="http://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
+							src="https://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
 						</ng-template>
 					</div>
 					<div class="panel-heading">

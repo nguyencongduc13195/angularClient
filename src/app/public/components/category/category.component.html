@@ -46,7 +46,8 @@
 											<div class="snipcart-item block">
 												<div class="snipcart-thumb">
 													<a [routerLink]="['/san-pham', product?.slug]">
-														<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+														<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
+														<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
 													</a>		
 													<p class="text-center">{{product?.name}}</p>
 													<h4 class="text-center" 
@@ -118,7 +119,8 @@
 										<div class="snipcart-item block">
 											<div class="snipcart-thumb">
 												<a [routerLink]="['/san-pham', product?.slug]">
-													<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+													<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
+													<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
 												</a>		
 												<p class="text-center">{{product?.name}}</p>
 												<h4 class="text-center" 

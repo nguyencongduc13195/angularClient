@@ -6,7 +6,8 @@
 			</div>
 			<div class="main-body">
 				<div class="main-img">
-					<img src="http://localhost:3000/api/brand/img/{{brand?.image}}" alt="">
+					<!-- <img src="http://localhost:3000/api/brand/img/{{brand?.image}}"> -->
+					<img src="https://apimean.herokuapp.com/api/brand/img/{{brand?.image}}">
 				</div>
 				<div class="main-description">
 					<p class="desc">{{brand?.description}}</p>
@@ -34,7 +35,8 @@
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
 											<a [routerLink]="['/san-pham', product?.slug]">
-												<img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}">
+												<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
+												<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
 											</a>		
 											<p class="text-center">{{product?.name}}</p>
 											<h4 class="text-center" 
@@ -59,7 +61,7 @@
 		</div>
 		<ng-template #none>
 			<div class="text-center">
-				<img src="assets/img/icon/loading.gif" alt="">
+				<img src="assets/img/icon/loading.gif">
 			</div>
 		</ng-template>
 	</div>

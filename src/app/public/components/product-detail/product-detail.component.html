@@ -2,13 +2,13 @@
 	<div class="row">
 		
 		<div class="col-xs-4">
-			<!-- <img *ngIf="productDetail?.image !==''; else none" 
-				src="https://apimean.herokuapp.com/api/product/img/{{productDetail?.image}}" class="img-responsive"> -->
 			<img *ngIf="productDetail?.image !==''; else none" 
-				src="http://localhost:3000/api/product/img/{{productDetail?.image}}" class="img-responsive">
+				src="https://apimean.herokuapp.com/api/product/img/{{productDetail?.image}}" class="img-responsive">
+			<!-- <img *ngIf="productDetail?.image !==''; else none" 
+				src="http://localhost:3000/api/product/img/{{productDetail?.image}}" class="img-responsive"> -->
 			<ng-template #none>
-				<!-- <img class="img-responsive" src="https://apimean.herokuapp.com/api/product/img/no-image.jpg"/> -->
-				<img class="img-responsive" src="http://localhost:3000/api/product/img/no-image.jpg"/>
+				<img class="img-responsive" src="https://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
+				<!-- <img class="img-responsive" src="http://localhost:3000/api/product/img/no-image.jpg"/> -->
 			</ng-template>
 			<br>
 			<div class="text-center">
