@@ -7,8 +7,8 @@ import { Product } from './../models/product.model';
 export class BrandService {
 
 	constructor(private _httpClient: HttpClient) { }
-	// private _api: string = 'https://apimean.herokuapp.com/api/brand';
-	private _api: string = 'http://localhost:3000/api/brand';
+	private _api: string = 'https://apimean.herokuapp.com/api/brand';
+	// private _api: string = 'http://localhost:3000/api/brand';
 	public getAll() : Observable<Brand[]>{
 		return this._httpClient.get<Brand[]>(`${this._api}/all`);
 	}

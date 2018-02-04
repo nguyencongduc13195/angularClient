@@ -5,7 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { HttpClient } from '@angular/common/http';
 @Injectable()
 export class AuthorService {
-	private api: string = 'http://localhost:3000/api/author';
+	// private api: string = 'http://localhost:3000/api/author';
+	private api: string = 'https://apimean.herokuapp.com/author';
 	constructor(private _httpClient: HttpClient) { }
 	public getAll() : Observable<Author[]>{
 		return this._httpClient.get<Author[]>(`${this.api}/all`);
