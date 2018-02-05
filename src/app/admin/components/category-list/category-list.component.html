@@ -18,13 +18,13 @@
 			<td>{{cate?.name}}</td>
 			<td>{{cate?.description}}</td>
 			<td *ngIf="cate?.image; else none">
-				<img src="http://localhost:3000/api/category/img/{{cate?.image}}" class="img-responsive">
-				<!-- <img src="http://apimean.herokuapp.com/api/category/img/{{cate?.image}}" class="img-responsive"> -->
+				<!-- <img src="http://localhost:3000/api/category/img/{{cate?.image}}" class="img-responsive"> -->
+				<img src="https://apimean.herokuapp.com/api/category/img/{{cate?.image}}" class="img-responsive">
 			</td>
 			<ng-template #none> 
 				<td>
-					<img src="http://localhost:3000/api/category/img/no-image.jpg" class="img-responsive">
-					<!-- <img src="https://apimean.herokuapp.com/api/category/img/no-image.jpg" class="img-responsive"> -->
+					<!-- <img src="http://localhost:3000/api/category/img/no-image.jpg" class="img-responsive"> -->
+					<img src="https://apimean.herokuapp.com/api/category/img/no-image.jpg" class="img-responsive">
 				</td>
 			</ng-template>
 			<td>

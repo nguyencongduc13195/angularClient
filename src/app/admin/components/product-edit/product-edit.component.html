@@ -86,11 +86,13 @@
 		</div>
 		<div class="form-group" *ngIf="!uploadNewImg">
 			<label>Hình ảnh hiện tại</label>
-			<!-- <img class="img-responsive edit" src="https://apimean.herokuapp.com/api/product/img/{{editProduct?.image}}"> -->
-			<img *ngIf="editProduct?.image" class="img-responsive edit" 
-				src="http://localhost:3000/api/product/img/{{editProduct?.image}}">
+			<img *ngIf="editProduct?.image" class="img-responsive edit" src="https://apimean.herokuapp.com/api/product/img/{{editProduct?.image}}">
+			<!-- <img *ngIf="editProduct?.image" class="img-responsive edit" 
+				src="http://localhost:3000/api/product/img/{{editProduct?.image}}"> -->
+			<!-- <img *ngIf="!editProduct?.image" class="img-responsive edit" 
+				src="http://localhost:3000/api/product/img/no-image.jpg"> -->
 			<img *ngIf="!editProduct?.image" class="img-responsive edit" 
-				src="http://localhost:3000/api/product/img/no-image.jpg">
+				src="https://apimean.herokuapp.com/api/product/img/no-image.jpg">
 		</div>
 		<div class="form-group">
 			<label>Hình ảnh mới</label>

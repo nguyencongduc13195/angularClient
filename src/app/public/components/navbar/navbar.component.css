@@ -7,13 +7,13 @@ a.navbar-brand.logo{
 	padding-left: 60px;
 }
 span.book{
-    color: #43a243;
+    color: #e24444;
     text-decoration: none;
     font-weight: bold;
 }
 span.store{
 	text-decoration: none;
-    color: #e24444;
+    color: #43a243;
 }
 .navbar.navbar-inverse{
 	margin-bottom: 0px;

@@ -10,11 +10,6 @@
 			<li class="list-group-item child" [routerLink]="['/admin/category/add']">Thêm</li>
 			<li class="list-group-item child" [routerLink]="['/admin/category/list']">Danh sách</li>
 		</ul>
-	<li class="list-group-item" [class.active]="isSelected==6" (click)="isSelected=6">Tác giả</li>
-		<ul *ngIf="isSelected == 6">
-			<li class="list-group-item child" [routerLink]="['/admin/author/add']">Thêm</li>
-			<li class="list-group-item child" [routerLink]="['/admin/author/list']">Danh sách</li>
-		</ul>
 	<li class="list-group-item" [class.active]="isSelected==2" (click)="isSelected=2">Nhà xuất bản</li>
 		<ul *ngIf="isSelected == 2">
 			<li class="list-group-item child" [routerLink]="['/admin/brand/add']">Thêm</li>

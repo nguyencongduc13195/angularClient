@@ -16,7 +16,7 @@ export class NotauthGuard implements CanActivate {
     		return true;
 		}
 		else{
-			this._router.navigate(['/']);
+			// this._router.navigate(['/']);
 			alert('Vui lòng đăng nhập.');
 		}
   	}

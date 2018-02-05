@@ -91,7 +91,8 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 					this.notUpload = false;
 					this.uploadNewImg = true;
 					this.nameImage = data['name'];
-					this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
+					// this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
+					this.urlImg= `https://apimean.herokuapp.com/api/product/img/${data['name']}`;
 					this._uploadImageService.deleteImage(this.editProduct.image, 'product').subscribe(data=>{
 					});
 				}

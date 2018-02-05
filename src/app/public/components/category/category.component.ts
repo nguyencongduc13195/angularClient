@@ -40,7 +40,6 @@ export class CategoryComponent implements OnInit, OnDestroy{
 				this.loaded = false;
 				this.noItems = false;
 				if(data['success']){
-					console.log(data);
 					this.totalItems = data['count'];
 					this.loaded = true;
 					this.products = data['data'];

@@ -21,7 +21,7 @@ export class BrandListComponent implements OnInit, OnDestroy {
 	public brands: Brand[] = [];
 	public loaded: boolean = false;
 	ngOnInit() {
-		this._sub = this._brandService.getAll().subscribe((data) => {
+		this._sub = this._brandService.getAll().subscribe((data: Brand[]) => {
 			if (data['success']) {
 				this.loaded = true;
 				this.brands = data['data'];

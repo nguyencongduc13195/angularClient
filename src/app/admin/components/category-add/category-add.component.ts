@@ -60,8 +60,8 @@ export class CategoryAddComponent implements OnInit, OnDestroy {
 					console.log(data);
 					this.loadImage = true;
 					this.nameImage = data['name'];
-					this.urlImg = `http://localhost:3000/api/category/img/${data['name']}`
-					// this.urlImg = `https://apimean.herokuapp.com/api/category/img/${data['name']}`
+					// this.urlImg = `http://localhost:3000/api/category/img/${data['name']}`
+					this.urlImg = `https://apimean.herokuapp.com/api/category/img/${data['name']}`
 				}
 			});
 		}else{

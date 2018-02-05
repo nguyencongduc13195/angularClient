@@ -1,4 +1,3 @@
-
 <div class="navbar navbar-inverse">
 	<div class="container-fluid">	
 		<div class="navbar-header">
@@ -9,7 +8,7 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand logo" [routerLink]="['/']">
-				<span class="book">Book<span class="store">Store</span>.com</span>
+				<span class="book">Angular<span class="store">Node</span></span>
 			</a>
 		</div>
 	<div class="collapse navbar-collapse" id="collapse">
@@ -120,7 +119,6 @@
 					</div>
 					<button type="submit" class="btn btn-info" 
 					[disabled]="formLogin.invalid"
-					[class.hidden]="success_login"
 					>Đồng ý</button>
 					<button type="button" class="btn btn-success" (click)="isModalShown=false"
 					[routerLink]="['/quen-mat-khau']"

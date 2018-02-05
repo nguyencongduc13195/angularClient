@@ -57,8 +57,7 @@ const publicRoutes: Routes = [
 		{path: 'myorder', component: MyOrderComponent},
 		{path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},
 		{path: 'thong-tin', component: InfoUserComponent, canActivate:[NotauthGuard]},
-		{path: 'quen-mat-khau', component: ForgotPasswordComponent, canActivate:[AuthGuard]},
-		{path: '**', component: HomeComponent}
+		{path: 'quen-mat-khau', component: ForgotPasswordComponent, canActivate:[AuthGuard]}
 	]},]
 @NgModule({
 	imports: [

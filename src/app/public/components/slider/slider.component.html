@@ -2,7 +2,6 @@
 	<img src="assets/img/slider/1.jpg" class="img-responsive" *ngIf="isActive===1">
 	<img src="assets/img/slider/2.jpg" class="img-responsive" *ngIf="isActive===2">
 	<img src="assets/img/slider/3.jpg" class="img-responsive" *ngIf="isActive===3">
-	<input type="text" (keyup.enter)="onSearch($event)" class="form-control" placeholder="Vui lòng nhập tên sản phẩm tìm...">
 	<ul class="list-slider">
 		<li *ngFor="let item of slider" (click)="isActive=item" [class.active]="item===isActive">{{item}}</li>
 	</ul>

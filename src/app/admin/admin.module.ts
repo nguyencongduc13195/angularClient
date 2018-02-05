@@ -20,9 +20,6 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { UserAddComponent } from './components/user-add/user-add.component';
 import { UserEditComponent } from './components/user-edit/user-edit.component';
 import { OrderListComponent } from './components/order-list/order-list.component';
-import { AuthorEditComponent } from './components/author-edit/author-edit.component';
-import { AuthorListComponent } from './components/author-list/author-list.component';
-import { AuthorAddComponent } from './components/author-add/author-add.component';
 // services
 import { AlertService } from './../shared/services/alert.service';
 import { CategoryService } from './../shared/services/category.service';
@@ -42,9 +39,6 @@ const adminRoutes: Routes = [
 		{path:'brand/add', component: BrandAddComponent},
 		{path:'brand/list', component: BrandListComponent},
 		{path:'brand/edit/:id', component: BrandEditComponent},
-		{path:'author/add', component: AuthorAddComponent},
-		{path:'author/list', component: AuthorListComponent},
-		{path:'author/edit/:id', component: AuthorEditComponent},
 		{path:'product/add', component: ProductAddComponent},
 		{path:'product/list', component: ProductListComponent},
 		{path:'product/edit/:id', component: ProductEditComponent},
@@ -78,10 +72,7 @@ const adminRoutes: Routes = [
 		UserListComponent,
 		UserAddComponent,
 		UserEditComponent,
-		OrderListComponent,
-		AuthorEditComponent,
-		AuthorListComponent,
-		AuthorAddComponent
+		OrderListComponent
 	],
 	providers: [
 		AlertService,

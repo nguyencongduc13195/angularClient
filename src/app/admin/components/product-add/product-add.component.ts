@@ -90,7 +90,6 @@ export class ProductAddComponent implements OnInit, OnDestroy {
 					this._router.navigate(['/admin/product/list'])
 				}
 			});
-			console.log(product);
 		}
 	}
 	// 
@@ -103,8 +102,8 @@ export class ProductAddComponent implements OnInit, OnDestroy {
 				if(data['success']){
 					this.uploadNewImg = true;
 					this.nameImage = data['name'];
-					// this.urlImg= `https://apimean.herokuapp.com/api/product/img/${data['name']}`;
-					this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
+					this.urlImg= `https://apimean.herokuapp.com/api/product/img/${data['name']}`;
+					// this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
 				}
 			});
 		}else{

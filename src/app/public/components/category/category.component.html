@@ -73,7 +73,9 @@
 						<div class="col-xs-12 product-grid" *ngFor="let product of products">
 							<div class="row">
 								<div class="col-xs-3 image-grid">
-									<img src="http://localhost:3000/api/product/img/{{product?.image}}" 
+									<!-- <img src="http://localhost:3000/api/product/img/{{product?.image}}" 
+									class="img-responsive img-grid"> -->
+									<img src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}" 
 									class="img-responsive img-grid">
 									<div class="tag-grid" *ngIf="product?.price !== product?.promotion_price">
 										<img src="./assets/img/icon/offer.png" class="img-responsive">

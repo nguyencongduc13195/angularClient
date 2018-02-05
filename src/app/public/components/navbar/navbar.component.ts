@@ -55,7 +55,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 		this.showhidePassword = !this.showhidePassword;
 	}
 	onSearch(value){
-		console.log(value);
 		this._router.navigate(['/'],{queryParams: {key: value}});
 	}
 	public isAdmin: string ;
@@ -86,11 +85,11 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 				this.msg = data['msg'];
 				this.msgClass = 'alert alert-success';
 				// this.disabledForm();
-				this.success_login = true;
-				setTimeout(()=>{
+				// this.success_login = true;
+				// setTimeout(()=>{
 					this.isModalShown = false;
-					this.success_login = false;
-				},1000);
+					// this.success_login = false;
+				// },1000);
 				this._router.navigate(['/']);
 				this.loadInformation();
 			}

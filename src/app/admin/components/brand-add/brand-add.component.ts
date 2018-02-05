@@ -55,8 +55,8 @@ export class BrandAddComponent implements OnInit {
 			if(data['success']){
 				this.loadImage = true;
 				this.nameImage = data['name'];
-				this.urlImage = `http://localhost:3000/api/brand/img/${data['name']}`;
-				// this.urlImage = `https://apimean.herokuapp.com/api/brand/img/${data['name']}`;
+				// this.urlImage = `http://localhost:3000/api/brand/img/${data['name']}`;
+				this.urlImage = `https://apimean.herokuapp.com/api/brand/img/${data['name']}`;
 			}
 		});
 	}
