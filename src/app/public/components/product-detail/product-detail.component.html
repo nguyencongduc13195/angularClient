@@ -45,7 +45,7 @@
 					<div class="info">
 						<h5 class="name">{{productDetail?.name}}</h5>
 						<span>Tác giả: <a [routerLink]="['/tac-gia', productDetail?.writer_slug]">{{productDetail?.writer_name}}</a></span>
-						<span>Nhà xuất bản: <a [routerLink]="['/nhan-hang', productDetail?.brand?.slug]">{{productDetail?.brand?.name}}</a></span>
+						<span>Nhà xuất bản: <a [routerLink]="['/nha-xuat-ban', productDetail?.brand?.slug]">{{productDetail?.brand?.name}}</a></span>
 						<p class="content" [innerHTML]="productDetail?.body | summary:400"></p>
 					</div>
 				</div>

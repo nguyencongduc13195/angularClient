@@ -31,7 +31,6 @@ import { OrderComponent } from './components/order/order.component';
 import { OrderInfoComponent } from './components/order-info/order-info.component';
 import { OrderItemComponent } from './components/order-item/order-item.component';
 import { ProductDetailComponent } from './components/product-detail/product-detail.component';
-import { ProductsComponent } from './components/products/products.component';
 import { RatingComponent } from './components/rating/rating.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
@@ -50,7 +49,7 @@ const publicRoutes: Routes = [
 	{ path: '', component: PublicComponent, children:[
 		{path: '', component: HomeComponent, pathMatch: 'full'},
 		{path: 'danh-muc/:slug', component: CategoryComponent},
-		{path: 'nhan-hang/:slug', component: BrandComponent},
+		{path: 'nha-xuat-ban/:slug', component: BrandComponent},
 		{path: 'tac-gia/:slug', component: AuthorComponent},
 		{path: 'san-pham/:slug', component: ProductDetailComponent},
 		{path: 'order', component: OrderComponent, canActivate:[NotorderGuard, NotauthGuard]},
@@ -83,7 +82,6 @@ const publicRoutes: Routes = [
 		OrderInfoComponent,
 		OrderItemComponent,
 		ProductDetailComponent,
-		ProductsComponent,
 		RatingComponent,
 		RegisterComponent,
 		RelatedProductComponent,

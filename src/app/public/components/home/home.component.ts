@@ -24,6 +24,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this._sub = this._activated.queryParams.subscribe((params)=>{
 			if(params['key']){
 				this._productService.searchItem(params['key']).subscribe((data)=>{
+					console.log(data);
+					this.productsSearch = [];
 					if(data['success']){
 						this.isSearching = true;
 						this.productsSearch = data['data']
