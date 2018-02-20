@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { CartService } from './../services/cart.service';
 @Injectable()
 export class OrderService {
-	// private _api: string = 'https://apimean.herokuapp.com/api/order';
-	private _api: string = 'http://localhost:3000/api/order';
+	private _api: string = 'https://apimean.herokuapp.com/api/order';
+	// private _api: string = 'http://localhost:3000/api/order';
 	constructor(private _httpClient: HttpClient, private _CartService: CartService) { }
 	addOrder(order: Order, orderItem: OrderItem[]) : Observable<Order>{
 		const headers = new HttpHeaders().set('Authorization', localStorage.getItem('token'));

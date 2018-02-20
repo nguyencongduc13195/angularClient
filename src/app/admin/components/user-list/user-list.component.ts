@@ -25,7 +25,6 @@ export class UserListComponent implements OnInit, OnDestroy {
 			if(data['success']){
 				this.users = data['data']
 			}
-			// console.log(data);
 		});
 	}
 	navigateToEdit(idUser){

@@ -7,8 +7,8 @@ import { Category } from './../models/category.model';
 export class CategoryService {
 
 	constructor(private _httpClient: HttpClient) { }
-	// private api: string = "https://apimean.herokuapp.com/api/category";
-	private api: string = "http://localhost:3000/api/category";
+	private api: string = "https://apimean.herokuapp.com/api/category";
+	// private api: string = "http://localhost:3000/api/category";
 	public getAllCategories() : Observable<Category[]>{
 		return this._httpClient.get<Category[]>(`${this.api}/all`);
 	}

@@ -8,12 +8,12 @@ export class UploadsImageService {
 	constructor(
 		private  _httpClient: HttpClient
 	) { }
-	// private api_cate: string = "https://apimean.herokuapp.com/api/category";
-	// private api_brand: string = "https://apimean.herokuapp.com/api/brand";
-	// private api_product: string = "https://apimean.herokuapp.com/api/product";
-	private api_cate: string = "http://localhost:3000/api/category";
-	private api_brand: string = "http://localhost:3000/api/brand";
-	private api_product: string = "http://localhost:3000/api/product";
+	private api_cate: string = "https://apimean.herokuapp.com/api/category";
+	private api_brand: string = "https://apimean.herokuapp.com/api/brand";
+	private api_product: string = "https://apimean.herokuapp.com/api/product";
+	// private api_cate: string = "http://localhost:3000/api/category";
+	// private api_brand: string = "http://localhost:3000/api/brand";
+	// private api_product: string = "http://localhost:3000/api/product";
 	public uploadImagesDetail(event): Observable<any>{
 		let fileList: FileList = event.nativeElement.files;
 	   	if(fileList.length > 0) {
