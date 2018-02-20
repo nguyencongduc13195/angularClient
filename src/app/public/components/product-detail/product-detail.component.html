@@ -49,8 +49,14 @@
 						<span class="brand">Giới tính: <a [routerLink]="['/gioi-tinh', productDetail?.gender?.slug]">{{productDetail?.gender?.name}}</a></span>
 						<p class="content" [innerHTML]="productDetail?.body | summary:400"></p>
 						<ng-container *ngIf="productDetail?.image_Detail?.length > 0">
-							<img *ngFor="let item of productDetail?.image_Detail"
+							<!-- <img *ngFor="let item of productDetail?.image_Detail"
 								src="http://localhost:3000/api/product/images-detail/{{item}}" 
+								class="img-detail"
+								(mouseenter)="changeImage(item)"
+								(mouseleave)="setDefaultImg()"
+							/> -->
+							<img *ngFor="let item of productDetail?.image_Detail"
+								src="https://apimean.herokuapp.com/api/product/images-detail/{{item}}" 
 								class="img-detail"
 								(mouseenter)="changeImage(item)"
 								(mouseleave)="setDefaultImg()"
