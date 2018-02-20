@@ -2,31 +2,80 @@
 	<legend>Thêm sản phẩm</legend>
 	<div class="form-group">
 		<label>Danh mục</label>
-		<select class="form-control" formControlName="sltCategory">
+		<select #id (change)="onChangeCategory(id.value)" class="form-control" formControlName="sltCategory">
 			<option value="">Vui lòng chọn.</option>
 			<option value="{{item?._id}}" *ngFor="let item of categories">{{item?.name}}</option>
 		</select>	
 	</div>
 	<div class="form-group">
-		<label>Nhà xuất bản</label>
+		<label>Nhà sản xuất</label>
 		<select class="form-control" formControlName="sltBrand">
 			<option value="">Vui lòng chọn.</option>
 			<option value="{{item?._id}}" *ngFor="let item of brands">{{item?.name}}</option>
 		</select>
 	</div>
 	<div class="form-group">
-		<label>Tên sách</label>
-		<input type="text" class="form-control" formControlName="txtName" placeholder="Vui lòng nhập tên sách.">
-		<span class="label label-danger"
-			*ngIf="formAdd.controls.txtName.touched && formAdd.controls.txtName?.errors?.required"
-		>Vui lòng nhập tên sách.</span>
+		<label>Màu sắc</label><br>
+		<span class="size-color" 
+			(click)="toggle(item, 'color')" 
+			*ngFor="let item of colors" 
+			[ngClass]="{'border-selected':colorsChecked.indexOf(item)>-1}"
+			[ngStyle]="{'background-color':item}">
+		</span>
+	</div>
+	<div class="form-group" *ngIf="choiseShoesProduct">
+		<label>Kích cỡ giày</label><br>
+		<span class="size-color" 
+			(click)="toggle(item, 'size')" 
+			*ngFor="let item of sizeShoes" 
+			[ngClass]="{'border-selected':sizesChecked.indexOf(item)>-1}"
+		>
+			{{item}}
+		</span>
+	</div>
+	<div class="form-group" *ngIf="choiseClothesProduct">
+		<label>Kích cỡ quần áo</label><br>
+		<span class="size-color" 
+			(click)="toggle(item, 'size')" 
+			*ngFor="let item of sizeClothes" 
+			[ngClass]="{'border-selected':sizesChecked.indexOf(item)>-1}"
+		>
+			{{item}}
+		</span>
 	</div>
 	<div class="form-group">
-		<label>Tên tác giả</label>
-		<input type="text" class="form-control" formControlName="txtFullName" placeholder="Vui lòng nhập tên tác giả.">
+		<label>Tên sản phẩm</label>
+		<input type="text" class="form-control" formControlName="txtName" placeholder="Vui lòng nhập tên sản phẩm.">
 		<span class="label label-danger"
-			*ngIf="formAdd.controls.txtFullName.touched && formAdd.controls.txtFullName?.errors?.required"
-		>Vui lòng nhập tên tác giả.</span>
+			*ngIf="formAdd.controls.txtName.touched && formAdd.controls.txtName?.errors?.required"
+		>Vui lòng nhập tên sản phẩm.</span>
+	</div>
+	<div class="form-group">
+		<label>Chức năng chính</label>
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<input type="text" class="form-control" #array placeholder="Vui lòng nhập chức năng chính.">
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<button type="button" class="btn btn-success" (click)="pushUse(array)">
+					Thêm
+				</button>
+			</div>
+		</div>
+		<span class="label label-success" *ngFor="let item of useArray">{{item}}</span>
+	</div>
+	<div class="form-group">
+		<label>Giới tính</label>
+		<div class="radio">
+			<label>
+				<input type="radio" formControlName="txtGender" name="txtGender" value="Nam">
+				Nam
+			</label>
+			<label>
+				<input type="radio" formControlName="txtGender" name="txtGender" value="Nữ">
+				Nữ
+			</label>
+		</div>
 	</div>
 	<div class="form-group">
 		<label>Giới thiệu</label>
@@ -37,7 +86,6 @@
 			[toolbar]="'clipboard,1'">
 			</ckbutton>
 		</ckeditor>
-		
 		<span class="label label-danger"
 			*ngIf="formAdd.controls.txtBody.touched && formAdd.controls.txtBody?.errors?.required"
 		>Vui lòng nhập mô tả.</span>
@@ -51,7 +99,6 @@
 			[toolbar]="'clipboard,1'">
 			</ckbutton>
 		</ckeditor>
-		
 		<span class="label label-danger"
 			*ngIf="formAdd.controls.txtDescription.touched && formAdd.controls.txtDescription?.errors?.required"
 		>Vui lòng nhập mô tả.</span>
@@ -90,6 +137,29 @@
 		</div>
 		<img class="img-responsive edit" src="{{urlImg}}" *ngIf="uploadNewImg">
 	</div>
+	<div class="form-group">
+		<label>Hình ảnh chi tiết (3 ảnh)</label>
+		<div class="row">
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<input #myImageDetail type="file" class="form-control" multiple>
+			</div>
+			<div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+				<button type="button" class="btn btn-success"
+					*ngIf="!uploadNewDetailImg" (click)="onUploadNewImageDetail()"
+				>
+					Tải ảnh
+				</button>
+			</div>
+		</div>
+		<div *ngIf="uploadNewDetailImg">
+			<img 
+			*ngFor="let item of imageDetail" 
+			class="img-responsive edit" 
+			src="http://localhost:3000/api/product/images-detail/{{item}}" 
+			>
+			<!-- src="https://apimean.com/api/product/images-detail/{{item}}"  -->
+		</div>
+	</div>
 	<!-- <button type="submit" class="btn btn-primary btn-lg" [disabled]="formAdd.invalid">Thêm</button> -->
-	<button type="submit" class="btn btn-primary btn-lg">Thêm</button>
+	<button type="submit" [disabled]="formAdd.invalid" class="btn btn-primary btn-lg">Thêm</button>
 </form>

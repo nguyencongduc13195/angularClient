@@ -24,7 +24,6 @@ export class HomeComponent implements OnInit, OnDestroy {
 		this._sub = this._activated.queryParams.subscribe((params)=>{
 			if(params['key']){
 				this._productService.searchItem(params['key']).subscribe((data)=>{
-					console.log(data);
 					this.productsSearch = [];
 					if(data['success']){
 						this.isSearching = true;
@@ -81,7 +80,8 @@ export class HomeComponent implements OnInit, OnDestroy {
 	}
 	// 
 	addToCart(product){
-		this._cartService.addItem(product);
+		// this._cartService.addItem(product);
+		this._cartService.addItem(product,'1',product.size[0],product.color[0]);
 	}
 	ngOnDestroy(){
 		if(this._sub){

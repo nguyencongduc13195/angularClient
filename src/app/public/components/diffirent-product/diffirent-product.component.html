@@ -17,8 +17,8 @@
 						<div class="snipcart-item block">
 							<div class="snipcart-thumb">
 								<a (click)="navigateToProduct(product?.slug)">
-									<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-									<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
+									<!-- <img class="img-product" src="http://localhost:3000/api/product/images-detail/{{product?.image}}"> -->
+									<img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}">
 								</a>		
 								<p class="text-center">{{product?.name}}</p>
 								<h4 class="text-center" *ngIf="product?.price !== product?.promotion_price; else nosale">

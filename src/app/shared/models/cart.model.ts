@@ -1,6 +1,6 @@
 import { Product } from './product.model';
 export class CartItem{
-	constructor(public product: Product, public quantity: number = 1){
+	constructor(public product: Product, public quantity: number = 1,public size, public color){
 
 	}
 	value(): number {

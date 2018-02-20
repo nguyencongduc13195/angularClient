@@ -75,14 +75,14 @@
 						{{product?.hot_flag ? 'Hot' : 'Bình thường'}}
 					</span>
 				</td>
-				<td *ngIf="product?.image; else none">
-					<!-- <img src="http://localhost:3000/api/product/img/{{product?.image}}" class="img-responsive" style="height: 150px"> -->
-					<img src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}" class="img-responsive" style="height: 150px">
+				<td *ngIf="product?.image_Detail.length>0; else none">
+					<img src="http://localhost:3000/api/product/images-detail/{{product?.image_Detail[0]}}" class="img-responsive" style="height: 150px">
+					<!-- <img src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image_Detail[0]}}" class="img-responsive" style="height: 150px"> -->
 				</td>
 				<ng-template #none> 
 					<td>
-						<img src="https://apimean.herokuapp.com/api/product/img/no-image.jpg" class="img-responsive">
-						<!-- <img src="http://localhost:3000/api/product/img/no-image.jpg" class="img-responsive"> -->
+						<!-- <img src="https://apimean.herokuapp.com/api/product/img/no-image.jpg" class="img-responsive"> -->
+						<img src="http://localhost:3000/api/product/images-detail/no-image.jpg" class="img-responsive">
 					</td>
 				</ng-template>
 				<td>

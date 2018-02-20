@@ -30,21 +30,22 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 		this.createFormComment();
 		this.loadDetailProduct();
 	}
-	
+	changeImage(item){
+		this.mainImage = item;
+	}
+	setDefaultImg(){
+		this.mainImage = this.productDetail['image'];
+	}
 	// 
 	public full_name: string;
 	public productDetail: Product;
-	public relatedProduct: Product[] = [];
+	public mainImage: string;
 	loadDetailProduct(){
 		this._sub = this._activatedRoute.params.subscribe((param: Params)=>{
 			this._productService.getOne(param['slug']).subscribe((product: Product)=>{
 				if(product['success']){
 					this.loaded = true;
-					this._productService.getRelatedProduct(product['data']['_id']).subscribe((product)=>{
-						if(product['success']){
-							this.relatedProduct = product['data']
-						}
-					});
+					this.mainImage = product['data']['image'];
 					if(localStorage.getItem('token')){
 						this._sub = this._userService.information().subscribe((data)=>{
 							if(data['success']){
@@ -124,9 +125,19 @@ export class ProductDetailComponent implements OnInit, OnDestroy {
 			});
 		}
 	}
+	public colorM: string[] = [];
 	// mua hàng
-	addToCart(item, quantity){
-		this._cartService.addItem(item, quantity);
+	selectColor(item){
+		this.colorM = [];
+		this.colorM.push(item);
+	}
+	addToCart(item, quantity, size){
+		if(this.colorM.length<=0){
+			alert('Vui lòng chọn màu.')
+		}
+		else{
+			this._cartService.addItem(item, quantity, size, this.colorM[0]);
+		}
 	}
 	// thích sản phẩm
 	public likeBy: string[] = [];

@@ -1,0 +1,61 @@
+.menu-show-hide{
+	width: 400px;
+	position: fixed;
+	height: 100%;
+	background-color: #f6f6f6;
+	top: 0;
+	right: 0;
+	z-index: 10;
+}
+.header{
+	margin-bottom: 20px;
+    border-bottom: 3px solid #d8d5d5;
+}
+.button{
+	width: 25%;
+    float: left;
+    margin-top: 25px;
+}
+.header-title{
+	width: 75%;
+    float: left;
+    height: 100px;
+    line-height: 100px;
+    font-size: 22px;
+    padding-left: 25px;
+}
+button.hideMenu{
+	background-color: #dc5353;
+	border: none;
+    font-weight: bold;
+    font-size: 20px;
+}
+.header:after{
+	content: '';
+	display: block;
+    clear: both;
+}
+.menu-rgba{
+	background-color: rgba(0, 0, 0, .8);
+	position: fixed;
+	top:0;
+	right: 0;
+	left: 0;
+	bottom: 0;
+	z-index: 9;
+}
+.cart{
+	margin-bottom: 10px;
+    height: 140px;
+}
+.img-cart img{
+	width: 25%;
+	float: left;
+	padding-left: 20px;
+}
+
+.detail-cart{
+	width: 75%;
+	float: left;
+	padding-left: 20px;
+}

@@ -35,7 +35,9 @@ import { RatingComponent } from './components/rating/rating.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RelatedProductComponent } from './components/related-product/related-product.component';
 import { HomeComponent } from './components/home/home.component';
-import { AuthorComponent } from './components/author/author.component';
+import { TagComponent } from './components/tag/tag.component';
+import { GenderComponent } from './components/gender/gender.component';
+
 // guard
 import { NotorderGuard } from './../shared/services/notorder.guard';
 import { NotauthGuard } from './../shared/services/notauth.guard';
@@ -45,15 +47,17 @@ import { MenuComponent } from './components/menu/menu.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { DiffirentProductComponent } from './components/diffirent-product/diffirent-product.component';
 import { FunctionComponent } from './components/function/function.component';
+import { CartComponent } from './components/cart/cart.component';
 const publicRoutes: Routes = [
 	{ path: '', component: PublicComponent, children:[
 		{path: '', component: HomeComponent, pathMatch: 'full'},
 		{path: 'danh-muc/:slug', component: CategoryComponent},
-		{path: 'nha-xuat-ban/:slug', component: BrandComponent},
-		{path: 'tac-gia/:slug', component: AuthorComponent},
+		{path: 'nha-san-xuat/:slug', component: BrandComponent},
+		{path: 'tag/:tag', component: TagComponent},
+		{path: 'gioi-tinh/:gender', component: GenderComponent},
 		{path: 'san-pham/:slug', component: ProductDetailComponent},
 		{path: 'order', component: OrderComponent, canActivate:[NotorderGuard, NotauthGuard]},
-		{path: 'myorder', component: MyOrderComponent},
+		{path: 'don-hang-cua-toi', component: MyOrderComponent},
 		{path: 'register', component: RegisterComponent, canActivate:[AuthGuard]},
 		{path: 'thong-tin', component: InfoUserComponent, canActivate:[NotauthGuard]},
 		{path: 'quen-mat-khau', component: ForgotPasswordComponent, canActivate:[AuthGuard]}
@@ -91,8 +95,10 @@ const publicRoutes: Routes = [
 		MenuComponent,
 		BreadcrumbComponent,
 		DiffirentProductComponent,
-		AuthorComponent,
-		FunctionComponent
+		FunctionComponent,
+		TagComponent,
+		GenderComponent,
+		CartComponent
 	],
 	providers: [
 		CategoryService,

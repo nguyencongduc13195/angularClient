@@ -33,7 +33,7 @@ export class OrderComponent implements OnInit {
 		order.note = event.txtNote;
 		order.total = this._cartService.total();
 		order.orderItems = this._cartService.items.map(
-			(item:CartItem)=>new OrderItem(item.product.slug,item.quantity)
+			(item:CartItem)=>new OrderItem(item.product.slug,item.quantity,item.size, item.color)
 		);
 		this._orderService.addOrder(order, order.orderItems).subscribe((data)=>{
 			this._cartService.clear();

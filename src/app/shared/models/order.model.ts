@@ -22,7 +22,9 @@ class Order{
 class OrderItem{
 	constructor(
 		public slug: string,
-		public quantity: number
+		public quantity: number,
+		public size: any,
+		public color: any
 		)
 	{
 

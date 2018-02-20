@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, OnDestroy, DoCheck } from '@angular/core';
+import { Component, OnInit, ViewChild, OnDestroy, DoCheck, Output, EventEmitter } from '@angular/core';
 import { CartService } from './../../../shared/services/cart.service';
 import { UserService } from './../../../shared/services/user.service';
 import { ModalDirective } from 'ngx-bootstrap/modal';
@@ -38,7 +38,11 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 		this.isAdmin = localStorage.getItem('role') || '';
 		this._userService.isAdmin = localStorage.getItem('role') === '1301' ? true : false;
 	}
-
+	// 
+	@Output('showCart') connector = new EventEmitter<any>();
+	showCart(){
+		this.connector.emit();
+	}
 	// form đăng nhập
 	public formLogin: FormGroup;
 	public showhidePassword: boolean = true;

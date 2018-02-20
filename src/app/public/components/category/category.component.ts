@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, OnChanges, Input } from '@angular/core';
 import { CategoryService } from './../../../shared/services/category.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { CartService } from './../../../shared/services/cart.service';
@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs/Subscription';
 	templateUrl: './category.component.html',
 	styleUrls: ['./category.component.css']
 })
-export class CategoryComponent implements OnInit, OnDestroy{
+export class CategoryComponent implements OnInit, OnDestroy, OnChanges{
 
 	constructor(
 		private _categoryService: CategoryService,
@@ -30,6 +30,12 @@ export class CategoryComponent implements OnInit, OnDestroy{
 		this.loadNameCate();
 		this.loadData();
 	}
+	ngOnChanges(){
+		// this._activatedRoute.params.subscribe((param)=>{
+		// 	console.log(param);
+		// })
+	}
+	public reset: boolean =false;
 	// 
 	public totalPage: number[] = [];
 	public pageIndex: number[] = [];
@@ -39,6 +45,8 @@ export class CategoryComponent implements OnInit, OnDestroy{
 			this._categoryService.getProductByCategories(params['slug'],pageIndex,pageSize).subscribe((data: Product[])=>{
 				this.loaded = false;
 				this.noItems = false;
+				this.isFilter = false;
+				this.reset = true;
 				if(data['success']){
 					this.totalItems = data['count'];
 					this.loaded = true;
@@ -72,7 +80,8 @@ export class CategoryComponent implements OnInit, OnDestroy{
 		});
 	}
 	addToCart(item){
-		this._cartService.addItem(item);
+		// this._cartService.addItem(item);
+		this._cartService.addItem(item,'1',item.size[0],item.color[0]);
 	}
 	// 
 	getSort(event){
@@ -134,6 +143,17 @@ export class CategoryComponent implements OnInit, OnDestroy{
 		}else{
 			this.isFilter = false;
 			return this.products
+		}
+	}
+	getPrice(event){
+		if(event==='0'){
+			this.isFilter = false;
+			return this.products;
+		}else{
+			this.isFilter = true;
+			this.productFilter = this.products.filter((value)=>{
+				return value.promotion_price >= event && value.promotion_price <= 2000000;
+			});
 		}
 	}
 	ngOnDestroy(){

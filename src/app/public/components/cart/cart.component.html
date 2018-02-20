@@ -1,0 +1,31 @@
+<div class="menu-show-hide" *ngIf="isShowCart">
+	<div class="header">
+		<div class="header-title">Giỏ hàng</div>
+		<div class="button">
+			<button type="button" class="btn btn-primary hideMenu" (click)="closeCart()">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+	</div>
+	<div class="cart" *ngFor="let item of cartItems">
+		<div class="img-cart">
+			<img src="https://apimean.herokuapp.com/api/product/images-detail/{{item?.product?.image}}">
+		</div>
+		<div class="detail-cart">
+			<div><strong>{{item?.product?.name}}</strong></div>
+			<div *ngIf="item?.product?.price !== item?.product?.promotion_price">
+				{{item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3' }}
+			</div>
+			<div *ngIf="item?.product?.price === item?.product?.promotion_price">
+				{{item?.product?.price |currency:'VND':'symbol':'1.0-3' }}
+			</div>
+			<div>Số lượng: {{item?.quantity }}</div>
+			<div>Kích cỡ: {{item?.size }}</div>
+			<div>Màu sắc: {{item?.color }}</div>
+		</div>
+	</div>
+</div>
+
+<div class="menu-rgba" *ngIf="isShowCart" (click)="closeCart()">
+	
+</div>

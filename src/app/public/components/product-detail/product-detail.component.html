@@ -1,14 +1,15 @@
 <div class="container-fluid" *ngIf="loaded" #scroll>
 	<div class="row">
-		
 		<div class="col-xs-4">
-			<img *ngIf="productDetail?.image !==''; else none" 
-				src="https://apimean.herokuapp.com/api/product/img/{{productDetail?.image}}" class="img-responsive">
-			<!-- <img *ngIf="productDetail?.image !==''; else none" 
-				src="http://localhost:3000/api/product/img/{{productDetail?.image}}" class="img-responsive"> -->
+			<!-- <img *ngIf="productDetail?.images_Detail?.length > 0 !==''; else none" 
+				src="https://apimean.herokuapp.com/api/product/images-detail/{{productDetail?.image}}" class="img-responsive"> -->
+			<ng-container *ngIf="productDetail?.image !==''; else none">
+				<img src="http://localhost:3000/api/product/images-detail/{{mainImage}}" class="img-responsive">
+				<!-- <img src="https://apimean.herokuapp.com/api/product/images-detail/{{mainImage}}" class="img-responsive"> -->
+			</ng-container>
 			<ng-template #none>
-				<img class="img-responsive" src="https://apimean.herokuapp.com/api/product/img/no-image.jpg"/>
-				<!-- <img class="img-responsive" src="http://localhost:3000/api/product/img/no-image.jpg"/> -->
+				<!-- <img class="img-responsive" src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"/> -->
+				<img class="img-responsive" src="http://localhost:3000/api/product/images-detail/no-image.jpg"/>
 			</ng-template>
 			<br>
 			<div class="text-center">
@@ -44,9 +45,24 @@
 				<div class="col-md-7 col-xs-12">
 					<div class="info">
 						<h5 class="name">{{productDetail?.name}}</h5>
-						<span>Tác giả: <a [routerLink]="['/tac-gia', productDetail?.writer_slug]">{{productDetail?.writer_name}}</a></span>
-						<span>Nhà xuất bản: <a [routerLink]="['/nha-xuat-ban', productDetail?.brand?.slug]">{{productDetail?.brand?.name}}</a></span>
+						<span class="brand">Nhà sản xuất: <a [routerLink]="['/nha-san-xuat', productDetail?.brand?.slug]">{{productDetail?.brand?.name}}</a></span>
+						<span class="brand">Giới tính: <a [routerLink]="['/gioi-tinh', productDetail?.gender?.slug]">{{productDetail?.gender?.name}}</a></span>
 						<p class="content" [innerHTML]="productDetail?.body | summary:400"></p>
+						<ng-container *ngIf="productDetail?.image_Detail?.length > 0">
+							<img *ngFor="let item of productDetail?.image_Detail"
+								src="http://localhost:3000/api/product/images-detail/{{item}}" 
+								class="img-detail"
+								(mouseenter)="changeImage(item)"
+								(mouseleave)="setDefaultImg()"
+							/>
+						</ng-container>
+						<div class="tag" *ngIf="productDetail?.tag_array?.length>0">Tag: 
+							<a class="label label-success" 
+								*ngFor="let item of productDetail?.tag_array" 
+								[routerLink]="['/tag',item]"
+							>{{item}}, </a>
+						</div>
+						<div class="clearfix"></div>
 					</div>
 				</div>
 				<div class="col-md-5 col-xs-12">
@@ -89,13 +105,34 @@
 									{{productDetail?.price | currency:'VND':'symbol':'1.0-3' }}
 									</span>
 								</div>
-								<br>
 							</ng-template>
+							<div class="select">
+								<label>Số lượng:</label>
+								<select #quantity>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+								</select>
+							</div>
+							<div class="select">
+								<label>Kích cỡ:</label>
+								<select #size>
+									<option *ngFor="let item of productDetail['size']" value="{{item}}">{{item}}</option>
+								</select>
+							</div>
+							<div class="select">
+								<label>Màu sắc:</label>
+								<span 
+									[ngStyle]="{'background-color':item}"
+									[ngClass]="{'color-select': colorM.indexOf(item)>-1}"
+									class="color" 
+									(click)="selectColor(item)"
+									*ngFor="let item of productDetail['color']"></span>
+							</div>
+							<div class="clearfix"></div>
 							<div class="button">
-								<strong>Số lượng:</strong> <input type="number" min="1" #quantity value="1" class="text-center">
-							<br><br>
 							<button *ngIf="productDetail?.stockitems" type="button" class="btn btn-success btn-lg" 
-								(click)="addToCart(productDetail, quantity.value)">
+								(click)="addToCart(productDetail, quantity.value, size.value)">
 								Thêm vào giỏ hàng</button>
 							<button *ngIf="!productDetail?.stockitems" type="button" class="btn btn-danger btn-lg">
 								Sản phẩm đã hết
@@ -107,21 +144,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="row text-center" style="margin-top: 30px;">
-		<div class="col-xs-6 col-sm-6 col-md-3 choice" 
-			[class.active]="isChoice===1"
-			(click)="isChoice = 1"
-			>
-			Chi tiết sản phẩm
-		</div>
-		<div class="col-xs-6 col-sm-6 col-md-3 choice" 
-			[class.active]="isChoice===2"
-			(click)="isChoice = 2"
-			>
-			Bình luận sản phẩm
-		</div>
+	<div class="product-tab">
+		<ul class="nav-tab">
+			<li [class.active]="isChoice===1"
+				(click)="isChoice = 1">
+				Thông tin chi tiết
+			</li>
+			<li [class.active]="isChoice===2"
+				(click)="isChoice = 2"
+			>Nhận xét</li>
+		</ul>
 	</div>
-	<hr>
 	<div class="row">
 		<ng-container *ngIf="isChoice===1; else comment">
 			<div [innerHTML]="productDetail?.body" 

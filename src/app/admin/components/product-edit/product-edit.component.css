@@ -1,0 +1,13 @@
+.list-product{
+	float: left;
+	margin-right: 5px;
+}
+.list-product:last-child{
+	margin-right: 0px;
+}
+
+.clear::after{
+	content: '';
+	clear: both;
+	display: block;
+}

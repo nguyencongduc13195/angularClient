@@ -31,8 +31,8 @@ export class RelatedProductComponent implements OnInit, OnDestroy {
 	}
 	// 
 	private _sub: Subscription;
-	onBuyItems(id, quantity){
-		this._cartService.addItem(id,quantity);
+	onBuyItems(product, quantity){
+		this._cartService.addItem(product,quantity,product.size[0], product.color[0]);
 	}
 	navigateToProduct(slug){
 		this._router.navigate(['san-pham',slug]);

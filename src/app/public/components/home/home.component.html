@@ -23,9 +23,17 @@
 								<div class="snipcart-item block">
 									<div class="snipcart-thumb">
 										<a [routerLink]="['/san-pham', product?.slug]">
-											<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-											<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
-										</a>		
+											<img *ngIf="product?.image !==''; else none" 
+											src="http://localhost:3000/api/product/images-detail/{{product?.image}}" 
+											class="img-product"/>
+											<!-- <img *ngIf="product?.image !==''; else none" 
+											src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}" 
+											class="img-product"/> -->
+											<ng-template #none>
+												<img src="http://localhost:3000/api/product/images-detail/no-image.jpg" class="img-product"/>
+												<!-- <img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"> -->
+											</ng-template>		
+										</a>
 										<p class="text-center">{{product?.name}}</p>
 										<h4 class="text-center" *ngIf="product?.price !== product?.promotion_price; else nosale">
 											{{product?.promotion_price | currency:'VND':'symbol':'1.0-3'}} 
@@ -75,8 +83,16 @@
 								<div class="snipcart-item block">
 									<div class="snipcart-thumb">
 										<a [routerLink]="['/san-pham', product?.slug]">
-											<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-											<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
+											<img *ngIf="product?.image !==''; else none" 
+											src="http://localhost:3000/api/product/images-detail/{{product?.image}}" 
+											class="img-product"/>
+											<!-- <img *ngIf="product?.image !==''; else none" 
+											src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}" 
+											class="img-product"/> -->
+											<ng-template #none>
+												<img src="http://localhost:3000/api/product/images-detail/no-image.jpg" class="img-product"/>
+												<!-- <img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"> -->
+											</ng-template>	
 										</a>		
 										<p class="text-center">{{product?.name}}</p>
 										<h4 class="text-center" 

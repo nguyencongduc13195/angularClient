@@ -11,14 +11,19 @@ export class CartService {
 	public clear(){
 		this.items = [];
 		this.totalQty = 0;
-	}
-	public addItem(item: Product, quantity='1'){
-		let foundItem = this.items.find((mItem)=>mItem.product._id === item._id);
+	}	
+	public addItem(item: Product, quantity='1',size, color){
+		// let foundItem = this.items.find(
+		// 	(fItem)=>fItem.product._id === item._id && parseInt(fItem.product.size) === size
+		// );
+		let foundItem = this.items.find(
+			(fItem)=>(fItem.product._id === item._id && fItem.size === size && fItem.color === color)
+		);
 		if(foundItem){
 			foundItem.quantity = foundItem.quantity + parseInt(quantity);
 			// this.increaseQty(foundItem);
 		}else{
-			this.items.push(new CartItem(item, parseInt(quantity)));
+			this.items.push(new CartItem(item, parseInt(quantity), size,color));
 		}
 		this.totalQty = this.totalQty + parseInt(quantity);
 		this._alertService.alert(`Bạn vừa thêm sản phẩm ${item.name}`);

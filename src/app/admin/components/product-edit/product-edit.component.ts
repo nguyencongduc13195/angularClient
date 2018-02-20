@@ -41,9 +41,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 			'sltCategory': ['', Validators.required],
 			'sltBrand': ['', Validators.required],
 			'txtName': ['', Validators.required],
-			'txtFullName': ['', Validators.required],
 			'txtBody': ['', Validators.required],
 			'txtDescription': ['', Validators.required],
+			'rdoGender': [''],
 			'txtPrice': ['', Validators.required],
 			'txtPromotionPrice': [''],
 			'txtStockItems': ['', Validators.required]
@@ -84,23 +84,23 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 	public notUpload: boolean = false;
 	public nameImage: string;
 	public urlImg: string;
-	onUploadNewImage(){
-		if(this.myImage.nativeElement.files.length > 0){
-			this._sub = this._uploadImageService.uploadImage(this.myImage,'product').subscribe((data)=>{
-				if(data['success']){
-					this.notUpload = false;
-					this.uploadNewImg = true;
-					this.nameImage = data['name'];
-					// this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
-					this.urlImg= `https://apimean.herokuapp.com/api/product/img/${data['name']}`;
-					this._uploadImageService.deleteImage(this.editProduct.image, 'product').subscribe(data=>{
-					});
-				}
-			});
-		}else{
-			this.notUpload = true;
-		}
-	}
+	// onUploadNewImage(){
+	// 	if(this.myImage.nativeElement.files.length > 0){
+	// 		this._sub = this._uploadImageService.uploadImage(this.myImage,'product').subscribe((data)=>{
+	// 			if(data['success']){
+	// 				this.notUpload = false;
+	// 				this.uploadNewImg = true;
+	// 				this.nameImage = data['name'];
+	// 				// this.urlImg= `http://localhost:3000/api/product/img/${data['name']}`;
+	// 				this.urlImg= `https://apimean.herokuapp.com/api/product/img/${data['name']}`;
+	// 				this._uploadImageService.deleteImage(this.editProduct.image, 'product').subscribe(data=>{
+	// 				});
+	// 			}
+	// 		});
+	// 	}else{
+	// 		this.notUpload = true;
+	// 	}
+	// }
 	// submitform
 	public updateSuccess: boolean = false;
 	public msg: string;
@@ -115,9 +115,9 @@ export class ProductEditComponent implements OnInit, OnDestroy {
 		// product.brand = formValue.sltBrand;
 		// product.writer.name = formValue.txtFullName;
 		// product.image = this.nameImage;
-		if(this.nameImage!==""){
-			this.editProduct.image = this.nameImage;
-		}
+		// if(this.nameImage!==""){
+		// 	this.editProduct.image = this.nameImage;
+		// }
 		this._sub = this._productService.updateProduct(this.idProduct, this.editProduct).subscribe((data: Product)=>{
 			if(data['success']){
 				this.updateSuccess = true;

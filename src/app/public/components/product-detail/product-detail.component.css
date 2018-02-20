@@ -104,7 +104,11 @@ span.priceDetail{
 
 div.button button{
     display: block;
-    margin: 0 auto
+    margin: 10px auto 0
+}
+div.button input{
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .content{
@@ -122,24 +126,95 @@ h4{
 }
 .name{
     font-size: 24px;
-    color: #413F3F
+    color: #413F3F;
+}
+.brand{
+    margin-top: 10px;
+}
+.tag a{
+    color: #fff;
+    margin-right: 5px;
 }
 .rating{
     margin-bottom: 5px;
 }
-::ng-deep .description ul { 
+
+div.select select, div.select label{
     float: left;
-    width: 100%;
-    list-style: square;
-    margin:0;
-    padding: 0;
-    list-style-position: inside;
+    margin-right: 5%;
 }
-::ng-deep .description ul li{
-    float: left;
-    width: 50%;
+
+div.select select{
+    text-align-last: center;
+    width: 60%;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    padding: 5px;
 }
-::ng-deep .description ul li strong{
-    width: 150px;
+div.select label{
+    width: 30%
+}
+
+.color{
+    height: 20px;
+    width: 20px;
+    border: 1px solid grey;
+    margin-right: 5px;
     display: inline-block;
+}
+
+.color-select{
+    height: 30px;
+    width: 30px;
+    margin-right: 5px;
+    display: inline-block;
+    border: 2px solid grey;
+}
+
+.img-detail{
+    float: left;
+    display: inline-block;
+    width: 130px;
+    height: 100px;
+    margin-right: 5px;
+    border: 1px solid;
+}
+
+::ng-deep table,::ng-deep tr,::ng-deep td{
+    border: 1px solid black;
+}
+.product-tab{
+    margin: 20px 0;
+}
+.product-tab .nav-tab {
+    width: 100%;
+    overflow: hidden;
+    z-index: 100;
+}
+.product-tab .nav-tab>li.active{
+    background-color: #fff
+}
+
+.product-tab .nav-tab>li {
+    height: 50px;
+    padding: 0px 20px;
+    line-height: 50px;
+    float: left;
+    display: inline;
+    background: #e2e2e2;
+     border: 1px solid #e2e2e2; 
+    color: #333333;
+    text-transform: uppercase;
+    text-align: center;
+    margin-right: 8px;
+    font-weight: bold;
+}
+.product-tab .nav-tab>li>a {
+    color: #333333;
+    padding: 0 26px;
+    height: 50px;
+    float: left;
+}
+.product-tab .nav-tab>li:last-child {
+    margin-right: 0;
 }

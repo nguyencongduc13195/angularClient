@@ -4,7 +4,6 @@ import { Category } from './../../../shared/models/category.model';
 import { BrandService } from './../../../shared/services/brand.service';
 import { Brand } from './../../../shared/models/brand.model';
 import { AuthorService } from './../../../shared/services/author.service';
-import { Author } from './../../../shared/models/author.model';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
 	selector: 'app-menu',
@@ -22,12 +21,9 @@ export class MenuComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.loadBrands();
 		this.loadCategories();
-		// this.loadAuthors();
 	}
 	private _sub: Subscription;
-	public isShowCate: boolean = false;
-	public isShowBrand: boolean = false;
-	public isShowAuthor: boolean = false;
+	public arrayMenu: any[]=[];
 	// categories
 	public categories: Category[] = [];
 	public cateMenu: any[] = [];
@@ -38,7 +34,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 				this.categories.forEach((val)=>{
 					this._categoryService.booksOfCate(val._id).subscribe((data)=>{
 						if(data['success']){
-							// console.log(`${val.name} - ${data['data']}`);
 							let item: {} = {name:val.name,item:data['data'],slug: val.slug}
 							this.cateMenu.push(item);
 						}	
@@ -66,44 +61,40 @@ export class MenuComponent implements OnInit, OnDestroy {
 			}
 		});
 	}
-	// authors
-	// public authors: Author[] = [];
-	// public idAuthors: number[] = [];
-	// loadAuthors(){
-	// 	this._sub = this._authorService.getAll().subscribe(data=>{ 
-	// 		this.authors = data['data']; 
-	// 		this.authors.forEach((value)=>{
-	// 			// this.idAuthors.push(value['_id'])
-	// 			this._authorService.booksOfAuthor(value['_id']).subscribe((data)=>{
-	// 				if(data['success']){
-	// 					this.idAuthors.push(data['data'])
-	// 				}
-	// 			})
-	// 		})
-	// 	});
-	// }
-	// 
 	onToggle(type: string){
-		if(type==='cate'){
-			this.isShowCate = !this.isShowCate;
-			if((this.isShowCate && this.isShowBrand) || (this.isShowCate && this.isShowAuthor)){
-				this.isShowBrand = false;
-				this.isShowAuthor = false;
-			}
-		}else if(type==='brand'){
-			this.isShowBrand = !this.isShowBrand;
-			if((this.isShowBrand && this.isShowCate) || (this.isShowBrand && this.isShowAuthor)){
-				this.isShowCate = false;
-				this.isShowAuthor = false;
-			}
+		// if(type==='cate'){
+		// 	this.isShowCate = !this.isShowCate;
+		// 	if((this.isShowCate && this.isShowBrand) || (this.isShowCate && this.isShowGender)){
+		// 		this.isShowBrand = false;
+		// 		this.isShowGender = false;
+		// 	}
+		// }else if(type==='brand'){
+		// 	this.isShowBrand = !this.isShowBrand;
+		// 	if((this.isShowBrand && this.isShowCate) || (this.isShowBrand && this.isShowGender)){
+		// 		this.isShowCate = false;
+		// 		this.isShowGender = false;
+		// 	}
+		// }else{
+		// 	this.isShowGender = !this.isShowGender;
+		// 	if((this.isShowGender && this.isShowCate) || (this.isShowBrand && this.isShowGender)){
+		// 		this.isShowCate = false;
+		// 		this.isShowBrand = false;
+		// 	}
+		// }
+			// this.arrayMenu = [];
+			// this.arrayMenu.push(type);
+		if(this.arrayMenu.length <= 0){
+			this.arrayMenu.push(type);
 		}else{
-			this.isShowAuthor = !this.isShowAuthor;
-			if((this.isShowAuthor && this.isShowCate) || (this.isShowBrand && this.isShowAuthor)){
-				this.isShowCate = false;
-				this.isShowBrand = false;
+			if(this.arrayMenu.indexOf(type)!== -1){
+				this.arrayMenu = [];
+			}else{
+				this.arrayMenu = [];
+				this.arrayMenu.push(type);
 			}
 		}
 	}
+	
 	// 
 	ngOnDestroy(){
 		if(this._sub){

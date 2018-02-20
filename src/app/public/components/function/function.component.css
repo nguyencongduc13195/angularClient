@@ -1,0 +1,18 @@
+.filter_price{
+	width: 90%;
+    margin: 20px auto;
+}
+
+.filter{
+	width: 15%;
+	float: left;
+	margin-right: 3%;
+	text-align: center;
+}
+.filter:last-child{
+	margin-left: 3%
+}
+.filter2{
+	width: 50%;
+	float: left
+}

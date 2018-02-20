@@ -101,8 +101,8 @@ export class ProductListComponent implements OnInit, OnDestroy {
 				this.updateCateSuccess = true;
 				setTimeout(()=>{
 					this.changeCateArray = [];
-					this.updateBrandSuccess = false;
-				},1000)
+					this.updateCateSuccess = false;
+				},500)
 			}
 		})
 	}

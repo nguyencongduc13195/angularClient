@@ -12,7 +12,7 @@
 			</select>
 		</div>
 		<div class="form-group">
-			<label>Nhà xuất bản</label>
+			<label>Nhà sản xuất</label>
 			<select class="form-control" formControlName="sltBrand" [(ngModel)]="editProduct.brand">
 				<option value="{{item?._id}}" *ngFor="let item of brands">{{item?.name}}</option>
 			</select>
@@ -24,11 +24,17 @@
 			>Vui lòng nhập tên sản phẩm.</span>
 		</div>
 		<div class="form-group">
-			<label>Tên tác giả</label>
-			<input type="text" [(ngModel)]="editProduct.writer_name" class="form-control" formControlName="txtFullName" placeholder="Vui lòng nhập tên tác giả.">
-			<span class="label label-danger"
-				*ngIf="formEditProduct.controls.txtFullName.touched && formEditProduct.controls.txtFullName?.errors?.required"
-			>Vui lòng nhập tên tác giả.</span>
+			<label>Giới tính</label>
+			<div class="radio">
+				<label>
+					<input type="radio"  [(ngModel)]="editProduct.gender.name" name="rdoGender" formControlName="rdoGender" value="Nam">
+					Nam
+				</label>.
+				<label>
+					<input type="radio"  [(ngModel)]="editProduct.gender.name" name="rdoGender" formControlName="rdoGender" value="Nữ">
+					Nữ
+				</label>
+			</div>
 		</div>
 		<div class="form-group">
 			<label>Mô tả</label>
@@ -84,15 +90,29 @@
 				*ngIf="formEditProduct.controls.txtStockItems.touched && formEditProduct.controls.txtStockItems?.errors?.required"
 			>Vui lòng nhập số lượng sản phẩm.</span>
 		</div>
-		<div class="form-group" *ngIf="!uploadNewImg">
+		<div class="form-group clear" *ngIf="!uploadNewImg">
 			<label>Hình ảnh hiện tại</label>
-			<img *ngIf="editProduct?.image" class="img-responsive edit" src="https://apimean.herokuapp.com/api/product/img/{{editProduct?.image}}">
-			<!-- <img *ngIf="editProduct?.image" class="img-responsive edit" 
-				src="http://localhost:3000/api/product/img/{{editProduct?.image}}"> -->
-			<!-- <img *ngIf="!editProduct?.image" class="img-responsive edit" 
-				src="http://localhost:3000/api/product/img/no-image.jpg"> -->
-			<img *ngIf="!editProduct?.image" class="img-responsive edit" 
-				src="https://apimean.herokuapp.com/api/product/img/no-image.jpg">
+			<br>
+			<ng-container *ngIf="editProduct?.image_Detail?.length>0; else none">
+				<img *ngFor="let item of editProduct?.image_Detail" 
+					class="img-responsive edit list-product" 
+					src="http://localhost:3000/api/product/images-detail/{{item}}"
+				/>
+				<!-- <img *ngFor="let item of editProduct?.image_Detail" 
+					class="img-responsive edit" 
+					src="https://apimean.herokuapp.com/api/product/images-detail/{{item}}"
+				/> -->
+			</ng-container>
+			<ng-template #none>
+				<img 
+					class="img-responsive edit" 
+					src="http://localhost:3000/api/product/images-detail/no-image.jpg"
+				/>
+				<!-- <img 
+					class="img-responsive edit" 
+					src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"
+				/> -->
+			</ng-template>
 		</div>
 		<div class="form-group">
 			<label>Hình ảnh mới</label>

@@ -50,7 +50,7 @@ export class BrandComponent implements OnInit {
 		});
 	}
 	addToCart(item){
-		this._cartService.addItem(item);
+		this._cartService.addItem(item,'1',item.size[0],item.color[0]);
 	}
 	ngOnDestroy(){
 		if(this._sub){

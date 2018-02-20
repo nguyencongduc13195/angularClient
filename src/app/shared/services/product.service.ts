@@ -9,8 +9,8 @@ import { AlertService } from './alert.service';
 export class ProductService {
 
 	constructor(private _httpClient: HttpClient, private _alertService: AlertService) { }
-	private api: string = "https://apimean.herokuapp.com/api/product";
-	// private api: string = "http://localhost:3000/api/product";
+	// private api: string = "https://apimean.herokuapp.com/api/product";
+	private api: string = "http://localhost:3000/api/product";
 	public getAll(pageIndex: number= 1, pageSize: number= 8) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/all?pageSize=${pageSize}&pageIndex=${pageIndex}`);
 	}
@@ -28,11 +28,15 @@ export class ProductService {
 			'txtName': product.name,
 			'sltCategory': product.category,
 			'sltBrand': product.brand,
-			'txtFullName': product.writer_name,
 			'txtBody': product.body,
 			'txtDescription': product.description,
 			'txtPrice': product.price,
+			'txtUseArray': product.tag_array,
+			'imageDetail': product.imageDetail,
 			'txtImage': product.image,
+			'txtColor': product.color,
+			'txtSize': product.size,
+			'txtGender': product.gender,
 			'txtPromotionPrice': product.promotion_price || product.price,
 			'txtStockItems': product.stockitems
 		});
@@ -42,13 +46,12 @@ export class ProductService {
 			'txtName': product.name,
 			'sltCategory': product.category,
 			'sltBrand': product.brand,
-			'txtFullName': product.writer_name,
-			'txtImage': product.image,
 			'txtBody': product.body,
 			'txtDescription': product.description,
 			'txtPrice': product.price,
 			'txtPromotionPrice': product.promotion_price || product.price,
-			'txtStockItems': product.stockitems
+			'txtStockItems': product.stockitems,
+			'txtColor': product.color,
 		});
 	}
 	public deleteProduct(id) : Observable<Product>{
@@ -94,5 +97,11 @@ export class ProductService {
 	}
 	public searchItem(search) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/search/${search}`);
+	}
+	public getProductsByUse(slug) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProducts/${slug}`);
+	}
+	public getProductsByGender(slug) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProductsByGender/${slug}`);
 	}
 }

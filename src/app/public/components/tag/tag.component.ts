@@ -1,46 +1,49 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import { AuthorService } from './../../../shared/services/author.service';
+import { ProductService } from './../../../shared/services/product.service';
+import { CartService } from './../../../shared/services/cart.service';
 import { Product } from './../../../shared/models/product.model';
-import { Author } from './../../../shared/models/author.model';
 @Component({
-	selector: 'app-author',
-	templateUrl: './author.component.html',
-	styleUrls: ['./author.component.css']
+	selector: 'app-tag',
+	templateUrl: './tag.component.html',
+	styleUrls: ['./tag.component.css']
 })
-export class AuthorComponent implements OnInit, OnDestroy {
+export class TagComponent implements OnInit, OnDestroy {
 
 	constructor(
 		private _activated: ActivatedRoute,
 		private _router: Router,
-		private _authorService: AuthorService
+		private _productService: ProductService,
+		private _cartService: CartService
 	) { }
 
 	ngOnInit() {
-		this.loadBooksOfAuthor();
+		this.loadProductsByUse();
 	}
 	public loaded: boolean = false;
 	public products: Product[] = [];
-	loadBooksOfAuthor(){
+	loadProductsByUse(){
 		this._sub = this._activated.params.subscribe((params: Params)=>{
-			this._authorService.booksOfAuthor(params['slug']).subscribe((data: Product[])=>{
+			this._productService.getProductsByUse(params['tag']).subscribe((data: Product[])=>{
 				this.loaded = false;
 				if(data['success']){
-					this.authorName = data['data'][0]['writer_name'];
+					this.useName = params['tag'];
 					this.products = data['data'];
 					this.loaded = true;
 				}
-				console.log(data);
 			})
 		})
 	}
-	// 
-	public authorName: string;
+	addToCart(product){
+		this._cartService.addItem(product, '1', product['size'][0], product['color'][0]);
+	}
+	public useName: string;
 	private _sub: Subscription;
 	ngOnDestroy(){
 		if(this._sub){
 			this._sub.unsubscribe();
 		}
 	}
+
 }

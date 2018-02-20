@@ -2,6 +2,8 @@
 	(sort)="getSort($event)" 
 	(element)="getElement($event)"
 	(filter)="getFilter($event)"
+	(price)="getPrice($event)"
+	[reset]="reset"
 ></app-function>
 <br>
 <div class="container">
@@ -46,8 +48,8 @@
 											<div class="snipcart-item block">
 												<div class="snipcart-thumb">
 													<a [routerLink]="['/san-pham', product?.slug]">
-														<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-														<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
+														<!-- <img class="img-product" src="http://localhost:3000/api/product/images-detail/{{product?.image}}"> -->
+														<img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}">
 													</a>		
 													<p class="text-center">{{product?.name}}</p>
 													<h4 class="text-center" 
@@ -73,9 +75,9 @@
 						<div class="col-xs-12 product-grid" *ngFor="let product of products">
 							<div class="row">
 								<div class="col-xs-3 image-grid">
-									<!-- <img src="http://localhost:3000/api/product/img/{{product?.image}}" 
+									<!-- <img src="http://localhost:3000/api/product/images-detail/{{product?.image}}" 
 									class="img-responsive img-grid"> -->
-									<img src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}" 
+									<img src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}" 
 									class="img-responsive img-grid">
 									<div class="tag-grid" *ngIf="product?.price !== product?.promotion_price">
 										<img src="./assets/img/icon/offer.png" class="img-responsive">
@@ -121,8 +123,8 @@
 										<div class="snipcart-item block">
 											<div class="snipcart-thumb">
 												<a [routerLink]="['/san-pham', product?.slug]">
-													<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-													<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
+													<!-- <img class="img-product" src="http://localhost:3000/api/product/images-detail/{{product?.image}}"> -->
+													<img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}">
 												</a>		
 												<p class="text-center">{{product?.name}}</p>
 												<h4 class="text-center" 

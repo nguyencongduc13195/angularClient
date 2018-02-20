@@ -343,7 +343,7 @@ span.price{
 }
 .tag-grid>img.img-responsive {
     position: absolute;
-    left: 0%;
+    left: 5%;
     top: 0%;
     z-index: 1;
 }
@@ -354,4 +354,16 @@ button.add-cart{
     text-transform: uppercase;
     color: #000;
     padding: 10px 15px;
+}
+
+.name{
+    color: #087b44;
+    height: 40px;
+    line-height: 40px;
+    font-size: 30px;
+    font-weight: bold;
+    display: inline-block;
+}
+span.author{
+    font-size: 20px
 }

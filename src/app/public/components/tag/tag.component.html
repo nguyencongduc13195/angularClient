@@ -1,18 +1,18 @@
 <div class="container">
-	<span class="author">Tác giả: </span><h2 class="name">{{authorName}}</h2>
+	<span class="author">Sản phẩm </span><h2 class="name">{{useName}}</h2>
 	<div class="panel panel-success">
 		<div class="panel-heading">
-			<h3 class="panel-title">Sách</h3>
+			<h3 class="panel-title">Sản phẩm</h3>
 		</div>
 		<div class="panel-body" *ngIf="loaded; else none">
 			<div class="row">
 				<div class="col-xs-12 product-grid" *ngFor="let product of products">
 					<div class="row">
 						<div class="col-xs-3 image-grid">
-							<!-- <img src="http://localhost:3000/api/product/img/{{product?.image}}" 
-							class="img-responsive img-grid"> -->
-							<img src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}" 
+							<img src="http://localhost:3000/api/product/images-detail/{{product?.image}}" 
 							class="img-responsive img-grid">
+							<!-- <img src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}" 
+							class="img-responsive img-grid"> -->
 							<div class="tag-grid" *ngIf="product?.price !== product?.promotion_price">
 								<img src="./assets/img/icon/offer.png" class="img-responsive">
 							</div>

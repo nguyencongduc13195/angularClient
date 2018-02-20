@@ -28,6 +28,12 @@
 							</td>
 						</tr>
 						<tr>
+							<td *ngFor="let item of order['orderItem'][0]['color']">Màu sắc: {{item}}</td>
+						</tr>
+						<tr>
+							<td *ngFor="let item of order['orderItem'][0]['size']">Kích cỡ: {{item}}</td>
+						</tr>
+						<tr>
 							<td *ngFor="let item of order['orderItem'][0]['quantity']">Số lượng: {{item}}</td>
 						</tr>
 						<tr>

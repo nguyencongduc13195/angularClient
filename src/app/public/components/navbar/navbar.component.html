@@ -14,48 +14,42 @@
 	<div class="collapse navbar-collapse" id="collapse">
 		<form class="navbar-form navbar-left" role="search">
 			<div class="form-group">
-				<input type="text" class="form-control" #value placeholder="Tìm kiếm sách...">
+				<input type="text" class="form-control" #search placeholder="Tìm kiếm sách...">
 			</div>
-			<button type="submit" class="btn btn-info" (click)="onSearch(value.value)">Tìm kiếm</button>
+			<button type="submit" class="btn btn-info" (click)="onSearch(search.value)">Tìm kiếm</button>
 		</form>
 		<ul class="nav navbar-nav navbar-right">
-			<li><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart">
+			<li (click)="showCart()"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart">
 				</span>Giỏ hàng&nbsp;<span class="badge">{{totalQty}} </span></a>
-				<div class="dropdown-menu" style="width:400px">
+				<!-- <div class="dropdown-menu" style="width:400px">
 					<div class="panel panel-success">
-						<div class="panel-heading">
-							<div class="row">
-								<div class="col-md-1">#</div>
-								<div class="col-md-2">Ảnh</div>
-								<div class="col-md-3">Tên SP</div>
-								<div class="col-md-3">Giá</div>
-								<div class="col-md-3">Số lượng</div>
-							</div>
-						</div>
 						<div class="panel-body">
 							<div id="cart_product">
 							<div class="row" *ngFor="let item of cartItems; let i = index">
-								<div class="col-md-1">{{i+1}}</div>
-								<div class="col-md-2">
+								<div class="col-md-3">
 									<img class="img-responsive" style="height: 30px" 
-									src="http://apimean.herokuapp.com/api/product/img/{{item?.product?.image}}" alt="">
+									src="http://apimean.herokuapp.com/api/product/image-details/{{item?.product?.image}}">
 								</div>
-								<div class="col-md-3">{{item?.product?.name}}</div>
-								<div class="col-md-3" *ngIf="item?.product?.price !== item?.product?.promotion_price">
-									{{item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3' }}
+								<div class="col-md-9">
+									<div><strong>{{item?.product?.name}}</strong></div>
+									<div *ngIf="item?.product?.price !== item?.product?.promotion_price">
+										{{item?.product?.promotion_price |currency:'VND':'symbol':'1.0-3' }}
+									</div>
+									<div *ngIf="item?.product?.price === item?.product?.promotion_price">
+										{{item?.product?.price |currency:'VND':'symbol':'1.0-3' }}
+									</div>
+									<div>Số lượng: {{item?.quantity }}</div>
+									<div>Kích cỡ: {{item?.size }}</div>
+									<div>Màu sắc: {{item?.color }}</div>
 								</div>
-								<div class="col-md-3" *ngIf="item?.product?.price === item?.product?.promotion_price">
-									{{item?.product?.price |currency:'VND':'symbol':'1.0-3' }}
-								</div>
-								<div class="col-md-3">{{item?.quantity }}</div>
 							</div>
-							</div>
-						</div>
-						<div class="panel-footer pull-right">
-							<button type="button" class="btn btn-success" (click)="getToOrder()">Thanh toán</button>
 						</div>
 					</div>
-				</div>
+					<div class="panel-footer pull-right">
+						<button type="button" class="btn btn-success" (click)="getToOrder()">Thanh toán</button>
+					</div>
+					</div>
+				</div> -->
 			</li>
 			<li *ngIf="!isLogging">
 				<a (click)="showModal()" class="dropdown-toggle" data-toggle="dropdown">
@@ -73,7 +67,7 @@
 				<ul class="dropdown-menu">
 					<li class="list-group-item" [routerLink]="['/thong-tin']">Thông tin cá nhân</li>
 					<li class="list-group-item" *ngIf="isAdmin === '1301'" [routerLink]="['/admin']">Trang Quản Trị</li>
-					<li class="list-group-item" [routerLink]="['/myorder']">Đơn hàng của tôi</li>
+					<li class="list-group-item" [routerLink]="['/don-hang-cua-toi']">Đơn hàng của tôi</li>
 					<li class="list-group-item" (click)="_userService.logout()">Đăng xuất</li>
 				</ul>
 			</li>

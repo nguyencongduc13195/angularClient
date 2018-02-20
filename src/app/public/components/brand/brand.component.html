@@ -2,12 +2,12 @@
 	<div class="information" *ngIf="loadedBrand">
 		<div class="main">
 			<div class="main-title">
-				<span>Thông tin nhà xuất bản {{brand?.name}}</span>
+				<span>Thông tin nhà sản xuất {{brand?.name}}</span>
 			</div>
 			<div class="main-body">
 				<div class="main-img">
-					<!-- <img src="http://localhost:3000/api/brand/img/{{brand?.image}}"> -->
-					<img src="https://apimean.herokuapp.com/api/brand/img/{{brand?.image}}">
+					<img src="http://localhost:3000/api/brand/img/{{brand?.image}}">
+					<!-- <img src="https://apimean.herokuapp.com/api/brand/img/{{brand?.image}}"> -->
 				</div>
 				<div class="main-description">
 					<p class="desc">{{brand?.description}}</p>
@@ -17,7 +17,7 @@
 	</div>
 	<div class="panel panel-success">
 		<div class="panel-heading">
-			<h3 class="panel-title">Sách</h3>
+			<h3 class="panel-title">Sản phẩm</h3>
 		</div>
 		<div class="panel-body" *ngIf="loaded; else none">
 			<div class="row">
@@ -35,8 +35,8 @@
 									<div class="snipcart-item block">
 										<div class="snipcart-thumb">
 											<a [routerLink]="['/san-pham', product?.slug]">
-												<!-- <img class="img-product" src="http://localhost:3000/api/product/img/{{product?.image}}"> -->
-												<img class="img-product" src="https://apimean.herokuapp.com/api/product/img/{{product?.image}}">
+												<!-- <img class="img-product" src="http://localhost:3000/api/product/images-detail/{{product?.image}}"> -->
+												<img class="img-product" src="https://apimean.herokuapp.com/api/product/images-detail/{{product?.image}}">
 											</a>		
 											<p class="text-center">{{product?.name}}</p>
 											<h4 class="text-center" 

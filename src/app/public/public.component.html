@@ -1,4 +1,5 @@
-<app-navbar></app-navbar>
+<app-navbar (showCart)="getShowCart($event)"></app-navbar>
+<app-cart [showCart]="isShowCart" (closeCart)="getCloseCart($event)"></app-cart>
 <app-breadcrumb></app-breadcrumb>
 	<div class="row" style="margin-top: 20px;">
 		<div class="col-xs-12 col-sm-12 col-md-3">
