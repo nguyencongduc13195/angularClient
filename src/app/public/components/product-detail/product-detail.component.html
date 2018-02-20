@@ -4,12 +4,12 @@
 			<!-- <img *ngIf="productDetail?.images_Detail?.length > 0 !==''; else none" 
 				src="https://apimean.herokuapp.com/api/product/images-detail/{{productDetail?.image}}" class="img-responsive"> -->
 			<ng-container *ngIf="productDetail?.image !==''; else none">
-				<img src="http://localhost:3000/api/product/images-detail/{{mainImage}}" class="img-responsive">
-				<!-- <img src="https://apimean.herokuapp.com/api/product/images-detail/{{mainImage}}" class="img-responsive"> -->
+				<!-- <img src="http://localhost:3000/api/product/images-detail/{{mainImage}}" class="img-responsive"> -->
+				<img src="https://apimean.herokuapp.com/api/product/images-detail/{{mainImage}}" class="img-responsive">
 			</ng-container>
 			<ng-template #none>
-				<!-- <img class="img-responsive" src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"/> -->
-				<img class="img-responsive" src="http://localhost:3000/api/product/images-detail/no-image.jpg"/>
+				<img class="img-responsive" src="https://apimean.herokuapp.com/api/product/images-detail/no-image.jpg"/>
+				<!-- <img class="img-responsive" src="http://localhost:3000/api/product/images-detail/no-image.jpg"/> -->
 			</ng-template>
 			<br>
 			<div class="text-center">
