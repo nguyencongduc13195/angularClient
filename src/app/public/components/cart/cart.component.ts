@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, OnChanges, Output, EventEmitter } from '@angular/core';
 import { CartItem } from './../../../shared/models/cart.model';
 import { CartService } from './../../../shared/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'app-cart',
@@ -10,7 +11,8 @@ import { CartService } from './../../../shared/services/cart.service';
 export class CartComponent implements OnInit, OnChanges {
 	
 	constructor(
-		private _cartService: CartService, 
+		private _cartService: CartService,
+		private _router: Router 
 	) { }
 
 	ngOnInit() {
@@ -25,5 +27,13 @@ export class CartComponent implements OnInit, OnChanges {
 	@Output('closeCart') connector = new EventEmitter<any>();
 	closeCart(){
 		this.connector.emit();
+	}
+	getToOrder(){
+		if(this._cartService.items.length > 0){
+			this._router.navigate(['/order']);
+		}
+		else{
+			alert('Bạn chưa có sản phẩm trong giỏ hàng.');
+		}
 	}
 }

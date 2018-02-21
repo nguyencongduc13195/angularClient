@@ -6,7 +6,6 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../shared/models/user.model';
-import { CartItem } from './../../../shared/models/cart.model';
 
 @Component({
 	selector: 'app-navbar',
@@ -26,14 +25,12 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 	@ViewChild('autoShownModal') public autoShownModal:ModalDirective;
 	public isModalShown: boolean = false;
 	public totalQty: number = 0;
-	public cartItems: CartItem[] = [];
 	public isLogging: boolean = false;
 	ngOnInit() {
 		this.createFormLogin();
 	}
 	ngDoCheck(){
 		this.totalQty = this._cartService.totalQty;
-		this.cartItems = this._cartService.items;
 		this.isLogging = this._userService.loggedIn();
 		this.isAdmin = localStorage.getItem('role') || '';
 		this._userService.isAdmin = localStorage.getItem('role') === '1301' ? true : false;
@@ -118,15 +115,6 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 	resetForm(){
 		this.formLogin.controls['txtEmail'].reset();
 		this.formLogin.controls['txtPassword'].reset();
-	}
-	// chuyển trang đặt hàng
-	getToOrder(){
-		if(this._cartService.items.length > 0){
-			this._router.navigate(['/order']);
-		}
-		else{
-			alert('Bạn chưa có sản phẩm trong giỏ hàng.');
-		}
 	}
 	// modal
 	public showModal(): void {

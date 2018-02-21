@@ -1,6 +1,8 @@
-<div class="menu-show-hide" *ngIf="isShowCart">
+<div class="menu-show-hide" 
+	*ngIf="isShowCart"
+	[ngClass]="{'show':isShowCart}"
+>
 	<div class="header">
-		<div class="header-title">Giỏ hàng</div>
 		<div class="button">
 			<button type="button" class="btn btn-primary hideMenu" (click)="closeCart()">
 				<i class="fa fa-times"></i>
@@ -24,8 +26,11 @@
 			<div>Màu sắc: {{item?.color }}</div>
 		</div>
 	</div>
+	<div class="panel-footer pull-right">
+		<button type="button" class="btn btn-success" (click)="getToOrder()">Thanh toán</button>
+	</div>
 </div>
 
-<div class="menu-rgba" *ngIf="isShowCart" (click)="closeCart()">
+<div class="menu-rgba" *ngIf="isShowCart">
 	
 </div>
