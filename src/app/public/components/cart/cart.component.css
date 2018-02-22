@@ -52,10 +52,12 @@ button.hideMenu{
 	padding-left: 20px;
 }
 
-.show{
+.showCart{
 	animation: in 1s forwards;
 }
-
+.hideCart{
+	animation: out 1s forwards;
+}
 @keyframes in {
     from {
     	opacity: 0;
@@ -64,5 +66,16 @@ button.hideMenu{
     to {
     	opacity: 1;
     	margin-right: 0px;
+    }
+}
+
+@keyframes out {
+    from {
+    	opacity: 0;
+    	margin-right: 0px;
+    }
+    to {
+    	opacity: 1;
+    	margin-right: -400px;
     }
 }

@@ -1,6 +1,5 @@
 <div class="menu-show-hide" 
-	*ngIf="isShowCart"
-	[ngClass]="{'show':isShowCart}"
+	[ngClass]="{'showCart':isShowCart, 'hideCart': !isShowCart}"
 >
 	<div class="header">
 		<div class="button">
