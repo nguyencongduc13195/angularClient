@@ -99,15 +99,27 @@ export class CategoryComponent implements OnInit, OnDestroy, OnChanges{
 			});
 		}else if(event==3){
 			this.products = this.products.sort((a, b)=>{
-				if(a.price > b.price) return 1;
-				else if(a.price < b.price) return -1;
-				else return 0;
+				if(a.promotion_price === a.price){
+					if(a.price > b.price) return 1;
+					else if(a.promotion_price !== a.price && a.price < b.price) return -1;
+					else return 0;
+				}else{
+					if(a.promotion_price > b.promotion_price) return 1;
+					else if(a.promotion_price < b.promotion_price) return -1;
+					else return 0;
+				}
 			});
 		}else{
 			this.products = this.products.sort((a, b)=>{
-				if(a.price > b.price) return -1;
-				else if(a.price < b.price) return 1;
-				else return 0;
+				if(a.promotion_price === a.price){
+					if(a.price > b.price) return -1;
+					else if(a.promotion_price !== a.price && a.price < b.price) return 1;
+					else return 0;
+				}else{
+					if(a.promotion_price > b.promotion_price) return -1;
+					else if(a.promotion_price < b.promotion_price) return 1;
+					else return 0;
+				}
 			});
 		}
 	}
