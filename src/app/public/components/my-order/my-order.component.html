@@ -1,47 +1,55 @@
-<table class="table table-bordered table-hover">
-	<thead>
-		<tr>
-			<th>STT</th>
-			<th>Họ tên</th>
-			<th>Địa chỉ</th>
-			<th>SĐT</th>
-			<th>Ngày đặt</th>
-			<th>Tình trạng</th>
-			<th>Sản phẩm</th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr *ngFor="let order of orders; let i = index">
-			<td>{{i+1}}</td>
-			<td>{{ order?.name }}</td>
-			<td>{{ order?.address }}</td>
-			<td>{{ order?.phone }}</td>
-			<td>{{ order?.created_at | date:'dd/MM/yyyy' }}</td>
-			<td>{{ order?.confirm ? 'Đã xác nhận' : 'Chưa xác nhận' }}</td>
-			<td>
-				<table class="table table-bordered table-hover">
-					<tbody>
-						<tr>
-							<td width="33%" *ngFor="let item of order['orderItem'][0]['slug']">
-								{{item}}<br/>
-								<a [routerLink]="['/san-pham',item]">Xem sản phẩm</a>
-							</td>
-						</tr>
-						<tr>
-							<td *ngFor="let item of order['orderItem'][0]['color']">Màu sắc: {{item}}</td>
-						</tr>
-						<tr>
-							<td *ngFor="let item of order['orderItem'][0]['size']">Kích cỡ: {{item}}</td>
-						</tr>
-						<tr>
-							<td *ngFor="let item of order['orderItem'][0]['quantity']">Số lượng: {{item}}</td>
-						</tr>
-						<tr>
-							<td>Tổng tiền: {{order?.total | currency:'VND':'symbol':'1.0-3'}}</td>
-						</tr>
-					</tbody>
-				</table>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<ng-container *ngIf="orders.length > 0; else none">
+	<table class="table table-bordered table-hover">
+		<thead>
+			<tr>
+				<th>STT</th>
+				<th>Họ tên</th>
+				<th>Địa chỉ</th>
+				<th>SĐT</th>
+				<th>Ngày đặt</th>
+				<th>Tình trạng</th>
+				<th>Sản phẩm</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr *ngFor="let order of orders; let i = index">
+				<td>{{i+1}}</td>
+				<td>{{ order?.name }}</td>
+				<td>{{ order?.address }}</td>
+				<td>{{ order?.phone }}</td>
+				<td>{{ order?.created_at | date:'dd/MM/yyyy' }}</td>
+				<td>{{ order?.confirm ? 'Đã xác nhận' : 'Chưa xác nhận' }}</td>
+				<td>
+					<table class="table table-bordered table-hover">
+						<tbody>
+							<tr>
+								<td width="33%" *ngFor="let item of order['orderItem'][0]['slug']">
+									{{item}}<br/>
+									<a [routerLink]="['/san-pham',item]">Xem sản phẩm</a>
+								</td>
+							</tr>
+							<tr>
+								<td *ngFor="let item of order['orderItem'][0]['color']">Màu sắc: {{item}}</td>
+							</tr>
+							<tr>
+								<td *ngFor="let item of order['orderItem'][0]['size']">Kích cỡ: {{item}}</td>
+							</tr>
+							<tr>
+								<td *ngFor="let item of order['orderItem'][0]['quantity']">Số lượng: {{item}}</td>
+							</tr>
+							<tr>
+								<td>Tổng tiền: {{order?.total | currency:'VND':'symbol':'1.0-3'}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</ng-container>
+<ng-template #none>
+	<div class="alert alert-danger">
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<strong>Không có đơn hàng !</strong>
+	</div>
+</ng-template>

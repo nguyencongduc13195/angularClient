@@ -12,7 +12,10 @@ export class MyOrderComponent implements OnInit {
 	public orders: Order[] = [];
 	ngOnInit() {
 		this._orderService.myOrder().subscribe((data: Order[]) => {
-			this.orders = data['data'];
+			console.log(data);
+			if(data['success']){
+				this.orders = data['data'];
+			}
 		});
 	}
 
