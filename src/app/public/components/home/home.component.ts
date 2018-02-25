@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this._sub = this._activated.queryParams.subscribe((params)=>{
 			if(params['key']){
-				this._productService.searchItem(params['key']).subscribe((data)=>{
+				this._sub = this._productService.searchItem(params['key']).subscribe((data)=>{
 					this.productsSearch = [];
 					if(data['success']){
 						this.isSearching = true;
@@ -33,7 +33,45 @@ export class HomeComponent implements OnInit, OnDestroy {
 						this.msg = data['msg'];
 					}
 				})
-			}else{
+			}else if(params['size']){
+				this._sub = this._productService.getProductsBySize(params['size']).subscribe((data)=>{
+					this.productsSearch = [];
+					if(data['success']){
+						this.isSearching = true;
+						this.productsSearch = data['data'];
+					}
+					else{
+						this.isSearching = true;
+						this.msg = data['msg'];
+					}
+				})
+			}else if(params['color']){
+				this._sub = this._productService.getProductsByColor(params['color']).subscribe((data)=>{
+					this.productsSearch = [];
+					if(data['success']){
+						this.isSearching = true;
+						this.productsSearch = data['data'];
+					}
+					else{
+						this.isSearching = true;
+						this.msg = data['msg'];
+					}
+				})
+			}
+			else if(params['price']){
+				this._sub = this._productService.getProductsByPrice(params['price']).subscribe((data)=>{
+					this.productsSearch = [];
+					if(data['success']){
+						this.isSearching = true;
+						this.productsSearch = data['data'];
+					}
+					else{
+						this.isSearching = true;
+						this.msg = data['msg'];
+					}
+				})
+			}
+			else{
 				this.loadAllProducts();
 			}
 		})

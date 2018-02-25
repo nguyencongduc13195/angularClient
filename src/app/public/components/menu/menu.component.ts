@@ -4,6 +4,7 @@ import { Category } from './../../../shared/models/category.model';
 import { BrandService } from './../../../shared/services/brand.service';
 import { Brand } from './../../../shared/models/brand.model';
 import { AuthorService } from './../../../shared/services/author.service';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 @Component({
 	selector: 'app-menu',
@@ -15,15 +16,44 @@ export class MenuComponent implements OnInit, OnDestroy {
 	constructor(
 		private _categoryService: CategoryService, 
 		private _brandService: BrandService,
-		private _authorService: AuthorService
+		private _authorService: AuthorService,
+		private _router: Router
 	) { }
 
 	ngOnInit() {
 		this.loadBrands();
 		this.loadCategories();
+		this.setSizeShoes();
+	}
+	public listSizeClothes: string[] = ['S','M','L','XL','XXL'];
+	public listSizeShoes: string[] = [];
+	setSizeShoes(){
+		for (var i = 36; i <= 45; i++) {
+			this.listSizeShoes.push(String(i));
+		}
 	}
 	private _sub: Subscription;
 	public arrayMenu: any[]=[];
+	// 
+	public arrayList: string[]=[];
+	navigateToSize(item){
+		this.arrayList = [];
+		this.arrayList.push(item);
+		this._router.navigate(['/'],{queryParams: {size: item}});
+	}
+	navigateToColor(item){
+		this.arrayList = [];
+		this.arrayList.push(item);
+		this._router.navigate(['/'],{queryParams: {color: item}});
+	}
+	// 
+	currentMoney: number = 0;
+	onChangePrice(event){
+		this.currentMoney = event.target.value;
+		this._router.navigate(['/'],{queryParams:{price: this.currentMoney}});
+	}
+	public colors: string[] = ['White','Red','Black','Green','Yellow','Purple','Pink','Blue','Orange','Grey'];
+
 	// categories
 	public categories: Category[] = [];
 	public cateMenu: any[] = [];

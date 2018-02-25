@@ -53,10 +53,10 @@ button.hideMenu{
 }
 
 .showCart{
-	animation: in 1s forwards;
+	animation: in 0.5s forwards;
 }
 .hideCart{
-	animation: out 1s forwards;
+	animation: out 0.2s forwards;
 }
 @keyframes in {
     from {

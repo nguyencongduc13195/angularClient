@@ -61,10 +61,6 @@
 			</div>
 		</div>
 		<div class="row" *ngIf="isSearching">
-			<div class="alert alert-success" *ngIf="productsSearch.length>0">
-				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-				<strong>Sản phẩm tìm kiếm !</strong>.
-			</div>
 			<div class="alert alert-danger" *ngIf="productsSearch.length<=0">
 				<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 				<strong>{{msg}}</strong>

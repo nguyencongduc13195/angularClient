@@ -11,7 +11,6 @@ export class FunctionComponent implements OnInit, OnChanges {
 	@Output('sort') sort = new EventEmitter<any>();
 	@Output('element') element = new EventEmitter<any>();
 	@Output('filter') filter = new EventEmitter<any>();
-	@Output('price') price = new EventEmitter<any>();
 	@Input('reset') reset;
 	ngOnInit() {
 	}
@@ -33,6 +32,5 @@ export class FunctionComponent implements OnInit, OnChanges {
 	currentMoney: number = 0;
 	onChangePrice(event){
 		this.currentMoney = event.target.value;
-		this.price.emit(this.currentMoney);
 	}
 }

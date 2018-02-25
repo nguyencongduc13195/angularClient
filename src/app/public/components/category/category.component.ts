@@ -157,17 +157,6 @@ export class CategoryComponent implements OnInit, OnDestroy, OnChanges{
 			return this.products
 		}
 	}
-	getPrice(event){
-		if(event==='0'){
-			this.isFilter = false;
-			return this.products;
-		}else{
-			this.isFilter = true;
-			this.productFilter = this.products.filter((value)=>{
-				return value.promotion_price >= event && value.promotion_price <= 2000000;
-			});
-		}
-	}
 	ngOnDestroy(){
 		if(this._sub){
 			this._sub.unsubscribe();

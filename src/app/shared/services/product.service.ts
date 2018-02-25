@@ -104,4 +104,13 @@ export class ProductService {
 	public getProductsByGender(slug) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/findProductsByGender/${slug}`);
 	}
+	public getProductsBySize(size) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProductsBySize/${size}`);
+	}
+	public getProductsByColor(color) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProductsByColor/${color}`);
+	}
+	public getProductsByPrice(price) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProductsByPrice/${price}`);
+	}
 }

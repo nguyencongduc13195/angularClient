@@ -39,3 +39,24 @@
 		</li>
 	</div> 
 </div>
+
+<div class="list">
+	<h4>Giá</h4>
+	<div class="list-size filter-price">
+	    <input type="range" class="filter2" (change)="onChangePrice($event)" value="0" min="0" max="20000000">
+	    <input type="text" disabled [ngModel]="currentMoney | currency:'VND':'symbol':'1.0-3'">
+	    <input type="text" disabled [value]="20000000 | currency:'VND':'symbol':'1.0-3'">
+	</div>
+	<div class="clearfix"></div>
+	<h4>Kích thước</h4>
+	<div class="list-size">
+		<span class="size" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of listSizeClothes" (click)="navigateToSize(item)">{{item}}</span>
+	</div>
+	<div class="list-size">
+		<span class="size" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of listSizeShoes" (click)="navigateToSize(item)">{{item}}</span>
+	</div>
+	<h4>Màu sắc</h4>
+	<div class="list-color">
+		<span class="color" [ngStyle]="{'background-color':item}" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of colors" (click)="navigateToColor(item)"></span>
+	</div>
+</div>
