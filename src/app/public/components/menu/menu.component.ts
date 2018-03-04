@@ -25,6 +25,8 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.loadCategories();
 		this.setSizeShoes();
 	}
+	// 
+	public colors: string[] = ['White','Red','Black','Green','Yellow','Purple','Pink','Blue','Orange','Grey'];
 	public listSizeClothes: string[] = ['S','M','L','XL','XXL'];
 	public listSizeShoes: string[] = [];
 	setSizeShoes(){
@@ -35,16 +37,45 @@ export class MenuComponent implements OnInit, OnDestroy {
 	private _sub: Subscription;
 	public arrayMenu: any[]=[];
 	// 
-	public arrayList: string[]=[];
+	public arrayListSize: string[]=[];
 	navigateToSize(item){
-		this.arrayList = [];
-		this.arrayList.push(item);
-		this._router.navigate(['/'],{queryParams: {size: item}});
+		this.arrayListColor = [];
+		if(this.arrayListSize.indexOf(item)>-1){
+			for (var i = 0; i <= this.arrayListSize.length; i++) {
+				if(this.arrayListSize[i] === item){
+					this.arrayListSize.splice(i,1);
+					break;
+				}
+			}
+		}else{
+			this.arrayListSize.push(item);
+		}
+		if(this.arrayListSize.length>0){
+			this._router.navigate(['/'],{queryParams: {size: this.arrayListSize}});
+		}
+		else{
+			this._router.navigate(['/']);
+		}
 	}
+	public arrayListColor: string[]=[];
 	navigateToColor(item){
-		this.arrayList = [];
-		this.arrayList.push(item);
-		this._router.navigate(['/'],{queryParams: {color: item}});
+		this.arrayListSize = [];
+		if(this.arrayListColor.indexOf(item)>-1){
+			for (var i = 0; i <= this.arrayListColor.length; i++) {
+				if(this.arrayListColor[i] === item){
+					this.arrayListColor.splice(i,1);
+					break;
+				}
+			}
+		}else{
+			this.arrayListColor.push(item);
+		}
+		if(this.arrayListColor.length>0){
+			this._router.navigate(['/'],{queryParams: {color: this.arrayListColor}});
+		}			
+		else{
+			this._router.navigate(['/']);
+		}
 	}
 	// 
 	currentMoney: number = 0;
@@ -52,8 +83,6 @@ export class MenuComponent implements OnInit, OnDestroy {
 		this.currentMoney = event.target.value;
 		this._router.navigate(['/'],{queryParams:{price: this.currentMoney}});
 	}
-	public colors: string[] = ['White','Red','Black','Green','Yellow','Purple','Pink','Blue','Orange','Grey'];
-
 	// categories
 	public categories: Category[] = [];
 	public cateMenu: any[] = [];

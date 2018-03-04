@@ -41,7 +41,7 @@ i:hover{
 }
 
 .active{
-    border: 1px solid black;
+    border: 2px solid #ad8a8a;
 }
 
 .filter-price input[type="text"]{

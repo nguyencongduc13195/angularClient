@@ -50,13 +50,13 @@
 	<div class="clearfix"></div>
 	<h4>Kích thước</h4>
 	<div class="list-size">
-		<span class="size" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of listSizeClothes" (click)="navigateToSize(item)">{{item}}</span>
+		<span class="size" [class.active]="arrayListSize.indexOf(item)>-1" *ngFor="let item of listSizeClothes" (click)="navigateToSize(item)">{{item}}</span>
 	</div>
 	<div class="list-size">
-		<span class="size" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of listSizeShoes" (click)="navigateToSize(item)">{{item}}</span>
+		<span class="size" [class.active]="arrayListSize.indexOf(item)>-1" *ngFor="let item of listSizeShoes" (click)="navigateToSize(item)">{{item}}</span>
 	</div>
 	<h4>Màu sắc</h4>
 	<div class="list-color">
-		<span class="color" [ngStyle]="{'background-color':item}" [class.active]="arrayList.indexOf(item)>-1" *ngFor="let item of colors" (click)="navigateToColor(item)"></span>
+		<span class="color" [ngStyle]="{'background-color':item}" [class.active]="arrayListColor.indexOf(item)>-1" *ngFor="let item of colors" (click)="navigateToColor(item)"></span>
 	</div>
 </div>

@@ -110,6 +110,9 @@ export class ProductService {
 	public getProductsByColor(color) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/findProductsByColor/${color}`);
 	}
+	public getProductsByColorAndSize(color, size) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/findProductsByColorAndSize/?$color={color}&size=${size}`);
+	}
 	public getProductsByPrice(price) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/findProductsByPrice/${price}`);
 	}
