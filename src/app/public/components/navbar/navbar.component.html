@@ -8,16 +8,25 @@
 				<span class="icon-bar"></span>
 			</button>
 			<a class="navbar-brand logo" [routerLink]="['/']">
-				<span class="book">Angular<span class="store">Node</span></span>
+				<span class="angular">Angular<span class="node">Node</span></span>
 			</a>
 		</div>
 	<div class="collapse navbar-collapse" id="collapse">
-		<form class="navbar-form navbar-left" role="search">
-			<div class="form-group">
-				<input type="text" class="form-control" #search placeholder="Tìm kiếm sản phẩm...">
+		<div class="navbar-form navbar-left formsearch">
+			<form>
+				<div class="form-group">
+					<input type="text" class="form-control" (keyup)="onChange($event)" #search placeholder="Tìm kiếm sản phẩm...">
+				</div>
+				<button type="submit" class="btn btn-info" (click)="onSearch(search.value)">Tìm kiếm</button>
+			</form>
+			<div class="resultsearch" *ngIf="searchNavbar.length>0">
+				<div class="detail" *ngFor="let item of searchNavbar">
+					<img (click)="navigateToProduct(item?.slug)" src="http://localhost:3000/api/product/images-detail/{{item?.image}}">
+					<h2 (click)="navigateToProduct(item?.slug)">{{item?.name}}</h2>
+					<span>{{item?.promotion_price | currency:'VND':'symbol':'1.0-3'}} </span>
+				</div>
 			</div>
-			<button type="submit" class="btn btn-info" (click)="onSearch(search.value)">Tìm kiếm</button>
-		</form>
+		</div>
 		<ul class="nav navbar-nav navbar-right">
 			<li (click)="showCart()"><a class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-shopping-cart">
 				</span>Giỏ hàng&nbsp;<span class="badge">{{totalQty}} </span></a>

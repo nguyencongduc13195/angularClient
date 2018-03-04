@@ -9,8 +9,8 @@ import { AlertService } from './alert.service';
 export class ProductService {
 
 	constructor(private _httpClient: HttpClient, private _alertService: AlertService) { }
-	private api: string = "https://apimean.herokuapp.com/api/product";
-	// private api: string = "http://localhost:3000/api/product";
+	// private api: string = "https://apimean.herokuapp.com/api/product";
+	private api: string = "http://localhost:3000/api/product";
 	public getAll(pageIndex: number= 1, pageSize: number= 8) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/all?pageSize=${pageSize}&pageIndex=${pageIndex}`);
 	}
@@ -97,6 +97,9 @@ export class ProductService {
 	}
 	public searchItem(search) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/search/${search}`);
+	}
+	public searchInNavbar(search) : Observable<Product[]>{
+		return this._httpClient.get<Product[]>(`${this.api}/search-navbar/${search}`);
 	}
 	public getProductsByUse(slug) : Observable<Product[]>{
 		return this._httpClient.get<Product[]>(`${this.api}/findProducts/${slug}`);

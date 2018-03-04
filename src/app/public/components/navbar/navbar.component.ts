@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from './../../../shared/models/user.model';
+import { Product } from './../../../shared/models/product.model';
+import { ProductService } from './../../../shared/services/product.service';
 
 @Component({
 	selector: 'app-navbar',
@@ -17,7 +19,8 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 		private _cartService: CartService, 
 		private _router: Router,
 		private _formBuilder: FormBuilder,
-		private _userService: UserService
+		private _userService: UserService,
+		private _productService: ProductService,
 	) { }
 
 	
@@ -52,9 +55,29 @@ export class NavbarComponent implements OnInit, OnDestroy, DoCheck {
 			'txtPassword': ["",Validators.required]
 			});
 	}
+	// 
+	public searchNavbar: Product[] = [];
+	onChange(event){
+		if(event.target.value){
+			this._sub = this._productService.searchInNavbar(event.target.value).subscribe((data: Product[])=>{
+				if(data['success']){
+					this.searchNavbar = data['data'];
+				}
+			});
+		}else{
+			this.searchNavbar = [];
+		}
+	}
+	// 
+	navigateToProduct(slug){
+		this.searchNavbar = [];
+		this._router.navigate(['/san-pham',slug]);
+	}
+	// 
 	togglePassword(){
 		this.showhidePassword = !this.showhidePassword;
 	}
+	// 
 	onSearch(value){
 		this._router.navigate(['/'],{queryParams: {key: value}});
 	}

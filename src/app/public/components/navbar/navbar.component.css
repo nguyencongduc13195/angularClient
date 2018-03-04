@@ -6,12 +6,12 @@ a.navbar-brand.logo{
 	font-size: 30px;
 	padding-left: 60px;
 }
-span.book{
+span.angular{
     color: #e24444;
     text-decoration: none;
     font-weight: bold;
 }
-span.store{
+span.node{
 	text-decoration: none;
     color: #43a243;
 }
@@ -50,4 +50,40 @@ a.navbar-brand{
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
 	background-color: #eee;
 	color:#000;
+}
+
+.formsearch{
+	position: relative;
+}
+.resultsearch{
+	position: absolute;
+    width: 100%;
+    background-color: #fff;
+    top: 35px;
+    z-index: 999;
+}
+.detail{
+    float: left;
+    clear: both;
+    border-bottom: dashed 1px #ccc;
+    padding: 10px;
+}
+.detail img{
+	float: left;
+    margin-right: 10px;
+    border: solid 1px #ccc;
+    padding: 5px;
+    width: 75px;
+}
+.detail h2{
+	font-size: 13px;
+    margin: 8px auto;
+    color: #0574BB;
+}
+.detail span{
+	color: red;
+    font-weight: bold;
+}
+.detail img:hover, .detail h2:hover{
+	cursor: pointer;
 }
